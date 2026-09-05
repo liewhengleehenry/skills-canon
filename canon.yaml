@@ -1,0 +1,11 @@
+# Skills Canon — the record's own configuration.
+canon:
+  name: Meridian Instruments 子虛儀器
+  note: illustrative — invented company, invented people
+apex: g0-root                 # only the apex may birth a skill
+cadence:
+  policing: weekly            # weekly | daily | 3d | 14d — the clearance sweep
+  clearance_expires_days: 90  # a PASS older than this stops being a PASS
+governance:
+  maker_checker: true         # the proposer may not approve their own proposal
+  single_writer: true         # one steward writes each record

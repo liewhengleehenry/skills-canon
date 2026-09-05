@@ -1,0 +1,289 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Skills Canon — the record</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{--ground:#0E1420;--panel:#151D2C;--line:#26334A;--paper:#F2EFE9;--ink:#0E1420;
+--wire:#4FC3C7;--named:#79B473;--orphan:#D0674F;--prop:#DDA83C;--text:#DCE3EE;--dim:#8494AC;--faint:#5A6A83;
+--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;--disp:"Archivo","Helvetica Neue",Arial,sans-serif}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--text);font-family:var(--disp);margin:0;padding:18px 20px 40px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1220px;margin:0 auto}
+header{display:flex;flex-wrap:wrap;align-items:baseline;gap:12px;margin-bottom:4px}
+h1{font-size:clamp(20px,2.3vw,28px);font-weight:700;letter-spacing:-.03em;margin:0}
+.sub{font-family:var(--mono);font-size:11px;color:var(--faint);letter-spacing:.09em;text-transform:uppercase}
+.badge{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;padding:3px 8px;border-radius:2px;border:1px solid var(--line);color:var(--faint)}
+.badge.live{color:var(--ground);background:var(--named);border-color:var(--named);font-weight:600}
+.lede{color:var(--dim);font-size:13.5px;max-width:80ch;margin:6px 0 14px;line-height:1.55}
+.tabs{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:14px}
+.tab{font-family:var(--mono);font-size:10.5px;padding:7px 12px;border-radius:2px;background:var(--panel);border:1px solid var(--line);color:var(--faint);cursor:pointer}
+.tab[aria-selected="true"]{color:var(--ground);background:var(--wire);border-color:var(--wire);font-weight:600}
+.tab:focus-visible{outline:2px solid var(--wire);outline-offset:2px}
+.pane{background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:14px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+button.go{font-family:var(--mono);font-size:11px;padding:7px 13px;border-radius:2px;cursor:pointer;background:var(--wire);color:var(--ground);border:none;font-weight:600}
+button.go.ghost{background:transparent;color:var(--dim);border:1px solid var(--line)}
+button.go:focus-visible{outline:2px solid var(--wire);outline-offset:2px}
+input,select{font-family:var(--mono);font-size:11px;padding:6px 8px;background:#0B121D;color:var(--text);border:1px solid var(--line);border-radius:2px}
+table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:11.5px}
+th{text-align:left;font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);padding:0 8px 8px;font-weight:500}
+td{padding:8px;border-top:1px solid var(--line);vertical-align:middle}
+tr.warn td{background:#2A2110}tr.bad td{background:#2A1712}tr.good td{background:#10241A}
+.own{color:var(--named);font-weight:600}.own.none{color:var(--orphan)}
+.st{font-size:10px}.st.ok{color:var(--named)}.st.warn{color:var(--prop)}.st.bad{color:var(--orphan)}.st.dim{color:var(--faint)}
+.meter{display:inline-block;height:7px;background:var(--wire);opacity:.75;border-radius:1px;vertical-align:middle;margin-right:6px}
+.mini{font-family:var(--mono);font-size:10px;color:var(--faint)}
+.card{border:1px solid var(--line);border-radius:3px;padding:11px;background:#101827}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.k{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.v{font-size:21px;font-weight:700;color:var(--wire);margin-top:3px}
+.note{font-family:var(--mono);font-size:10.5px;color:var(--faint);margin-top:12px;line-height:1.6}
+.log{font-family:var(--mono);font-size:11px;line-height:1.7;max-height:230px;overflow:auto}
+.disc{font-family:var(--mono);font-size:9.5px;color:var(--faint);opacity:.65;margin-top:18px}
+.hide{display:none}
+svg{width:100%;height:auto}
+.nd rect{fill:var(--paper);stroke:var(--named);stroke-width:1.5}
+.nd.prop rect{stroke:var(--prop);stroke-dasharray:5 4}
+.nd.bad rect{stroke:var(--orphan);stroke-width:2.2}
+.nd .a{font-family:var(--mono);font-size:9.5px;font-weight:600;fill:var(--ink)}
+.nd .b{font-family:var(--mono);font-size:8.5px;fill:#4A7A46}
+.nd .c{font-family:var(--mono);font-size:7.5px;fill:var(--wire)}
+.ed{stroke:var(--wire);stroke-width:1.2;fill:none;opacity:.55}
+.ed.req{stroke-dasharray:4 4;opacity:.8}
+</style></head><body><div class="wrap">
+<header><h1>Skills Canon</h1><span class="sub">the skills system of record</span><span class="badge" id="mode">checking…</span></header>
+<p class="lede">Every skill is a <b>folder</b> this company owns — code, data, tests. The canon is the record over them: what exists, what it may call, and which named human answers for it. One skill's whole job is to inspect the others, on a cadence, and nothing runs that nobody has signed for.</p>
+<div class="tabs" id="tabs"></div>
+<div id="view"></div>
+<p class="disc" id="foot">Illustrative — invented company, invented people. 子虛 means <i>fictitious</i>.</p>
+</div>
+<script>
+const SEED={"config":{"apex":"g0-root","cadence":{"policing":"weekly","clearance_expires_days":"90"},"canon":{"name":"Meridian Instruments 子虛儀器"}},
+"nodes":[
+{"id":"g0-root","g":"G0","n":"","role":"master — the apex; holds the law and mints every graph","owner":"A. Chen","owner_role":"business","status":"active","clearance":"","cleared_by":"","cleared_on":"","calls":0,"dependents":0,"type":"skill","exempt":1},
+{"id":"g1n0-refund-master","g":"G1","n":"N0","role":"master — governs the Refund Desk graph","owner":"M. Santos","owner_role":"business","status":"active","clearance":"PASS","cleared_by":"D. Halim","cleared_on":"2026-08-30","calls":0,"dependents":0,"type":"skill"},
+{"id":"g1n1-policy-steward","g":"G1","n":"N1","role":"steward (CRUD) — the only writer of record/refund-policy.csv","owner":"M. Santos","owner_role":"business","status":"active","clearance":"PASS","cleared_by":"D. Halim","cleared_on":"2026-08-30","calls":0,"dependents":1,"type":"skill"},
+{"id":"g1n2-quote-reader","g":"G1","n":"N2","role":"reader (read-only) — answers from the record or refuses","owner":"J. Varga","owner_role":"business","status":"active","clearance":"PASS","cleared_by":"D. Halim","cleared_on":"2026-08-30","calls":0,"dependents":0,"type":"skill"},
+{"id":"g2n0-clearance","g":"G2","n":"N0","role":"master — inspects every governed skill and writes the register","owner":"D. Halim","owner_role":"it","status":"active","clearance":"","cleared_by":"","cleared_on":"","calls":0,"dependents":3,"type":"skill","exempt":1}],
+"edges":[["g1n1-policy-steward","g1n0-refund-master","broader"],["g1n2-quote-reader","g1n0-refund-master","broader"],
+["g1n2-quote-reader","g1n1-policy-steward","requires"],["g1n0-refund-master","g2n0-clearance","requires"],
+["g1n1-policy-steward","g2n0-clearance","requires"],["g1n2-quote-reader","g2n0-clearance","requires"]],
+"runs":[],"proposals":[],"feedback":[],"usage_total":0};
+
+let S=JSON.parse(JSON.stringify(SEED)), LIVE=false, TAB="skills";
+const $=i=>document.getElementById(i), esc=t=>String(t??"").replace(/[<>&]/g,c=>({"<":"&lt;",">":"&gt;","&":"&amp;"}[c]));
+const EXEMPT={"g0-root":"the apex holds the law it applies","g2n0-clearance":"cannot clear itself — no self-approval"};
+
+async function api(p,body){ if(!LIVE) return null;
+  try{const r=await fetch(p,body?{method:"POST",body:JSON.stringify(body)}:{});return await r.json();}catch(e){return null;} }
+async function load(){ try{const r=await fetch("/api/state"); if(!r.ok) throw 0;
+    S=await r.json(); LIVE=true; $("mode").textContent="LIVE · SERVED FROM THE RECORD"; $("mode").className="badge live";
+  }catch(e){ LIVE=false; $("mode").textContent="LIVE IN YOUR BROWSER · NOTHING INSTALLED"; $("mode").className="badge"; }
+  const f=$("foot");
+  f.innerHTML = (LIVE
+    ? "Served by <code>app.py</code> — every action below writes to <code>canon/*.csv</code> and <code>skills/</code> on disk. "
+    : "Running entirely in this browser — the same five laws, on in-memory state. Clone the repo and run <code>python3 app.py</code> to have every action write to real folders and CSVs. ")
+    + "Illustrative — invented company, invented people. 子虛 means <i>fictitious</i>.";
+  render(); }
+
+const TABS=[["skills","skills"],["graph","graph"],["cadence","cadence · policing"],["benchmark","benchmark"],["feedback","feedback"]];
+$("tabs").innerHTML=TABS.map(([k,l])=>`<button class="tab" role="tab" data-k="${k}">${l}</button>`).join("");
+$("tabs").onclick=e=>{const b=e.target.closest(".tab"); if(!b)return; TAB=b.dataset.k; render();};
+
+function skillRows(){ return (S.nodes||[]).filter(n=>n.type==="skill"); }
+function clrState(n){
+  if(EXEMPT[n.id]) return ["exempt","dim"];
+  if(!n.clearance) return ["not cleared","bad"];
+  const age=Math.round((Date.now()-Date.parse(n.cleared_on))/864e5);
+  const lim=+(S.config?.cadence?.clearance_expires_days||90);
+  return age>lim?[`expired · ${age}d`,"bad"]:[`cleared · ${n.cleared_by}`,"ok"];
+}
+function render(){
+  [...$("tabs").children].forEach(b=>b.setAttribute("aria-selected",b.dataset.k===TAB));
+  $("view").innerHTML = ({skills:vSkills,graph:vGraph,cadence:vCadence,benchmark:vBench,feedback:vFeed})[TAB]();
+  wire();
+}
+function vSkills(){
+  const rows=skillRows().map(n=>{const[c,cls]=clrState(n);
+    const bad=cls==="bad", prop=n.status==="proposed";
+    return `<tr class="${bad?'bad':prop?'warn':''}">
+      <td><b>${esc(n.id)}</b><div class="mini">${esc(n.role||"")}</div></td>
+      <td class="own ${n.owner?'':'none'}">◆ ${esc(n.owner||"no owner")}</td>
+      <td><span class="meter" style="width:${Math.min(n.calls*6,90)}px"></span>${n.calls}</td>
+      <td>${n.dependents}</td>
+      <td class="st ${cls}">${c}</td>
+      <td class="st ${prop?'warn':'ok'}">${esc(n.status)}</td>
+      <td>${prop?`<button class="go" data-act="promote" data-s="${n.id}">promote</button>`
+        :bad?`<button class="go" data-act="clear" data-s="${n.id}">sign PASS</button>`:'<span class="st dim">—</span>'}</td></tr>`;}).join("");
+  return `<div class="pane"><div class="bar">
+    <b class="mini">${esc(S.config?.canon?.name||"")}</b>
+    <span style="flex:1"></span>
+    <input id="bn" placeholder="new skill name" size="16">
+    <input id="bo" placeholder="owner" size="12">
+    <select id="bt"><option>reader</option><option>steward</option><option>master</option></select>
+    <button class="go" data-act="birth">birth from apex</button>
+    <button class="go ghost" data-act="reset">reset</button></div>
+    <table><thead><tr><th>skill (a folder)</th><th>owner</th><th>calls</th><th>dependents</th><th>clearance</th><th>status</th><th>action</th></tr></thead><tbody>${rows}</tbody></table>
+    <p class="note">Only the apex <b>${esc(S.config?.apex||"g0-root")}</b> may birth a skill, and every birth lands <b>proposed</b> — a different named human must promote it. The apex and the clearance skill are exempt from inspection: one holds the law it applies, the other cannot clear itself.</p></div>`;
+}
+function vGraph(){
+  const ns=skillRows(), W=980, colX={G0:40,G1:360,G2:700};
+  const pos={}; let gi={G0:0,G1:0,G2:0};
+  ns.forEach(n=>{const g=n.g||"G1"; pos[n.id]={x:colX[g]??360,y:30+gi[g]*74}; gi[g]++;});
+  const ed=(S.edges||[]).map(e=>{const a=Array.isArray(e)?e:[e.source_id,e.target_id,e.relation];
+    const p=pos[a[0]],q=pos[a[1]]; if(!p||!q)return"";
+    const x1=p.x+250,y1=p.y+22,x2=q.x,y2=q.y+22,m=(x1+x2)/2;
+    return `<path class="ed ${a[2]==='requires'?'req':''}" d="M${x1} ${y1} C${m} ${y1} ${m} ${y2} ${x2} ${y2}"/>`;}).join("");
+  const nd=ns.map(n=>{const p=pos[n.id],[c,cls]=clrState(n);
+    return `<g class="nd ${n.status==='proposed'?'prop':cls==='bad'?'bad':''}">
+      <rect x="${p.x}" y="${p.y}" width="250" height="44" rx="3"/>
+      <text class="c" x="${p.x+10}" y="${p.y+14}">${esc((n.g||"")+(n.n?" · "+n.n:""))}</text>
+      <text class="a" x="${p.x+10}" y="${p.y+28}">${esc(n.id)}</text>
+      <text class="b" x="${p.x+10}" y="${p.y+39}">◆ ${esc(n.owner||"no owner")}</text></g>`;}).join("");
+  const h=Math.max(...Object.values(pos).map(p=>p.y))+70;
+  return `<div class="pane"><svg viewBox="0 0 ${W} ${h}">${ed}${nd}</svg>
+  <p class="note">Solid line = <b>broader</b>, the hierarchy. Dashed = <b>requires</b>, the dependency that code enforces — every dashed line into <b>g2n0-clearance</b> reads <i>“its scripts run only after a written PASS from”</i>.</p></div>`;
+}
+function vCadence(){
+  const c=S.config?.cadence||{}, runs=(S.runs||[]).slice().reverse();
+  return `<div class="pane"><div class="bar">
+    <span class="mini">policing cadence <b style="color:var(--wire)">${esc(c.policing||"weekly")}</b> · clearance expires after <b style="color:var(--wire)">${esc(c.clearance_expires_days||90)}</b> days · set in <b>canon.yaml</b></span>
+    <span style="flex:1"></span><button class="go" data-act="police">run the sweep now</button></div>
+    <div class="grid" style="margin-bottom:12px">
+      <div class="card"><div class="k">skills governed</div><div class="v">${skillRows().length}</div></div>
+      <div class="card"><div class="k">sweeps recorded</div><div class="v">${(S.runs||[]).length}</div></div>
+      <div class="card"><div class="k">calls logged</div><div class="v">${S.usage_total||0}</div></div>
+      <div class="card"><div class="k">open proposals</div><div class="v">${(S.proposals||[]).filter(p=>p.status==="proposed").length}</div></div></div>
+    <div class="log">${runs.length?runs.map(r=>`<div><span class="st dim">${esc(r.ts)}</span>
+      <b style="color:var(--wire)">${esc(r.run_id)}</b> ${esc(r.trigger)} — checked ${esc(r.skills_checked)},
+      <span class="st ok">pass ${esc(r.passed)}</span>, <span class="st ${+r.blocked?'bad':'dim'}">blocked ${esc(r.blocked)}</span>
+      <div class="mini" style="padding-left:12px">${esc(r.note)}</div></div>`).join("")
+      :'<span class="st dim">no sweep recorded yet — run one.</span>'}</div>
+    <p class="note">The sweep is triggered by the record, not by a person: <b>g2n0-clearance</b> inspects every governed skill against the cadence in <code>canon.yaml</code> and writes the result to <code>canon/runs.csv</code>. A skill whose PASS has expired stops being runnable until a named human signs it again.</p></div>`;
+}
+function vBench(){
+  const rows=skillRows().map(n=>{
+    const ex=!!EXEMPT[n.id], age=n.cleared_on?Math.round((Date.now()-Date.parse(n.cleared_on))/864e5):null;
+    const reach=Math.min(n.calls/10,4), rel=n.dependents*2, fresh=(ex||(age!==null&&age<=90))?2:-3;
+    const fb=(S.feedback||[]).filter(f=>f.skill===n.id);
+    const fbs=fb.filter(f=>f.rating==="up").length-2*fb.filter(f=>f.rating==="down").length;
+    const s=Math.round((reach+rel+fresh+fbs)*10)/10;
+    const rec=ex?"exempt — governs the rule it would be judged by":age===null?"needs clearance":age>90?"re-clear":(n.dependents>=2&&s>=6)?"promote — load-bearing":n.calls===0?"retire — nothing calls it":"hold";
+    return `<tr><td><b>${esc(n.id)}</b></td><td class="own">◆ ${esc(n.owner)}</td>
+      <td>${n.calls}</td><td>${n.dependents}</td><td>${age===null?"—":age+"d"}</td>
+      <td style="color:var(--wire);font-weight:600">${s}</td><td class="st ${rec.startsWith("promote")?"ok":rec.startsWith("retire")||rec.startsWith("needs")||rec==="re-clear"?"warn":"dim"}">${esc(rec)}</td></tr>`;}).join("");
+  return `<div class="pane">
+    <table><thead><tr><th>skill</th><th>owner</th><th>calls</th><th>dependents</th><th>clearance age</th><th>score</th><th>recommendation</th></tr></thead><tbody>${rows}</tbody></table>
+    <p class="note"><b>Graded on evidence this system produced</b> — call volume, how many skills depend on it, how fresh its clearance is, and what people said. Not on anyone's opinion.<br><br>
+    <b style="color:var(--prop)">And the law that makes it safe:</b> the benchmark <b>proposes — it never writes</b>. Every line above lands in <code>canon/proposals.csv</code> at status <b>proposed</b> and waits for a named human. An automated grader that could promote itself would be exactly the thing this record exists to prevent.<br><br>
+    An optional <code>--llm</code> mode sends the same evidence bundle to a model for a written judgement. It is bound by the identical rule.</p></div>`;
+}
+function vFeed(){
+  const fb=(S.feedback||[]).slice().reverse();
+  return `<div class="pane"><div class="bar">
+    <select id="fs">${skillRows().map(n=>`<option>${esc(n.id)}</option>`).join("")}</select>
+    <select id="fr"><option value="up">worked</option><option value="down">did not work</option></select>
+    <input id="fc" placeholder="what happened" size="34"><input id="fb" placeholder="your name" size="12">
+    <button class="go" data-act="feedback">file it</button></div>
+    <div class="log">${fb.length?fb.map(f=>`<div><span class="st dim">${esc(f.ts)}</span>
+      <b>${esc(f.skill)}</b> <span class="st ${f.rating==="up"?"ok":"bad"}">${f.rating==="up"?"worked":"did not work"}</span>
+      — ${esc(f.comment)} <span class="mini">◆ ${esc(f.by)}</span></div>`).join(""):'<span class="st dim">no feedback filed yet.</span>'}</div>
+    <p class="note">Feedback is evidence, not chatter: it feeds the benchmark, and a skill people report as broken loses score until its owner acts.</p></div>`;
+}
+/* ---------------------------------------------------------------
+   The same five laws, in the browser.
+   With a server, every action writes to canon/*.csv and skills/*.
+   Without one, it runs here on in-memory state — identical rules,
+   so the public demo behaves exactly like the record does.
+----------------------------------------------------------------*/
+const nowISO=()=>new Date().toISOString().replace(/\.\d+Z$/,"Z");
+function logUse(skill,action,outcome,caller){ S.usage_total=(S.usage_total||0)+1;
+  const n=S.nodes.find(x=>x.id===skill); if(n) n.calls=(n.calls||0)+1;
+  S._log=(S._log||[]); S._log.push({ts:nowISO(),skill,action,outcome,caller}); }
+
+function localPolice(trigger){
+  const lim=+(S.config?.cadence?.clearance_expires_days||90); let pass=0,blocked=0,notes=[];
+  skillRows().forEach(n=>{
+    let verdict="PASS", why="";
+    if(EXEMPT[n.id]){ verdict="EXEMPT"; }
+    else if(!n.owner){ verdict="BLOCKED"; why="STEWARDLESS — no named human"; }
+    else if(!n.clearance){ verdict="BLOCKED"; why="NO CLEARANCE — never inspected"; }
+    else { const age=Math.round((Date.now()-Date.parse(n.cleared_on))/864e5);
+      if(age>lim){ verdict="BLOCKED"; why=`CLEARANCE EXPIRED — ${age}d, limit ${lim}`; } }
+    if(verdict==="BLOCKED"){ blocked++; notes.push(`${n.id}: ${why}`);} else pass++;
+    logUse(n.id,"police",verdict,"g2n0-clearance");
+  });
+  S.runs=(S.runs||[]).concat([{run_id:`R-${String((S.runs||[]).length+1).padStart(4,"0")}`,
+    ts:nowISO(),trigger,skills_checked:skillRows().length,passed:pass,failed:0,blocked,
+    note:notes.join("; ")||"all clear"}]);
+}
+function localBirth(name,owner,kind){
+  const apex=S.config?.apex||"g0-root";
+  const ns=S.nodes.filter(n=>n.g==="G1"&&/^N\d+$/.test(n.n||"")).map(n=>+n.n.slice(1));
+  const nn="N"+(ns.length?Math.max(...ns)+1:0);
+  const sid=`g1${nn.toLowerCase()}-${name.replace(/[^a-z0-9-]/gi,"-").toLowerCase()}`;
+  if(S.nodes.some(n=>n.id===sid)) return {ok:false,error:sid+" already exists"};
+  S.nodes.push({id:sid,g:"G1",n:nn,role:kind+" — born by the apex",owner,owner_role:"business",
+    status:"proposed",clearance:"",cleared_by:"",cleared_on:"",calls:0,dependents:0,type:"skill"});
+  S.edges.push([sid,"g1n0-refund-master","broader"],[sid,"g2n0-clearance","requires"]);
+  const cl=S.nodes.find(n=>n.id==="g2n0-clearance"); if(cl) cl.dependents++;
+  S.proposals=(S.proposals||[]).concat([{id:`P-${String((S.proposals||[]).length+1).padStart(3,"0")}`,
+    kind:"birth",target:sid,detail:`${kind} owned by ${owner}`,raised_by:apex,
+    status:"proposed",approved_by:"",ts:nowISO()}]);
+  logUse(sid,"birth","PROPOSED",apex);
+  return {ok:true,skill:sid};
+}
+function localPromote(sid,approver){
+  const p=(S.proposals||[]).filter(x=>x.target===sid&&x.status==="proposed").pop();
+  if(p && p.raised_by===approver)
+    return {ok:false,error:`maker-checker: ${approver} raised it and may not approve it`};
+  const n=S.nodes.find(x=>x.id===sid); if(n) n.status="active";
+  if(p){ p.status="active"; p.approved_by=approver; }
+  logUse(sid,"promote","ACTIVE",approver); return {ok:true};
+}
+function localClear(sid,inspector){
+  const n=S.nodes.find(x=>x.id===sid); if(!n) return;
+  n.clearance="PASS"; n.cleared_by=inspector; n.cleared_on=new Date().toISOString().slice(0,10);
+  logUse(sid,"clear","PASS",inspector);
+}
+function localFeedback(skill,rating,comment,by){
+  S.feedback=(S.feedback||[]).concat([{ts:nowISO(),skill,rating,comment,by}]);
+  logUse(skill,"feedback",rating,by);
+}
+
+function wire(){
+  $("view").onclick=async e=>{
+    const b=e.target.closest("[data-act]"); if(!b)return;
+    const act=b.dataset.act, sid=b.dataset.s;
+
+    if(act==="reset"){ S=JSON.parse(JSON.stringify(SEED)); render(); return; }
+
+    if(LIVE){
+      if(act==="police")  await api("/api/police",{trigger:"console"});
+      if(act==="clear")   await api("/api/clear",{skill:sid,inspector:"D. Halim"});
+      if(act==="promote"){const r=await api("/api/promote",{skill:sid,approver:"A. Chen"});
+        if(r&&!r.ok) alert(r.error);}
+      if(act==="birth"){ const n=$("bn").value.trim(),o=$("bo").value.trim();
+        if(!n||!o){alert("a skill needs a name and a named human");return;}
+        const r=await api("/api/birth",{name:n,owner:o,type:$("bt").value,graph:"G1"});
+        if(r&&!r.ok) alert(r.error); }
+      if(act==="feedback") await api("/api/feedback",{skill:$("fs").value,rating:$("fr").value,
+        comment:$("fc").value,by:$("fb").value||"anon"});
+      await load(); return;
+    }
+
+    /* no server — same laws, in the browser */
+    if(act==="police")  localPolice("console");
+    if(act==="clear")   localClear(sid,"D. Halim");
+    if(act==="promote"){const r=localPromote(sid,"A. Chen"); if(!r.ok) alert(r.error);}
+    if(act==="birth"){ const n=$("bn").value.trim(),o=$("bo").value.trim();
+      if(!n||!o){alert("a skill needs a name and a named human");return;}
+      const r=localBirth(n,o,$("bt").value); if(!r.ok) alert(r.error); }
+    if(act==="feedback"){ if(!$("fc").value.trim()){alert("say what happened");return;}
+      localFeedback($("fs").value,$("fr").value,$("fc").value,$("fb").value||"anon"); }
+    render();
+  };
+}
+load();
+</script></body></html>

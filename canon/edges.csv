@@ -1,0 +1,10 @@
+source_id,target_id,relation,meaning
+g0-root,meridian-canon,broader,the apex sits at the root and numbers every graph below it
+g1n0-refund-master,meridian-canon,broader,G1 is a graph minted by the apex
+g2n0-clearance,meridian-canon,broader,G2 is a graph minted by the apex
+g1n1-policy-steward,g1n0-refund-master,broader,member of G1 — born N1
+g1n2-quote-reader,g1n0-refund-master,broader,member of G1 — born N2
+g1n2-quote-reader,g1n1-policy-steward,requires,reads the record the policy steward writes
+g1n0-refund-master,g2n0-clearance,requires,its scripts run only after a written PASS from
+g1n1-policy-steward,g2n0-clearance,requires,its scripts run only after a written PASS from
+g1n2-quote-reader,g2n0-clearance,requires,its scripts run only after a written PASS from

@@ -1,0 +1,4 @@
+rule_id,country,window_days,pct,source,effective_from,owner
+RP-001,TW,30,100,Policy Committee 2026-01,2026-01-01,M. Santos
+RP-002,JP,14,100,Policy Committee 2026-01,2026-01-01,M. Santos
+RP-003,DE,30,80,Policy Committee 2026-03,2026-03-01,M. Santos
