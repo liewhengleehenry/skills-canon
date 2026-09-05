@@ -33,6 +33,10 @@ model did, silently, on somebody else's schedule.
 So the base is one open-weights model at one quantisation, held still on purpose. It is not the
 smartest model available. It is **the same one as last month**:
 
+> **Reading the names.** Every skill has an address. `g1n2-quote-reader` is *graph 1, node 2*. `N0` is
+> the master of its graph; `N1` upward are its members. **`G0` is the apex** — the one skill that has
+> no graph above it, and the one a team begins with.
+
 ```console
 $ python3 engine/testrun.py g1n2-quote-reader
 g1n2-quote-reader  v2026-08.2  suite=quote-and-refuse  n=6
@@ -104,8 +108,11 @@ folders on disk; the browser build is there so you can look at it without clonin
 
 ## How it works
 
-A person commits a G0, and that act is the team. The apex is administrative: it carries the rules
-its members inherit and the human who administers them. Anyone then writes skills in any agent, and
+A person commits a **G0**, and that act is the team. A G0 is the apex of a team's graph: a skill
+folder like any other, with a version and a named owner, but the only one that sits above everything
+else. It is administrative rather than functional — it does no work of its own. What it holds is the
+rules its members will inherit and the name of the human who administers them, which is why
+committing one is not a setup step but the act that brings the team into being. Anyone then writes skills in any agent, and
 every skill is born under that team's rules plus any stricter rule its graph master added. Teams
 link to teams: a cross-team dependency sees the version, the owner and the signature date before it
 commits, and accountability stays with the producing team.

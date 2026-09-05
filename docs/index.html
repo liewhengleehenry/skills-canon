@@ -161,16 +161,58 @@ tr.bad td{background:#2A1712}tr.warn td{background:#2A2110}tr.good td{background
 </section>
 
 <section class="sec">
+  <h2>An open standard is not enough<span class="sub">what the format leaves out &middot; what the record supplies</span></h2>
+  <p class="lede">It helps, and it is not enough. A <code>SKILL.md</code> says what a skill <b>looks
+  like</b>. It says nothing about whether that skill <b>may run here</b>. Four things are missing, and
+  every one of them is enterprise business rather than format business.</p>
+  <div class="steps" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+
+    <div class="step"><div class="n">01 &middot; MISSING</div>
+      <div class="t">The metadata that matters to <i>your</i> enterprise, enforced</div>
+      <div class="d">Which fields matter is your decision, not a standard's. Declare them as signed
+      rules and every sweep checks them. One graph demands <code>max-tokens</code>, another demands
+      <code>security-review</code>. Neither is in any published format.</div>
+      <div class="w">canon/rules.csv &middot; card_has &middot; card_is &middot; card_max</div></div>
+
+    <div class="step"><div class="n">02 &middot; MISSING</div>
+      <div class="t">A graph &mdash; dependencies and inspection rights</div>
+      <div class="d">Who depends on whom is a fact the sweep can act on, not a diagram. Who may inspect
+      whom is <b>declared</b>, not assumed. Both are edges in the record, walked and enforced.</div>
+      <div class="w">canon/edges.csv &middot; requires &middot; inspected by</div></div>
+
+    <div class="step"><div class="n">03 &middot; MISSING</div>
+      <div class="t">A hierarchy of identity and access</div>
+      <div class="d">Which principal, in which role, over which scope, may create, promote, sign or
+      write. Granted by a named human, and <b>expiring</b> &mdash; including across team boundaries,
+      where skills cross-pollinate.</div>
+      <div class="w">canon/grants.csv &middot; principal &middot; scope &middot; expires</div></div>
+
+    <div class="step"><div class="n">04 &middot; MISSING</div>
+      <div class="t">A stable base to test against</div>
+      <div class="d">Every suite runs against <b>one pinned open-weights model</b>, named by weight
+      hash. Hold the base still and a moving pass rate means the skill moved. Test on a frontier model
+      that changes underneath you and you can never say which one broke.</div>
+      <div class="w">canon.yaml &middot; canon/tests.csv &middot; qwen2.5-14b &middot; Q4_K_M</div></div>
+
+  </div>
+  <p class="lede" style="margin-top:18px">Every check below is one of these four, and none of them is
+  written into the inspector. <b>17 signed rules</b> are in force; the inspector is a loop and twelve
+  generic checks that names no skill and states no rule.</p>
+</section>
+
+<section class="sec">
   <h2>How a team comes into existence<span class="sub">and how skills come into existence inside it</span></h2>
   <p class="lede">Nothing here is hardcoded and nothing is central. A team is created the moment someone
-  commits a <b>G0</b>, an administrative apex that carries that team's rules. From then on, everything
+  commits a <b>G0</b> &mdash; the apex of a team's graph, a skill folder like any other but the one
+  that sits above all the rest, carrying the rules its members inherit. From then on, everything
   born beneath it inherits those rules, and <b>some of its skills inspect the others</b> because they were
   written to and pointed at by an edge. A different team writes a different apex, sets different rules, and
   appoints different inspectors.</p>
   <div class="steps">
     <div class="step"><div class="n">01</div><div class="t">A person commits a G0.</div>
-      <div class="d">That act <b>is</b> the team. The apex carries the rules its members will inherit and the
-      name of the human who administers them.</div><div class="w">canon/nodes.csv · canon/rules.csv</div></div>
+      <div class="d">That act <b>is</b> the team. A <b>G0</b> is the apex: administrative, not functional
+      &mdash; it does no work itself. It carries the rules its members will inherit and the name of the
+      human who administers them.</div><div class="w">canon/nodes.csv · canon/rules.csv</div></div>
     <div class="step"><div class="n">02</div><div class="t">Anyone writes skills, in any agent.</div>
       <div class="d">Cowork on one desk, Copilot on the next, a home-made agent on a third. The tool is
       the author's choice; <b>the shape of the output is not</b>.</div><div class="w">a folder + SKILL.md</div></div>
@@ -191,6 +233,10 @@ tr.bad td{background:#2A1712}tr.warn td{background:#2A2110}tr.good td{background
   <h2>The record, right now<span class="sub">drawn live from nodes · edges · rules · clearance</span></h2>
   <p class="lede">Two teams, two apexes, and <b>two different inspectors</b>, each an ordinary skill in
   its own team. The one cross-team dependency is in violet. Every arrow says what it is.</p>
+  <p class="lede" style="margin-top:10px"><b>Reading the names.</b> Every skill has an address.
+  <code>g1n2-quote-reader</code> is <i>graph 1, node 2</i>. <code>N0</code> is the master of its graph;
+  <code>N1</code> upward are its members. <b><code>G0</code> is the apex</b> &mdash; the one skill with
+  no graph above it, and the one a team begins with.</p>
   <div id="herograph"></div>
 </section>
 
