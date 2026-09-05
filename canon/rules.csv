@@ -1,0 +1,18 @@
+rule_id,scope,check,param,severity,authored_by,approved_by,version,note
+R-FOLDER-01,g0-root,folder_exists,,block,A. Chen,D. Halim,2026-09.1,the canon may not vouch for a skill nobody holds
+R-CARD-01,g0-root,card_has,version,block,A. Chen,D. Halim,2026-09.1,every card states the version it is
+R-CARD-02,g0-root,card_has,address,block,A. Chen,D. Halim,2026-09.1,every skill has an address in a graph
+R-CARD-03,g0-root,card_has,type,block,A. Chen,D. Halim,2026-09.1,reader / steward / master must be declared
+R-CARD-04,g0-root,card_has,skill-owner,block,A. Chen,D. Halim,2026-09.1,a skill with no named human cannot be answered for
+R-CARD-05,g0-root,card_has,status,block,A. Chen,D. Halim,2026-09.1,proposed or active — never implicit
+R-OWNER-01,g0-root,node_owner,,block,A. Chen,D. Halim,2026-09.1,the record must carry the same named human as the card
+R-CLEAR-01,g0-root,clearance_pass,,block,D. Halim,A. Chen,2026-09.1,nothing runs without a written PASS
+R-CLEAR-02,g0-root,clearance_age,90,block,D. Halim,A. Chen,2026-09.1,a PASS older than the cadence limit is not a PASS
+R-CTX-01,g1n0-refund-master,card_max,max-tokens:8000,block,M. Santos,A. Chen,2026-09.1,refund skills answer from the record — a large context means it is guessing
+R-WRITE-01,g1n0-refund-master,card_is,steward-type:human,warn,M. Santos,A. Chen,2026-09.1,every member of this graph answers to a person not a rota
+R-CTX-02,g0-root,card_has,max-tokens,block,D. Halim,A. Chen,2026-09.1,a skill that does not declare a context ceiling cannot be held to one
+R-TEST-01,g0-root,test_exists,,block,D. Halim,A. Chen,2026-09.1,"a skill nobody has tested against the pinned base is a claim, not a capability"
+R-TEST-02,g0-root,test_pass_min,0.90,block,D. Halim,A. Chen,2026-09.1,"the floor this estate accepts; a team may raise it, never lower it"
+R-TEST-03,g0-root,test_current_version,,block,D. Halim,A. Chen,2026-09.1,"change the skill, re-run the suite — an old result describes an old skill"
+R-TEST-04,g0-root,test_base_pinned,allow-stub,block,A. Chen,D. Halim,2026-09.1,only results from the base pinned in canon.yaml are comparable to each other
+R-IAM-01,g0-root,grant_write,,block,A. Chen,D. Halim,2026-09.1,"a skill that writes a record holds a scoped, granted, expiring authority to do so"

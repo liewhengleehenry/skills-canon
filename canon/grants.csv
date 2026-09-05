@@ -1,0 +1,8 @@
+grant_id,principal,role,scope,may,granted_by,granted_on,expires_on,note
+GR-001,A. Chen,apex-owner,g0-root,"create,promote,grant",BOARD,2026-06-14,2027-06-14,administers this team and may delegate
+GR-002,D. Halim,inspector-owner,g0-root,"clear,test",A. Chen,2026-06-14,2026-12-14,may sign the register; may not create or promote
+GR-003,M. Santos,graph-owner,g1n0-refund-master,"rule,promote",A. Chen,2026-06-20,2027-06-20,may add rules stricter than the apex within this graph only
+GR-004,M. Santos,steward,g1n1-policy-steward,write,A. Chen,2026-06-20,2027-06-20,THE ONLY principal who may write record/refund-policy.csv
+GR-005,J. Varga,reader-owner,g1n2-quote-reader,read,M. Santos,2026-06-22,2027-06-22,read-only; may not write any record
+GR-006,K. Adeyemi,apex-owner,so-g0-root,"create,promote,grant",BOARD,2026-08-02,2027-08-02,a different team — a different apex
+GR-007,g1n2-quote-reader,cross-team-consumer,so-g1n1-vendor-steward,read,K. Adeyemi,2026-08-27,2026-11-27,CROSS-TEAM — granted by the OWNING team's apex, and it expires

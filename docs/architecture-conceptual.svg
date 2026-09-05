@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 640" role="img" aria-label="Skills Canon CONCEPTUAL architecture — any agent writes it, the team's rules decide, a named human signs">
+<defs>
+<style>
+.lbl{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:9px;letter-spacing:.16em;fill:#5A6A83}
+.ttl{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:12.5px;font-weight:600;fill:#DCE3EE}
+.sm{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:9.5px;fill:#8494AC}
+.tiny{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:8.5px;fill:#5A6A83}
+.big{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:15px;font-weight:600;fill:#DCE3EE}
+.box{fill:#151D2C;stroke:#26334A;stroke-width:1.2}
+.wire{stroke:#4FC3C7;fill:none;stroke-width:1.4}
+.grn{stroke:#79B473;fill:none;stroke-width:1.6}
+.amb{stroke:#DDA83C;fill:none;stroke-width:1.6}
+</style>
+<marker id="aw" markerWidth="9" markerHeight="9" refX="7.6" refY="3.2" orient="auto"><path d="M0 0 L8 3.2 L0 6.4 z" fill="#4FC3C7"/></marker>
+<marker id="ag" markerWidth="9" markerHeight="9" refX="7.6" refY="3.2" orient="auto"><path d="M0 0 L8 3.2 L0 6.4 z" fill="#79B473"/></marker>
+<marker id="aa" markerWidth="9" markerHeight="9" refX="7.6" refY="3.2" orient="auto"><path d="M0 0 L8 3.2 L0 6.4 z" fill="#DDA83C"/></marker>
+</defs>
+<rect fill="#0E1420" x="0" y="0" width="1160" height="640"/>
+
+<text class="lbl" x="40" y="18" fill="#DDA83C">CONCEPTUAL ARCHITECTURE — HOW THE GOVERNANCE WORKS · DEMONSTRATED BY THIS REPOSITORY</text>
+<text class="lbl" x="40"  y="34">1 · PROPOSE</text>
+<text class="lbl" x="392" y="34">2 · THE GATE</text>
+<text class="lbl" x="700" y="34">3 · THE RECORD</text>
+<line x1="40" y1="44" x2="300" y2="44" stroke="#26334A"/>
+<line x1="392" y1="44" x2="628" y2="44" stroke="#26334A"/>
+<line x1="700" y1="44" x2="1120" y2="44" stroke="#26334A"/>
+
+<!-- 1 · PROPOSE -->
+<rect class="box" x="40" y="62" width="260" height="80" rx="3"/>
+<text class="ttl" x="56" y="86">a human, in words</text>
+<text class="sm"  x="56" y="107">“what should we retire?”</text>
+<text class="tiny" x="56" y="128">the only input needed to begin</text>
+<path class="wire" marker-end="url(#aw)" d="M170 142 L170 178"/>
+
+<rect class="box" x="40" y="184" width="260" height="116" rx="3"/>
+<text class="ttl" x="56" y="208">the proposer</text>
+<text class="sm"  x="56" y="228">deterministic · no model called</text>
+<text class="tiny" x="56" y="249">grades and drafts from the record —</text>
+<text class="tiny" x="56" y="262">calls, dependents, signatures</text>
+<rect x="56" y="272" width="228" height="18" fill="#2A1712" stroke="#D0674F" stroke-width="1" rx="2"/>
+<text class="tiny" x="64" y="285" fill="#D0674F">it may NOT write to the canon</text>
+<path class="wire" marker-end="url(#aw)" d="M170 300 L170 336"/>
+
+<rect class="box" x="40" y="342" width="260" height="88" rx="3"/>
+<text class="ttl" x="56" y="366">a named human</text>
+<text class="sm"  x="56" y="387">assigns every owner ◆</text>
+<text class="tiny" x="56" y="408">a skill with no name against it is</text>
+<text class="tiny" x="56" y="421">STEWARDLESS and cannot run</text>
+
+<!-- named human → the gate -->
+<path class="wire" marker-end="url(#aw)" d="M300 386 L344 386 L344 180 L386 180"/>
+
+<!-- THE LAW -->
+<line x1="40" y1="470" x2="300" y2="470" stroke="#26334A"/>
+<text class="lbl" x="40" y="492">THE LAW</text>
+<text class="big" x="40" y="522">Any agent writes it.</text>
+<text class="big" x="40" y="546">The team&#8217;s rules decide.</text>
+<text class="big" x="40" y="570" fill="#79B473">A named human signs.</text>
+<text class="tiny" x="40" y="598">838 lines of Python · standard library only · no database</text>
+<text class="tiny" x="40" y="612">no build step · no pip install · git is the audit trail</text>
+
+<!-- 2 · THE GATE -->
+<rect class="box" x="392" y="62" width="236" height="212" rx="3" stroke="#DDA83C" stroke-width="1.6"/>
+<text class="ttl" x="408" y="86" fill="#DDA83C">canon/proposals.csv</text>
+<text class="sm"  x="408" y="106">status = proposed</text>
+<line x1="408" y1="118" x2="612" y2="118" stroke="#26334A"/>
+<text class="tiny" x="408" y="138">NOTHING enters the canon</text>
+<text class="tiny" x="408" y="151">except through this file.</text>
+<text class="tiny" x="408" y="174">· every new skill lands here</text>
+<text class="tiny" x="408" y="187">· the benchmark proposes here</text>
+<text class="tiny" x="408" y="200">· every birth lands here</text>
+<rect x="408" y="212" width="204" height="46" fill="#2A2110" stroke="#DDA83C" stroke-width="1" rx="2"/>
+<text class="tiny" x="416" y="226" fill="#DDA83C">MAKER-CHECKER</text>
+<text class="tiny" x="416" y="239" fill="#DDA83C">the person who raised it</text>
+<text class="tiny" x="416" y="252" fill="#DDA83C">may not approve it.</text>
+
+<!-- gate → record -->
+<path class="grn" marker-end="url(#ag)" d="M628 168 L698 168"/>
+<text class="tiny" x="632" y="160" fill="#79B473">a 2nd human</text>
+<text class="tiny" x="632" y="186" fill="#79B473">signs it in</text>
+
+<!-- benchmark -->
+<rect class="box" x="392" y="342" width="236" height="100" rx="3"/>
+<text class="ttl" x="408" y="366">engine/benchmark.py</text>
+<text class="tiny" x="408" y="386">grades on evidence the system</text>
+<text class="tiny" x="408" y="399">itself produced — calls, dependents,</text>
+<text class="tiny" x="408" y="412">clearance age, what people reported</text>
+<text class="tiny" x="408" y="432" fill="#DDA83C">it proposes. it never writes.</text>
+<path class="amb" marker-end="url(#aa)" d="M510 342 L510 282"/>
+
+<!-- 3 · THE RECORD -->
+<rect class="box" x="700" y="62" width="196" height="212" rx="3"/>
+<text class="ttl" x="716" y="86">canon/</text>
+<text class="sm"  x="716" y="110">nodes.csv</text><text class="tiny" x="716" y="123">what exists · OWNER · status</text>
+<text class="sm"  x="716" y="147">edges.csv</text><text class="tiny" x="716" y="160">broader · requires</text>
+<text class="sm"  x="716" y="184">clearance.csv</text><text class="tiny" x="716" y="197">the written PASS register</text>
+<text class="sm"  x="716" y="221">runs · usage · feedback</text><text class="tiny" x="716" y="234">every sweep · every call</text>
+<text class="tiny" x="716" y="258" fill="#4FC3C7">plain text — git diffs the record</text>
+
+<rect class="box" x="924" y="62" width="196" height="212" rx="3"/>
+<text class="ttl" x="940" y="86">skills/</text>
+<text class="tiny" x="940" y="104">ONE FOLDER PER SKILL</text>
+<rect x="940" y="116" width="164" height="56" fill="#F2EFE9" stroke="#79B473" stroke-width="1.4" rx="2"/>
+<text class="tiny" x="950" y="133" fill="#0E1420">g1n1-policy-steward/</text>
+<text class="tiny" x="950" y="147" fill="#0E1420">SKILL.md · code · data</text>
+<text class="tiny" x="950" y="162" fill="#4A7A46">◆ M. Santos</text>
+<rect x="940" y="180" width="164" height="32" fill="#151D2C" stroke="#26334A" stroke-dasharray="4 3" rx="2"/>
+<text class="tiny" x="950" y="195">g1n3-tariff-checker/</text>
+<text class="tiny" x="950" y="207" fill="#D0674F">◆ unsigned — BLOCKED</text>
+<text class="tiny" x="940" y="234">the unit is the folder — it moves,</text>
+<text class="tiny" x="940" y="247">it is owned, it outlives the app</text>
+
+<!-- 4 · THE POLICE -->
+<text class="lbl" x="700" y="330">4 · THE POLICE — A SKILL, LIKE ANY OTHER</text>
+<line x1="700" y1="340" x2="1120" y2="340" stroke="#26334A"/>
+<rect class="box" x="700" y="358" width="420" height="160" rx="3" stroke="#79B473" stroke-width="1.6"/>
+<text class="ttl" x="716" y="382" fill="#79B473">g2n0-clearance</text>
+<text class="sm"  x="716" y="402">engine/inspect_skills.py · cadence: weekly · canon.yaml</text>
+<line x1="716" y1="414" x2="1104" y2="414" stroke="#26334A"/>
+<text class="tiny" x="716" y="434">no owner ................. BLOCKED · stewardless</text>
+<text class="tiny" x="716" y="450">no written PASS .......... BLOCKED · never inspected</text>
+<text class="tiny" x="716" y="466">PASS older than 90 days .. BLOCKED · clearance expired</text>
+<rect x="716" y="478" width="388" height="26" fill="#10241A" stroke="#79B473" stroke-width="1" rx="2"/>
+<text class="tiny" x="724" y="495" fill="#79B473">EXEMPT — g0-root holds the law it applies · clearance cannot clear itself</text>
+<path class="grn" marker-end="url(#ag)" d="M1022 358 L1022 282"/>
+<text class="tiny" x="1032" y="308" fill="#79B473">inspects · blocks</text>
+
+<text class="tiny" x="700" y="546">The sweep is triggered by the record, not by a person. Its verdict is written to</text>
+<text class="tiny" x="700" y="560">canon/runs.csv, and a blocked skill stays blocked until a named human signs it again.</text>
+<text class="tiny" x="700" y="586" fill="#4FC3C7">MERIDIAN INSTRUMENTS 子虛儀器 — an invented company. 子虛 means fictitious.</text>
+</svg>

@@ -2,6 +2,7 @@ id,prefLabel,type,g,n,role,owner,owner_role,status,version
 meridian-canon,Meridian Skill Canon,root,,,the record of what this company can do,A. Chen,business,active,2026-09.1
 g0-root,g0-root,skill,G0,,master — the apex; holds the law and mints every graph,A. Chen,business,active,2026-09.1
 g1n0-refund-master,g1n0-refund-master,skill,G1,N0,master — governs the Refund Desk graph,M. Santos,business,active,2026-09.1
-g1n1-policy-steward,g1n1-policy-steward,skill,G1,N1,steward (CRUD) — the only writer of record/refund-policy.csv,M. Santos,business,active,2026-09.1
-g1n2-quote-reader,g1n2-quote-reader,skill,G1,N2,reader (read-only) — answers a refund question from the record,J. Varga,business,active,2026-09.1
+g1n1-policy-steward,g1n1-policy-steward,skill,G1,N1,steward (CRUD) — the only writer of record/refund-policy.csv,M. Santos,business,active,2026-08.4
+g1n2-quote-reader,g1n2-quote-reader,skill,G1,N2,reader (read-only) — answers a refund question from the record,J. Varga,business,active,2026-08.2
 g2n0-clearance,g2n0-clearance,skill,G2,N0,master — inspects every governed skill and writes the clearance register,D. Halim,it,active,2026-09.1
+g1n3-legacy-fx-lookup,g1n3-legacy-fx-lookup,skill,G1,N3,"reader (read-only) — legacy FX rate lookup, superseded",J. Varga,business,active,2026-04.1

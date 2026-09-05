@@ -1,0 +1,3 @@
+{"id":"R-01","suite":"routing","input":"A pricing question about a refund quote. Which member?","expect":"quote-reader"}
+{"id":"R-02","suite":"routing","input":"A policy change approved by the committee. Which member?","expect":"policy-steward"}
+{"id":"R-03","suite":"routing","input":"A question about staff payroll. Which member?","expect":"REFUSE"}

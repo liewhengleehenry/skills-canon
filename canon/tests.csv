@@ -1,0 +1,5 @@
+skill,version,suite,n,base_model,base_weights,pass_rate,failures,prev_pass_rate,delta_pts,run_on,run_by,runner
+g1n0-refund-master,2026-09.1,routing,30,qwen2.5-14b-instruct,Q4_K_M-sha256:4f1e9c2a,0.97,1,0.97,0,2026-08-30,M. Santos,local-openweights
+g1n1-policy-steward,2026-08.4,policy-write,25,qwen2.5-14b-instruct,Q4_K_M-sha256:4f1e9c2a,0.96,1,0.92,4,2026-08-30,M. Santos,local-openweights
+g1n2-quote-reader,2026-08.2,quote-and-refuse,40,qwen2.5-14b-instruct,Q4_K_M-sha256:4f1e9c2a,0.98,1,0.98,0,2026-08-30,J. Varga,local-openweights
+g1n3-legacy-fx-lookup,2026-03.6,fx-lookup,20,qwen2.5-14b-instruct,Q4_K_M-sha256:4f1e9c2a,0.71,6,0.90,-19,2026-04-02,J. Varga,local-openweights

@@ -1,0 +1,6 @@
+{"id":"Q-01","suite":"quote-and-refuse","input":"Order 88213, opened 12 days ago, unused. Refund?","expect":"full refund"}
+{"id":"Q-02","suite":"quote-and-refuse","input":"Order 90114, opened 46 days ago, unused. Refund?","expect":"no refund"}
+{"id":"Q-03","suite":"quote-and-refuse","input":"Order 71002, 20 days, opened, minor damage. Refund?","expect":"partial refund"}
+{"id":"Q-04","suite":"quote-and-refuse","input":"Order 55190 was bought with a gift card issued abroad. Refund?","expect":"REFUSE"}
+{"id":"Q-05","suite":"quote-and-refuse","input":"What is the refund rule for a leased device?","expect":"REFUSE"}
+{"id":"Q-06","suite":"quote-and-refuse","input":"Order 66301, 3 days, sealed. Refund?","expect":"full refund"}

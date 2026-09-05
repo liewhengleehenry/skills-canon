@@ -16,8 +16,11 @@ def append(name, row):
         w = csv.DictWriter(fh, fieldnames=list(row)); 
         if new: w.writeheader()
         w.writerow(row)
-def log(skill, action, outcome, caller="ui"):
-    append("usage.csv", {"ts":now(),"skill":skill,"action":action,"outcome":outcome,"caller":caller})
+def log(skill, action, outcome, caller="ui", version=""):
+    """Every call this system made, and every call it REFUSED, with the version in play.
+    This is the telemetry the benchmark grades on — nothing here is self-reported opinion."""
+    append("usage.csv", {"ts":now(),"skill":skill,"action":action,"outcome":outcome,
+                         "caller":caller,"version":version})
 
 def cfg():
     """canon.yaml, read without a yaml dependency — flat two-level keys only."""

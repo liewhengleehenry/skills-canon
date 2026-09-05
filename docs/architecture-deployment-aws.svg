@@ -1,0 +1,220 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1480 1010" role="img" aria-label="Skills Canon — proposed AWS VPC reference deployment. Not instantiated in this repository.">
+<defs>
+<style>
+.h1{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:15px;font-weight:600;fill:#DCE3EE;letter-spacing:.02em}
+.lbl{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:9px;letter-spacing:.17em;fill:#5A6A83}
+.svc{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:10.5px;font-weight:600;fill:#EDF2F9}
+.sub{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:8.5px;fill:#8494AC}
+.tiny{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:8px;fill:#5A6A83}
+.note{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:8.5px;fill:#8494AC}
+.warn{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:9.5px;fill:#DDA83C;letter-spacing:.1em}
+.box{fill:#151D2C;stroke:#2E3D57;stroke-width:1.2}
+.zone{fill:none;stroke:#26334A;stroke-width:1;stroke-dasharray:6 4}
+.vpc{fill:none;stroke:#4FC3C7;stroke-width:1.6}
+.acct{fill:none;stroke:#9B8CE0;stroke-width:1.4;stroke-dasharray:8 5}
+.dat{fill:#101E2A;stroke:#4FC3C7;stroke-width:1.4}
+.sec{fill:#10241A;stroke:#79B473;stroke-width:1.4}
+.noegress{fill:#1B1410;stroke:#D0674F;stroke-width:1.6}
+.w{stroke:#4FC3C7;fill:none;stroke-width:1.4}
+.wg{stroke:#79B473;fill:none;stroke-width:1.4}
+.wa{stroke:#DDA83C;fill:none;stroke-width:1.4;stroke-dasharray:4 4}
+.wv{stroke:#9B8CE0;fill:none;stroke-width:1.4;stroke-dasharray:5 4}
+.elab{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:8px;fill:#5A6A83}
+</style>
+<marker id="a1" markerWidth="8" markerHeight="8" refX="7" refY="2.8" orient="auto"><path d="M0 0 L7 2.8 L0 5.6 z" fill="#4FC3C7"/></marker>
+<marker id="a2" markerWidth="8" markerHeight="8" refX="7" refY="2.8" orient="auto"><path d="M0 0 L7 2.8 L0 5.6 z" fill="#79B473"/></marker>
+<marker id="a3" markerWidth="8" markerHeight="8" refX="7" refY="2.8" orient="auto"><path d="M0 0 L7 2.8 L0 5.6 z" fill="#DDA83C"/></marker>
+</defs>
+<rect x="0" y="0" width="1480" height="1010" fill="#0E1420"/>
+
+<text class="warn" x="26" y="26">PROPOSED DEPLOYMENT — NOT INSTANTIATED IN THIS REPOSITORY</text>
+<text class="h1"  x="26" y="52">Reference deployment · AWS VPC</text>
+<text class="note" x="26" y="70">How the same record and the same six laws would run inside an enterprise. The demo proves the governance; this proves it can be operated.</text>
+
+<!-- ─────────────── OUTSIDE THE BOUNDARY ─────────────── -->
+<text class="lbl" x="26" y="106">OUTSIDE THE BOUNDARY</text>
+<line x1="26" y1="114" x2="300" y2="114" stroke="#26334A"/>
+
+<rect class="box" x="26" y="126" width="274" height="92" rx="3"/>
+<text class="svc"  x="40" y="148">Desktop agents</text>
+<text class="sub"  x="40" y="164">Claude Cowork · Copilot · in-house</text>
+<text class="tiny" x="40" y="182">Authors write skill folders on their own</text>
+<text class="tiny" x="40" y="194">machines. No agent has canon credentials.</text>
+<text class="tiny" x="40" y="210" fill="#79B473">push a folder → CI → S3 (versioned)</text>
+
+<rect class="box" x="26" y="232" width="274" height="86" rx="3"/>
+<text class="svc"  x="40" y="254">Skill runtimes</text>
+<text class="sub"  x="40" y="270">ECS tasks · Lambda · laptops · agents</text>
+<text class="tiny" x="40" y="288">Wherever a skill actually executes.</text>
+<text class="tiny" x="40" y="302" fill="#DDA83C">every invocation calls POST /api/use first</text>
+
+<rect class="box" x="26" y="332" width="274" height="76" rx="3"/>
+<text class="svc"  x="40" y="354">Corporate IdP</text>
+<text class="sub"  x="40" y="370">Entra ID · Okta — SAML / OIDC</text>
+<text class="tiny" x="40" y="388">The OWNER column is a federated identity,</text>
+<text class="tiny" x="40" y="400">not a string somebody typed.</text>
+
+<text class="lbl" x="26" y="440">EDGE</text>
+<line x1="26" y1="448" x2="300" y2="448" stroke="#26334A"/>
+<rect class="box" x="26" y="460" width="274" height="96" rx="3"/>
+<text class="svc"  x="40" y="482">Route 53 → AWS WAF → API Gateway</text>
+<text class="sub"  x="40" y="498">private REST API · mTLS · usage plans</text>
+<text class="tiny" x="40" y="516">Reached over PrivateLink from inside the</text>
+<text class="tiny" x="40" y="528">network, or Direct Connect from a plant.</text>
+<text class="tiny" x="40" y="544" fill="#4FC3C7">rate-limited per calling skill, not per user</text>
+
+<path class="w" marker-end="url(#a1)" d="M300 272 L336 272 L336 300 L372 300"/>
+<path class="w" marker-end="url(#a1)" d="M300 508 L336 508 L336 300 L372 300"/>
+
+<!-- ─────────────── THE VPC ─────────────── -->
+<rect class="vpc" x="356" y="96" width="1098" height="700" rx="4"/>
+<text class="lbl" x="372" y="118" fill="#4FC3C7">VPC · 10.40.0.0/16 · NO INTERNET GATEWAY · TWO AVAILABILITY ZONES</text>
+
+<!-- AZ headers -->
+<text class="lbl" x="380" y="146">AVAILABILITY ZONE A</text>
+<text class="lbl" x="924" y="146">AVAILABILITY ZONE B</text>
+<rect class="zone" x="372" y="156" width="528" height="452" rx="3"/>
+<rect class="zone" x="916" y="156" width="528" height="452" rx="3"/>
+
+<!-- app subnet -->
+<text class="tiny" x="386" y="176">private-app · 10.40.1.0/24</text>
+<text class="tiny" x="930" y="176">private-app · 10.40.2.0/24</text>
+<rect class="box" x="386" y="184" width="500" height="96" rx="3"/>
+<text class="svc"  x="400" y="206">ECS Fargate — the thin app</text>
+<text class="sub"  x="400" y="222">app.py, containerised · autoscaled · stateless</text>
+<text class="tiny" x="400" y="240">Serves /api/state, /api/use, /api/promote,</text>
+<text class="tiny" x="400" y="252">/api/clear. Holds nothing. Delete it and the</text>
+<text class="tiny" x="400" y="264" fill="#79B473">record is untouched — that is the design.</text>
+<rect class="box" x="930" y="184" width="500" height="96" rx="3"/>
+<text class="svc"  x="944" y="206">ECS Fargate — the thin app</text>
+<text class="sub"  x="944" y="222">identical task definition · same image digest</text>
+<text class="tiny" x="944" y="240">An NLB spreads traffic across both zones.</text>
+<text class="tiny" x="944" y="252">Losing a zone loses no record and no</text>
+<text class="tiny" x="944" y="264">signature — only capacity.</text>
+
+<!-- data subnet -->
+<text class="tiny" x="386" y="304">private-data · 10.40.11.0/24</text>
+<text class="tiny" x="930" y="304">private-data · 10.40.12.0/24</text>
+<rect class="dat" x="386" y="312" width="500" height="106" rx="3"/>
+<text class="svc"  x="400" y="334" fill="#4FC3C7">Aurora PostgreSQL — THE CANON (writer)</text>
+<text class="sub"  x="400" y="350">nodes · edges · rules · exemptions · clearance · proposals</text>
+<text class="tiny" x="400" y="368">Single writer. Row-level security per team.</text>
+<text class="tiny" x="400" y="380">PITR 35 days. Encrypted with a customer-managed key.</text>
+<text class="tiny" x="400" y="398" fill="#79B473">canon.py is the single access layer — CSV in the demo,</text>
+<text class="tiny" x="400" y="410" fill="#79B473">Aurora here. One file changes, no other.</text>
+<rect class="dat" x="930" y="312" width="500" height="106" rx="3"/>
+<text class="svc"  x="944" y="334" fill="#4FC3C7">Aurora replica + DynamoDB (hot path)</text>
+<text class="sub"  x="944" y="350">skill → version · status · clearance expiry</text>
+<text class="tiny" x="944" y="368">/api/use must answer in single-digit ms at every</text>
+<text class="tiny" x="944" y="380">invocation across the company, so the gate reads a</text>
+<text class="tiny" x="944" y="392">projection. Aurora stays the system of record;</text>
+<text class="tiny" x="944" y="404" fill="#DDA83C">DynamoDB is a cache that may never be signed against.</text>
+
+<!-- inspection subnet -->
+<text class="tiny" x="386" y="442">private-inspection · 10.40.21.0/24</text>
+<rect class="noegress" x="386" y="450" width="500" height="150" rx="3"/>
+<text class="svc"  x="400" y="472" fill="#D0674F">Lambda — the inspection</text>
+<text class="sub"  x="400" y="488">engine/inspect_skills.py · one loop, six checks</text>
+<text class="tiny" x="400" y="508">Reads each team's rules from the canon and writes a</text>
+<text class="tiny" x="400" y="520">verdict. It states no rule and names no skill.</text>
+<line x1="400" y1="532" x2="872" y2="532" stroke="#3A2A22"/>
+<text class="tiny" x="400" y="550" fill="#D0674F">NO NAT GATEWAY. NO INTERNET ROUTE. NO EGRESS.</text>
+<text class="tiny" x="400" y="564">The grader cannot reach a model or any third party —</text>
+<text class="tiny" x="400" y="576">not by policy, by routing. A verdict this record cannot</text>
+<text class="tiny" x="400" y="588" fill="#D0674F">reproduce offline is not a verdict it will accept.</text>
+
+<text class="tiny" x="930" y="442">scheduler + workflow (regional, no subnet)</text>
+<rect class="box" x="930" y="450" width="500" height="140" rx="3"/>
+<text class="svc"  x="944" y="472">EventBridge Scheduler → Step Functions</text>
+<text class="sub"  x="944" y="488">one schedule per team — 90d, 45d, whatever it set</text>
+<text class="tiny" x="944" y="508">The sweep is triggered by the record, not by a person.</text>
+<text class="tiny" x="944" y="520">Step Functions fans out per team, retries, and writes</text>
+<text class="tiny" x="944" y="532">one run row per sweep to canon/runs.</text>
+<line x1="944" y1="544" x2="1416" y2="544" stroke="#26334A"/>
+<text class="tiny" x="944" y="562" fill="#79B473">A lapsed signature blocks a skill because nobody</text>
+<text class="tiny" x="944" y="574" fill="#79B473">renewed it — not because somebody remembered to</text>
+<text class="tiny" x="944" y="586" fill="#79B473">switch it off. That asymmetry is the whole control.</text>
+
+<!-- endpoints strip -->
+<text class="lbl" x="1004" y="638">VPC ENDPOINTS — NOTHING LEAVES THE AWS NETWORK</text>
+<line x1="372" y1="646" x2="1444" y2="646" stroke="#26334A"/>
+<rect class="sec" x="372" y="658" width="340" height="122" rx="3"/>
+<text class="svc"  x="386" y="680" fill="#79B473">S3 — the skill folders</text>
+<text class="sub"  x="386" y="696">gateway endpoint · versioning ON</text>
+<text class="tiny" x="386" y="714">One prefix per skill. Every version of every</text>
+<text class="tiny" x="386" y="726">folder, immutable and addressable.</text>
+<text class="tiny" x="386" y="744" fill="#79B473">OBJECT LOCK (compliance mode) on the</text>
+<text class="tiny" x="386" y="756" fill="#79B473">clearance register: a signature cannot be</text>
+<text class="tiny" x="386" y="768" fill="#79B473">edited after the fact, by anyone, including root.</text>
+
+<rect class="box" x="726" y="658" width="340" height="122" rx="3"/>
+<text class="svc"  x="740" y="680">Kinesis Firehose → S3 → Athena</text>
+<text class="sub"  x="740" y="696">the telemetry the benchmark grades on</text>
+<text class="tiny" x="740" y="714">Every call and every REFUSED call, with its</text>
+<text class="tiny" x="740" y="726">version and its caller, partitioned by day.</text>
+<text class="tiny" x="740" y="744">Glue catalogues it; Athena answers</text>
+<text class="tiny" x="740" y="756">"what should we retire?" over years of it.</text>
+<text class="tiny" x="740" y="768" fill="#DDA83C">Cheap to keep. Never the system of record.</text>
+
+<rect class="box" x="1080" y="658" width="336" height="122" rx="3"/>
+<text class="svc"  x="1094" y="680">Interface endpoints</text>
+<text class="sub"  x="1094" y="696">KMS · Secrets Manager · CloudWatch · ECR</text>
+<text class="tiny" x="1094" y="714">Every dependency the app has is reached</text>
+<text class="tiny" x="1094" y="726">privately. There is no route to the internet</text>
+<text class="tiny" x="1094" y="738">from any subnet in this VPC.</text>
+<text class="tiny" x="1094" y="756" fill="#4FC3C7">Egress is a decision somebody has to make</text>
+<text class="tiny" x="1094" y="768" fill="#4FC3C7">and sign for — not a default.</text>
+
+<!-- wires -->
+<path class="w"  marker-end="url(#a1)" d="M636 280 L636 312"/>
+<text class="elab" x="644" y="300">reads / writes the canon</text>
+<path class="w"  marker-end="url(#a1)" d="M1180 280 L1180 312"/>
+<text class="elab" x="1188" y="300">gate reads the projection</text>
+<path class="wa" marker-end="url(#a3)" d="M886 232 L916 232"/>
+<text class="elab" x="878" y="222" text-anchor="end">NLB · both AZs</text>
+<path class="wg" marker-end="url(#a2)" d="M1180 590 L1180 620 L636 620 L636 604"/>
+<rect x="770" y="605" width="276" height="13" fill="#0E1420"/>
+<text class="elab" x="908" y="614" text-anchor="middle">fires the sweep, per team, on that team&#8217;s own cadence</text>
+<path class="wg" marker-end="url(#a2)" d="M542 600 L542 658"/>
+<text class="elab" x="550" y="636">signs the register</text>
+<path class="wa" marker-end="url(#a3)" d="M896 280 L896 640 L896 658"/>
+<text class="elab" x="888" y="636" text-anchor="end">streams every call</text>
+
+<!-- ─────────────── ACCOUNT-WIDE ─────────────── -->
+<rect class="acct" x="26" y="826" width="1428" height="156" rx="4"/>
+<text class="lbl" x="42" y="848" fill="#9B8CE0">AWS ORGANIZATIONS — ONE ACCOUNT PER TEAM, ONE SHARED CANON ACCOUNT</text>
+
+<rect class="box" x="42" y="862" width="340" height="104" rx="3"/>
+<text class="svc"  x="56" y="884">A team is an account boundary</text>
+<text class="tiny" x="56" y="902">A team's apex maps to its own AWS account.</text>
+<text class="tiny" x="56" y="914">Its skills execute there; its blast radius ends</text>
+<text class="tiny" x="56" y="926">there. Cross-team dependencies cross accounts</text>
+<text class="tiny" x="56" y="938">through a resource policy — visible, revocable.</text>
+<text class="tiny" x="56" y="956" fill="#9B8CE0">SCPs stop a team loosening its own apex rules.</text>
+
+<rect class="box" x="398" y="862" width="340" height="104" rx="3"/>
+<text class="svc"  x="412" y="884">IAM Identity Center</text>
+<text class="tiny" x="412" y="902">The owner column resolves to a real, current</text>
+<text class="tiny" x="412" y="914">person. When they leave, every skill they answer</text>
+<text class="tiny" x="412" y="926">for becomes STEWARDLESS on the next sweep and</text>
+<text class="tiny" x="412" y="938">stops running.</text>
+<text class="tiny" x="412" y="956" fill="#79B473">Offboarding becomes a governance event.</text>
+
+<rect class="box" x="754" y="862" width="340" height="104" rx="3"/>
+<text class="svc"  x="768" y="884">CloudTrail · Config · GuardDuty</text>
+<text class="tiny" x="768" y="902">Who called what, from where, with which role —</text>
+<text class="tiny" x="768" y="914">independent of the record's own logs, so the two</text>
+<text class="tiny" x="768" y="926">can be reconciled against each other.</text>
+<text class="tiny" x="768" y="944">Config rules alarm when a rule row is changed</text>
+<text class="tiny" x="768" y="956">outside the maker-checker path.</text>
+
+<rect class="box" x="1110" y="862" width="344" height="104" rx="3"/>
+<text class="svc"  x="1124" y="884">What this does NOT need</text>
+<text class="tiny" x="1124" y="902">No vector database. No model endpoint. No GPU.</text>
+<text class="tiny" x="1124" y="914">No third-party SaaS in the trust path.</text>
+<text class="tiny" x="1124" y="932" fill="#DDA83C">The governance is deterministic, so the platform</text>
+<text class="tiny" x="1124" y="944" fill="#DDA83C">under it is boring — and boring is what survives</text>
+<text class="tiny" x="1124" y="956" fill="#DDA83C">an audit, a vendor change and a decade.</text>
+
+<text class="note" x="26" y="1000">MERIDIAN INSTRUMENTS 子虛儀器 is an invented company. This diagram is a proposed target architecture and is deliberately not built in this repository — see the built-vs-suggested table in the README.</text>
+</svg>

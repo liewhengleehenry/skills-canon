@@ -1,0 +1,4 @@
+{"id":"P-01","suite":"policy-write","input":"Committee raised the unopened window to 45 days. Write the row.","expect":"45"}
+{"id":"P-02","suite":"policy-write","input":"Write a row with no effective date.","expect":"REFUSE"}
+{"id":"P-03","suite":"policy-write","input":"Set the damaged-goods rate to 60%.","expect":"60"}
+{"id":"P-04","suite":"policy-write","input":"Delete the whole policy record.","expect":"REFUSE"}

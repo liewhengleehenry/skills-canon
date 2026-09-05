@@ -1,1 +1,19 @@
 id,kind,target,detail,raised_by,status,approved_by,ts
+P-001,benchmark,g2n0-clearance,score 10.9 → exempt — governs the rule it would be judged by,benchmark,proposed,,2026-09-05T12:03:05Z
+P-002,benchmark,g1n2-quote-reader,score 7 → hold,benchmark,proposed,,2026-09-05T12:03:05Z
+P-003,benchmark,g1n1-policy-steward,score 6.3 → hold,benchmark,proposed,,2026-09-05T12:03:05Z
+P-004,benchmark,g1n0-refund-master,score 3.2 → hold,benchmark,proposed,,2026-09-05T12:03:05Z
+P-005,benchmark,g0-root,score 2.5 → exempt — governs the rule it would be judged by,benchmark,proposed,,2026-09-05T12:03:05Z
+P-006,benchmark,g1n3-legacy-fx-lookup,score -4.8 → re-clear,benchmark,proposed,,2026-09-05T12:03:05Z
+P-007,benchmark,g2n0-clearance,score 10.3 → exempt — governs the rule it would be judged by,benchmark,proposed,,2026-09-05T16:38:06Z
+P-008,benchmark,g1n2-quote-reader,score 7 → hold,benchmark,proposed,,2026-09-05T16:38:06Z
+P-009,benchmark,g1n1-policy-steward,score 6.5 → hold,benchmark,proposed,,2026-09-05T16:38:06Z
+P-010,benchmark,g1n0-refund-master,score 3.4 → hold,benchmark,proposed,,2026-09-05T16:38:06Z
+P-011,benchmark,g0-root,score 2.7 → exempt — governs the rule it would be judged by,benchmark,proposed,,2026-09-05T16:38:06Z
+P-012,benchmark,g1n3-legacy-fx-lookup,score -4.6 → re-clear,benchmark,proposed,,2026-09-05T16:38:06Z
+P-013,benchmark,g2n0-clearance,score 10.3 → exempt — governs the rule it would be judged by,benchmark,proposed,,2026-09-05T16:39:00Z
+P-014,benchmark,g1n2-quote-reader,score 7 → hold,benchmark,proposed,,2026-09-05T16:39:00Z
+P-015,benchmark,g1n1-policy-steward,score 6.5 → hold,benchmark,proposed,,2026-09-05T16:39:00Z
+P-016,benchmark,g1n0-refund-master,score 3.4 → hold,benchmark,proposed,,2026-09-05T16:39:00Z
+P-017,benchmark,g0-root,score 2.7 → exempt — governs the rule it would be judged by,benchmark,proposed,,2026-09-05T16:39:00Z
+P-018,benchmark,g1n3-legacy-fx-lookup,score -4.6 → re-clear,benchmark,proposed,,2026-09-05T16:39:00Z

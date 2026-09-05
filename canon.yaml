@@ -3,6 +3,21 @@ canon:
   name: Meridian Instruments 子虛儀器
   note: illustrative — invented company, invented people
 apex: g0-root                 # only the apex may birth a skill
+inspector: g2n0-clearance     # WHICH skill inspects the others — a setting, not a constant.
+                              # Point it at a different skill and that skill becomes the inspector.
+
+# ── THE TEST BASE ────────────────────────────────────────────────────────────
+# Every skill's suite runs against ONE pinned open-weights model, held still on
+# purpose. A frontier model that changes under you is not a control: when the
+# pass rate moves you cannot tell whether your skill broke or the model did.
+# Moving this pin is a governed change like any other — and it is only worth
+# moving if the new base STRICTLY IMPROVES the suites already on record.
+testing:
+  base_model: qwen2.5-14b-instruct
+  base_weights: Q4_K_M-sha256:4f1e9c2a
+  endpoint_env: TEST_BASE_URL   # any OpenAI-compatible server: llama.cpp, vLLM, Ollama
+  min_pass_rate: 0.90
+  rerun_on_version_change: true
 cadence:
   policing: weekly            # weekly | daily | 3d | 14d — the clearance sweep
   clearance_expires_days: 90  # a PASS older than this stops being a PASS

@@ -2,3 +2,4 @@ skill,verdict,inspector,date,note
 g1n0-refund-master,PASS,D. Halim,2026-08-30,no network egress; read-only over the seed
 g1n1-policy-steward,PASS,D. Halim,2026-08-30,write path reviewed; appends only
 g1n2-quote-reader,PASS,D. Halim,2026-08-30,read-only; no credentials
+g1n3-legacy-fx-lookup,PASS,D. Halim,2026-04-02,read-only; superseded by the quote reader — not renewed since

@@ -1,289 +1,1199 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Skills Canon — the record</title>
+<title>Skills Canon — the skills system of record</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
-:root{--ground:#0E1420;--panel:#151D2C;--line:#26334A;--paper:#F2EFE9;--ink:#0E1420;
---wire:#4FC3C7;--named:#79B473;--orphan:#D0674F;--prop:#DDA83C;--text:#DCE3EE;--dim:#8494AC;--faint:#5A6A83;
+:root{--ground:#0E1420;--panel:#151D2C;--card:#101827;--line:#26334A;--paper:#F2EFE9;
+--wire:#4FC3C7;--named:#79B473;--orphan:#D0674F;--prop:#DDA83C;--violet:#9B8CE0;
+--text:#DCE3EE;--dim:#8494AC;--faint:#5A6A83;
 --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;--disp:"Archivo","Helvetica Neue",Arial,sans-serif}
 *{box-sizing:border-box}
-body{background:var(--ground);color:var(--text);font-family:var(--disp);margin:0;padding:18px 20px 40px;-webkit-font-smoothing:antialiased}
-.wrap{max-width:1220px;margin:0 auto}
-header{display:flex;flex-wrap:wrap;align-items:baseline;gap:12px;margin-bottom:4px}
-h1{font-size:clamp(20px,2.3vw,28px);font-weight:700;letter-spacing:-.03em;margin:0}
-.sub{font-family:var(--mono);font-size:11px;color:var(--faint);letter-spacing:.09em;text-transform:uppercase}
-.badge{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;padding:3px 8px;border-radius:2px;border:1px solid var(--line);color:var(--faint)}
+body{background:var(--ground);color:var(--text);font-family:var(--disp);margin:0;padding:0 20px 48px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1260px;margin:0 auto}
+code{font-family:var(--mono);font-size:.92em}
+h1,h2{margin:0;letter-spacing:-.03em}
+
+/* hero */
+.hero{padding:54px 0 26px}
+.eyebrow{font-family:var(--mono);font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--wire);margin-bottom:20px}
+.hero h1{font-size:clamp(32px,5.8vw,66px);line-height:1.03;font-weight:700;letter-spacing:-.045em;max-width:20ch}
+.hero h1 em{font-style:normal;color:var(--named)}
+.kicker{font-size:clamp(14px,1.45vw,16.5px);color:var(--dim);max-width:60ch;margin:22px 0 0;line-height:1.6}
+.kicker b{color:var(--text);font-weight:600}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px;align-items:center}
+.cta a{font-family:var(--mono);font-size:11.5px;text-decoration:none;padding:11px 20px;border-radius:2px;font-weight:600;letter-spacing:.04em}
+.cta a.p{background:var(--wire);color:var(--ground)}
+.cta a.s{border:1px solid var(--line);color:var(--dim)}
+.cta a:hover{opacity:.86}
+.badge{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;padding:4px 9px;border-radius:2px;border:1px solid var(--line);color:var(--faint)}
 .badge.live{color:var(--ground);background:var(--named);border-color:var(--named);font-weight:600}
-.lede{color:var(--dim);font-size:13.5px;max-width:80ch;margin:6px 0 14px;line-height:1.55}
-.tabs{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:14px}
-.tab{font-family:var(--mono);font-size:10.5px;padding:7px 12px;border-radius:2px;background:var(--panel);border:1px solid var(--line);color:var(--faint);cursor:pointer}
+
+/* section headers */
+.sec{margin:52px 0 0;border-top:1px solid var(--line);padding-top:26px}
+.sec h2{font-size:clamp(19px,2vw,26px);font-weight:700}
+.sec .sub{font-family:var(--mono);font-size:10.5px;color:var(--faint);letter-spacing:.09em;text-transform:uppercase;margin-left:10px}
+.lede{color:var(--dim);font-size:13.5px;max-width:88ch;margin:12px 0 0;line-height:1.62}
+.lede b{color:var(--text)}
+
+/* the five steps */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(198px,1fr));gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:3px;margin-top:22px;overflow:hidden}
+.step{background:var(--ground);padding:16px 17px}
+.step .n{font-family:var(--mono);font-size:9px;letter-spacing:.16em;color:var(--wire);margin-bottom:9px}
+.step .t{font-size:13px;line-height:1.45;color:var(--text);font-weight:600}
+.step .d{font-size:11.5px;line-height:1.5;color:var(--dim);margin-top:7px}
+.step .w{font-family:var(--mono);font-size:9px;color:var(--faint);margin-top:9px}
+
+/* laws */
+.laws{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:3px;margin-top:22px;overflow:hidden}
+.law{background:var(--ground);padding:15px 16px}
+.law .n{font-family:var(--mono);font-size:9px;color:var(--wire);letter-spacing:.16em}
+.law .t{font-size:12.5px;line-height:1.45;margin-top:8px;color:var(--text);font-weight:500}
+.law .w{font-family:var(--mono);font-size:9px;color:var(--faint);margin-top:8px}
+
+/* graph */
+.hg{margin-top:22px;border:1px solid var(--line);border-radius:3px;background:#0B111C;overflow-x:auto}
+.hg svg{display:block;min-width:1180px}
+.hglegend{display:flex;gap:18px;flex-wrap:wrap;padding:12px 16px;border-top:1px solid var(--line);
+  font-family:var(--mono);font-size:9.5px;color:var(--faint);letter-spacing:.04em}
+.hglegend b{color:var(--text);font-weight:500}
+.hgk{display:inline-flex;align-items:center;gap:7px}
+.hgk i{display:inline-block;width:24px;height:0;border-top:1.6px solid var(--wire)}
+.hgk i.mem{border-top-color:var(--dim)}
+.hgk i.insp{border-top-style:dashed;border-top-color:var(--orphan)}
+.hgk i.req{border-top-style:dashed;border-top-color:var(--prop)}
+.hgk i.xt{border-top-style:dashed;border-top-color:var(--violet)}
+.hgk s{display:inline-block;width:9px;height:9px;border-radius:2px;background:var(--named);text-decoration:none}
+.hgk s.b{background:var(--orphan)}.hgk s.x{background:var(--wire)}.hgk s.p{background:var(--prop)}
+.tm rect{fill:none;stroke:var(--line);stroke-width:1}
+.tm .lab{font-family:var(--mono);font-size:11px;font-weight:600;fill:var(--text);letter-spacing:.06em}
+.tm .meta{font-family:var(--mono);font-size:8.5px;fill:var(--faint);letter-spacing:.08em}
+.gcol{font-family:var(--mono);font-size:8.5px;letter-spacing:.16em;fill:var(--faint)}
+.hn .plate{fill:#131C2B;stroke:#2E3D57;stroke-width:1.2}
+.hn.ok .plate{stroke:var(--named);stroke-width:1.5}
+.hn.apex .plate{fill:#0D1B22;stroke:var(--wire);stroke-width:2}
+.hn.bad .plate{stroke:var(--orphan);stroke-width:2}
+.hn.prop .plate{stroke:var(--prop);stroke-width:1.5;stroke-dasharray:5 4}
+.hn .addr{font-family:var(--mono);font-size:8.5px;letter-spacing:.13em;fill:var(--wire)}
+.hn .name{font-family:var(--mono);font-size:10.5px;font-weight:600;fill:#EDF2F9}
+.hn .who{font-family:var(--mono);font-size:9px;fill:var(--named)}
+.hn .who.none{fill:var(--orphan)}
+.hn .meta{font-family:var(--mono);font-size:8px;fill:#6B7C96}
+.hn .rel{font-family:var(--mono);font-size:8px;fill:var(--faint)}
+.he{fill:none;stroke-width:1.3;opacity:.55;stroke:var(--dim)}
+.he.insp{stroke:var(--orphan);stroke-dasharray:4 4;opacity:.9;stroke-width:1.5}
+.he.req{stroke:var(--prop);stroke-dasharray:4 4;opacity:.85}
+.he.xteam{stroke:var(--violet);stroke-dasharray:5 4;opacity:.95;stroke-width:1.7}
+.he.born{stroke:var(--wire);opacity:.6}
+.elab{font-family:var(--mono);font-size:8px;letter-spacing:.05em}
+.elab.insp{fill:var(--orphan)}.elab.req{fill:var(--prop)}
+.elab.xteam{fill:var(--violet)}.elab.born{fill:var(--wire)}.elab.mem{fill:var(--dim)}
+.elabbg{fill:#0B111C}
+
+/* console */
+.tabs{display:flex;gap:5px;flex-wrap:wrap;margin-top:18px}
+.tab{font-family:var(--mono);font-size:10.5px;padding:8px 13px;border-radius:2px;background:var(--panel);
+  border:1px solid var(--line);color:var(--faint);cursor:pointer}
 .tab[aria-selected="true"]{color:var(--ground);background:var(--wire);border-color:var(--wire);font-weight:600}
-.tab:focus-visible{outline:2px solid var(--wire);outline-offset:2px}
-.pane{background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:14px}
-.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
-button.go{font-family:var(--mono);font-size:11px;padding:7px 13px;border-radius:2px;cursor:pointer;background:var(--wire);color:var(--ground);border:none;font-weight:600}
+.pane{background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:15px;margin-top:12px}
+.bar{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+button.go{font-family:var(--mono);font-size:11px;padding:7px 13px;border-radius:2px;cursor:pointer;
+  background:var(--wire);color:var(--ground);border:none;font-weight:600}
 button.go.ghost{background:transparent;color:var(--dim);border:1px solid var(--line)}
-button.go:focus-visible{outline:2px solid var(--wire);outline-offset:2px}
-input,select{font-family:var(--mono);font-size:11px;padding:6px 8px;background:#0B121D;color:var(--text);border:1px solid var(--line);border-radius:2px}
+input,select{font-family:var(--mono);font-size:11px;padding:6px 8px;background:#0B121D;color:var(--text);
+  border:1px solid var(--line);border-radius:2px}
 table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:11.5px}
 th{text-align:left;font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);padding:0 8px 8px;font-weight:500}
-td{padding:8px;border-top:1px solid var(--line);vertical-align:middle}
-tr.warn td{background:#2A2110}tr.bad td{background:#2A1712}tr.good td{background:#10241A}
+td{padding:8px;border-top:1px solid var(--line);vertical-align:top}
+tr.bad td{background:#2A1712}tr.warn td{background:#2A2110}tr.good td{background:#10241A}
 .own{color:var(--named);font-weight:600}.own.none{color:var(--orphan)}
 .st{font-size:10px}.st.ok{color:var(--named)}.st.warn{color:var(--prop)}.st.bad{color:var(--orphan)}.st.dim{color:var(--faint)}
-.meter{display:inline-block;height:7px;background:var(--wire);opacity:.75;border-radius:1px;vertical-align:middle;margin-right:6px}
-.mini{font-family:var(--mono);font-size:10px;color:var(--faint)}
-.card{border:1px solid var(--line);border-radius:3px;padding:11px;background:#101827}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.mini{font-family:var(--mono);font-size:10px;color:var(--faint);line-height:1.5}
+.card{border:1px solid var(--line);border-radius:3px;padding:12px;background:var(--card)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
 .k{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
 .v{font-size:21px;font-weight:700;color:var(--wire);margin-top:3px}
-.note{font-family:var(--mono);font-size:10.5px;color:var(--faint);margin-top:12px;line-height:1.6}
+.note{font-family:var(--mono);font-size:10.5px;color:var(--faint);margin-top:14px;line-height:1.65}
+.note b{color:var(--text)}
 .log{font-family:var(--mono);font-size:11px;line-height:1.7;max-height:230px;overflow:auto}
-.disc{font-family:var(--mono);font-size:9.5px;color:var(--faint);opacity:.65;margin-top:18px}
-.hide{display:none}
-svg{width:100%;height:auto}
-.nd rect{fill:var(--paper);stroke:var(--named);stroke-width:1.5}
-.nd.prop rect{stroke:var(--prop);stroke-dasharray:5 4}
-.nd.bad rect{stroke:var(--orphan);stroke-width:2.2}
-.nd .a{font-family:var(--mono);font-size:9.5px;font-weight:600;fill:var(--ink)}
-.nd .b{font-family:var(--mono);font-size:8.5px;fill:#4A7A46}
-.nd .c{font-family:var(--mono);font-size:7.5px;fill:var(--wire)}
-.ed{stroke:var(--wire);stroke-width:1.2;fill:none;opacity:.55}
-.ed.req{stroke-dasharray:4 4;opacity:.8}
+.meter{display:inline-block;height:7px;background:var(--wire);opacity:.75;border-radius:1px;vertical-align:middle;margin-right:6px}
+.teamchip{font-family:var(--mono);font-size:9px;padding:2px 7px;border-radius:2px;letter-spacing:.06em}
+.teamchip.rd{background:#12333A;color:var(--wire)}
+.teamchip.so{background:#2A2540;color:var(--violet)}
+.stackbar{border:1px solid var(--line);border-left:3px solid var(--named);padding:11px 15px;margin-top:16px;
+  font-size:12.5px;line-height:1.65;color:var(--dim);background:var(--card);border-radius:3px}
+.stackbar b{color:var(--text)}
+/* CUI */
+.cui{display:grid;grid-template-columns:1fr 310px;gap:12px}
+@media(max-width:960px){.cui{grid-template-columns:1fr}}
+.thread{background:#0B121D;border:1px solid var(--line);border-radius:3px;padding:14px;min-height:300px;max-height:520px;overflow:auto}
+.turn{margin-bottom:16px;font-size:13px;line-height:1.6}
+.turn .who{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:6px}
+.turn.u .who{color:var(--wire)}.turn.a .who{color:var(--named)}
+.turn.u .body{color:var(--text)}.turn .body{color:var(--dim)}.turn .body b{color:var(--text)}
+.ask{display:flex;gap:8px;margin-top:12px}.ask input{flex:1}
+.chip{display:inline-block;font-family:var(--mono);font-size:9.5px;padding:4px 8px;border:1px solid var(--line);
+  border-radius:2px;color:var(--dim);cursor:pointer;margin:0 4px 4px 0}
+.chip:hover{border-color:var(--wire);color:var(--wire)}
+.filed{margin-top:11px;padding:9px 11px;border-left:2px solid var(--prop);background:#1A1608;
+  font-size:11.5px;line-height:1.55;color:var(--dim);border-radius:2px}
+.filed b{color:var(--text)}
+.side h4{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint);margin:0 0 8px}
+.side p{font-size:11.5px;line-height:1.55;color:var(--dim);margin:0 0 9px}
+.side p b{color:var(--text)}
+.disc{font-family:var(--mono);font-size:9.5px;color:var(--faint);opacity:.7;margin-top:22px;line-height:1.6}
 </style></head><body><div class="wrap">
-<header><h1>Skills Canon</h1><span class="sub">the skills system of record</span><span class="badge" id="mode">checking…</span></header>
-<p class="lede">Every skill is a <b>folder</b> this company owns — code, data, tests. The canon is the record over them: what exists, what it may call, and which named human answers for it. One skill's whole job is to inspect the others, on a cadence, and nothing runs that nobody has signed for.</p>
-<div class="tabs" id="tabs"></div>
-<div id="view"></div>
-<p class="disc" id="foot">Illustrative — invented company, invented people. 子虛 means <i>fictitious</i>.</p>
+
+<section class="hero">
+  <div class="eyebrow">Skills Canon · the skills system of record</div>
+  <h1>You don't get promoted.<br><em>Your skill does.</em></h1>
+  <p class="kicker">Language leaks — so we wrapped the model in a process and called it safe. But an
+  <b>agent process has a fuzzy trust line</b>: many hands, many hops, and no one standing at the end of
+  it to hold. A skill is a <b>folder</b> your company owns, with <b>one named human</b> against it, and
+  the record decides whether it may run.</p>
+  <div class="cta">
+    <a class="p" href="#console">open the console →</a>
+    <a class="s" href="https://github.com/liewhengleehenry/skills-canon">the code · Python 3 stdlib</a>
+    <span class="badge" id="mode">checking…</span>
+  </div>
+</section>
+
+<section class="sec">
+  <h2>How a team comes into existence<span class="sub">and how skills come into existence inside it</span></h2>
+  <p class="lede">Nothing here is hardcoded and nothing is central. A team is created the moment someone
+  commits a <b>G0</b>, an administrative apex that carries that team's rules. From then on, everything
+  born beneath it inherits those rules, and <b>some of its skills inspect the others</b> because they were
+  written to and pointed at by an edge. A different team writes a different apex, sets different rules, and
+  appoints different inspectors.</p>
+  <div class="steps">
+    <div class="step"><div class="n">01</div><div class="t">A person commits a G0.</div>
+      <div class="d">That act <b>is</b> the team. The apex carries the rules its members will inherit and the
+      name of the human who administers them.</div><div class="w">canon/nodes.csv · canon/rules.csv</div></div>
+    <div class="step"><div class="n">02</div><div class="t">Anyone writes skills, in any agent.</div>
+      <div class="d">Cowork on one desk, Copilot on the next, a home-made agent on a third. The tool is
+      the author's choice; <b>the shape of the output is not</b>.</div><div class="w">a folder + SKILL.md</div></div>
+    <div class="step"><div class="n">03</div><div class="t">Every skill is born under the team's rules.</div>
+      <div class="d">Its address, owner, version and limits are checked against rules inherited from that
+      team's apex, plus any stricter rule its graph master added.</div><div class="w">scope · inheritance</div></div>
+    <div class="step"><div class="n">04</div><div class="t">Some skills inspect the others.</div>
+      <div class="d">Not a special class of thing, just an ordinary skill somebody wrote that other
+      skills <b>declared</b> they would be inspected by. Remove the edge and it inspects nothing.</div>
+      <div class="w">relation: inspected by</div></div>
+    <div class="step"><div class="n">05</div><div class="t">Teams link to teams.</div>
+      <div class="d">A skill in one team may depend on a skill in another. It sees the version, the owner
+      and the signature date <b>before</b> it takes the dependency.</div><div class="w">cross-team requires</div></div>
+  </div>
+</section>
+
+<section class="sec">
+  <h2>The record, right now<span class="sub">drawn live from nodes · edges · rules · clearance</span></h2>
+  <p class="lede">Two teams, two apexes, and <b>two different inspectors</b>, each an ordinary skill in
+  its own team. The one cross-team dependency is in violet. Every arrow says what it is.</p>
+  <div id="herograph"></div>
+</section>
+
+<section class="sec">
+  <h2>The six laws<span class="sub">three in code, three in signed rows</span></h2>
+  <div class="laws">
+    <div class="law"><div class="n">LAW 01</div><div class="t">Only a team's apex may create a skill in it.</div><div class="w">code · engine/birth.py</div></div>
+    <div class="law"><div class="n">LAW 02</div><div class="t">Every creation lands <i>proposed</i>. Nothing enters by being made.</div><div class="w">code · canon/proposals.csv</div></div>
+    <div class="law"><div class="n">LAW 03</div><div class="t">The maker may not check.</div><div class="w">code · /api/promote</div></div>
+    <div class="law"><div class="n">LAW 04</div><div class="t">Nothing runs without a written PASS.</div><div class="w">row · rules.csv · R-CLEAR-01</div></div>
+    <div class="law"><div class="n">LAW 05</div><div class="t">The grader proposes. It never writes.</div><div class="w">code · engine/benchmark.py</div></div>
+    <div class="law"><div class="n">LAW 06</div><div class="t">Every rule is a signed row, inherited from an apex down.</div><div class="w">row · rules.csv · exemptions.csv</div></div>
+  </div>
+</section>
+
+<section class="sec" id="console">
+  <h2>The console<span class="sub">live · the same six laws</span></h2>
+  <div id="stackbar" class="stackbar"></div>
+  <div class="tabs" id="tabs"></div>
+  <div id="view"></div>
+</section>
+
+<section class="sec">
+  <h2>Two architectures<span class="sub">one is proven here in demo · one is proposed</span></h2>
+  <p class="lede"><b>The conceptual architecture</b> is what this repository demonstrates: how a proposal
+  reaches the record, what the gate refuses, and who signs. <b>The reference deployment</b> is how the same
+  record would be operated inside an enterprise. It is <b>deliberately not built here</b>, because standing
+  up a VPC in three days would have proved less about the governance than the rules did.</p>
+  <div class="steps" style="grid-template-columns:1fr 1fr">
+    <div class="step"><div class="n">DIAGRAM 1 · BUILT</div>
+      <div class="t">Conceptual architecture — how the governance works</div>
+      <div class="d">Propose → the gate → the record → the inspection. Every box maps to a file you can run
+      in this repository.</div><div class="w">docs/architecture-conceptual.svg</div></div>
+    <div class="step"><div class="n">DIAGRAM 2 · PROPOSED</div>
+      <div class="t">Reference deployment — AWS VPC</div>
+      <div class="d">Aurora as the canon, S3 Object Lock on the clearance register, an inspection subnet with
+      no egress at all, one AWS account per team.</div><div class="w">docs/architecture-deployment-aws.svg</div></div>
+  </div>
+  <div class="hg" style="margin-top:16px"><svg viewBox="0 0 1160 640" role="img" aria-label="Skills Canon CONCEPTUAL architecture — any agent writes it, the team's rules decide, a named human signs">
+<defs>
+<style>
+.lbl{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:9px;letter-spacing:.16em;fill:#5A6A83}
+.ttl{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:12.5px;font-weight:600;fill:#DCE3EE}
+.sm{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:9.5px;fill:#8494AC}
+.tiny{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:8.5px;fill:#5A6A83}
+.big{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:15px;font-weight:600;fill:#DCE3EE}
+.box{fill:#151D2C;stroke:#26334A;stroke-width:1.2}
+.wire{stroke:#4FC3C7;fill:none;stroke-width:1.4}
+.grn{stroke:#79B473;fill:none;stroke-width:1.6}
+.amb{stroke:#DDA83C;fill:none;stroke-width:1.6}
+</style>
+<marker id="aw" markerWidth="9" markerHeight="9" refX="7.6" refY="3.2" orient="auto"><path d="M0 0 L8 3.2 L0 6.4 z" fill="#4FC3C7"/></marker>
+<marker id="ag" markerWidth="9" markerHeight="9" refX="7.6" refY="3.2" orient="auto"><path d="M0 0 L8 3.2 L0 6.4 z" fill="#79B473"/></marker>
+<marker id="aa" markerWidth="9" markerHeight="9" refX="7.6" refY="3.2" orient="auto"><path d="M0 0 L8 3.2 L0 6.4 z" fill="#DDA83C"/></marker>
+</defs>
+<rect fill="#0E1420" x="0" y="0" width="1160" height="640"/>
+
+<text class="lbl" x="40" y="18" fill="#DDA83C">CONCEPTUAL ARCHITECTURE — HOW THE GOVERNANCE WORKS · DEMONSTRATED BY THIS REPOSITORY</text>
+<text class="lbl" x="40"  y="34">1 · PROPOSE</text>
+<text class="lbl" x="392" y="34">2 · THE GATE</text>
+<text class="lbl" x="700" y="34">3 · THE RECORD</text>
+<line x1="40" y1="44" x2="300" y2="44" stroke="#26334A"/>
+<line x1="392" y1="44" x2="628" y2="44" stroke="#26334A"/>
+<line x1="700" y1="44" x2="1120" y2="44" stroke="#26334A"/>
+
+<!-- 1 · PROPOSE -->
+<rect class="box" x="40" y="62" width="260" height="80" rx="3"/>
+<text class="ttl" x="56" y="86">a human, in words</text>
+<text class="sm"  x="56" y="107">“what should we retire?”</text>
+<text class="tiny" x="56" y="128">the only input needed to begin</text>
+<path class="wire" marker-end="url(#aw)" d="M170 142 L170 178"/>
+
+<rect class="box" x="40" y="184" width="260" height="116" rx="3"/>
+<text class="ttl" x="56" y="208">the proposer</text>
+<text class="sm"  x="56" y="228">deterministic · no model called</text>
+<text class="tiny" x="56" y="249">grades and drafts from the record —</text>
+<text class="tiny" x="56" y="262">calls, dependents, signatures</text>
+<rect x="56" y="272" width="228" height="18" fill="#2A1712" stroke="#D0674F" stroke-width="1" rx="2"/>
+<text class="tiny" x="64" y="285" fill="#D0674F">it may NOT write to the canon</text>
+<path class="wire" marker-end="url(#aw)" d="M170 300 L170 336"/>
+
+<rect class="box" x="40" y="342" width="260" height="88" rx="3"/>
+<text class="ttl" x="56" y="366">a named human</text>
+<text class="sm"  x="56" y="387">assigns every owner ◆</text>
+<text class="tiny" x="56" y="408">a skill with no name against it is</text>
+<text class="tiny" x="56" y="421">STEWARDLESS and cannot run</text>
+
+<!-- named human → the gate -->
+<path class="wire" marker-end="url(#aw)" d="M300 386 L344 386 L344 180 L386 180"/>
+
+<!-- THE LAW -->
+<line x1="40" y1="470" x2="300" y2="470" stroke="#26334A"/>
+<text class="lbl" x="40" y="492">THE LAW</text>
+<text class="big" x="40" y="522">Any agent writes it.</text>
+<text class="big" x="40" y="546">The team&#8217;s rules decide.</text>
+<text class="big" x="40" y="570" fill="#79B473">A named human signs.</text>
+<text class="tiny" x="40" y="598">838 lines of Python · standard library only · no database</text>
+<text class="tiny" x="40" y="612">no build step · no pip install · git is the audit trail</text>
+
+<!-- 2 · THE GATE -->
+<rect class="box" x="392" y="62" width="236" height="212" rx="3" stroke="#DDA83C" stroke-width="1.6"/>
+<text class="ttl" x="408" y="86" fill="#DDA83C">canon/proposals.csv</text>
+<text class="sm"  x="408" y="106">status = proposed</text>
+<line x1="408" y1="118" x2="612" y2="118" stroke="#26334A"/>
+<text class="tiny" x="408" y="138">NOTHING enters the canon</text>
+<text class="tiny" x="408" y="151">except through this file.</text>
+<text class="tiny" x="408" y="174">· every new skill lands here</text>
+<text class="tiny" x="408" y="187">· the benchmark proposes here</text>
+<text class="tiny" x="408" y="200">· every birth lands here</text>
+<rect x="408" y="212" width="204" height="46" fill="#2A2110" stroke="#DDA83C" stroke-width="1" rx="2"/>
+<text class="tiny" x="416" y="226" fill="#DDA83C">MAKER-CHECKER</text>
+<text class="tiny" x="416" y="239" fill="#DDA83C">the person who raised it</text>
+<text class="tiny" x="416" y="252" fill="#DDA83C">may not approve it.</text>
+
+<!-- gate → record -->
+<path class="grn" marker-end="url(#ag)" d="M628 168 L698 168"/>
+<text class="tiny" x="632" y="160" fill="#79B473">a 2nd human</text>
+<text class="tiny" x="632" y="186" fill="#79B473">signs it in</text>
+
+<!-- benchmark -->
+<rect class="box" x="392" y="342" width="236" height="100" rx="3"/>
+<text class="ttl" x="408" y="366">engine/benchmark.py</text>
+<text class="tiny" x="408" y="386">grades on evidence the system</text>
+<text class="tiny" x="408" y="399">itself produced — calls, dependents,</text>
+<text class="tiny" x="408" y="412">clearance age, what people reported</text>
+<text class="tiny" x="408" y="432" fill="#DDA83C">it proposes. it never writes.</text>
+<path class="amb" marker-end="url(#aa)" d="M510 342 L510 282"/>
+
+<!-- 3 · THE RECORD -->
+<rect class="box" x="700" y="62" width="196" height="212" rx="3"/>
+<text class="ttl" x="716" y="86">canon/</text>
+<text class="sm"  x="716" y="110">nodes.csv</text><text class="tiny" x="716" y="123">what exists · OWNER · status</text>
+<text class="sm"  x="716" y="147">edges.csv</text><text class="tiny" x="716" y="160">broader · requires</text>
+<text class="sm"  x="716" y="184">clearance.csv</text><text class="tiny" x="716" y="197">the written PASS register</text>
+<text class="sm"  x="716" y="221">runs · usage · feedback</text><text class="tiny" x="716" y="234">every sweep · every call</text>
+<text class="tiny" x="716" y="258" fill="#4FC3C7">plain text — git diffs the record</text>
+
+<rect class="box" x="924" y="62" width="196" height="212" rx="3"/>
+<text class="ttl" x="940" y="86">skills/</text>
+<text class="tiny" x="940" y="104">ONE FOLDER PER SKILL</text>
+<rect x="940" y="116" width="164" height="56" fill="#F2EFE9" stroke="#79B473" stroke-width="1.4" rx="2"/>
+<text class="tiny" x="950" y="133" fill="#0E1420">g1n1-policy-steward/</text>
+<text class="tiny" x="950" y="147" fill="#0E1420">SKILL.md · code · data</text>
+<text class="tiny" x="950" y="162" fill="#4A7A46">◆ M. Santos</text>
+<rect x="940" y="180" width="164" height="32" fill="#151D2C" stroke="#26334A" stroke-dasharray="4 3" rx="2"/>
+<text class="tiny" x="950" y="195">g1n3-tariff-checker/</text>
+<text class="tiny" x="950" y="207" fill="#D0674F">◆ unsigned — BLOCKED</text>
+<text class="tiny" x="940" y="234">the unit is the folder — it moves,</text>
+<text class="tiny" x="940" y="247">it is owned, it outlives the app</text>
+
+<!-- 4 · THE POLICE -->
+<text class="lbl" x="700" y="330">4 · THE POLICE — A SKILL, LIKE ANY OTHER</text>
+<line x1="700" y1="340" x2="1120" y2="340" stroke="#26334A"/>
+<rect class="box" x="700" y="358" width="420" height="160" rx="3" stroke="#79B473" stroke-width="1.6"/>
+<text class="ttl" x="716" y="382" fill="#79B473">g2n0-clearance</text>
+<text class="sm"  x="716" y="402">engine/inspect_skills.py · cadence: weekly · canon.yaml</text>
+<line x1="716" y1="414" x2="1104" y2="414" stroke="#26334A"/>
+<text class="tiny" x="716" y="434">no owner ................. BLOCKED · stewardless</text>
+<text class="tiny" x="716" y="450">no written PASS .......... BLOCKED · never inspected</text>
+<text class="tiny" x="716" y="466">PASS older than 90 days .. BLOCKED · clearance expired</text>
+<rect x="716" y="478" width="388" height="26" fill="#10241A" stroke="#79B473" stroke-width="1" rx="2"/>
+<text class="tiny" x="724" y="495" fill="#79B473">EXEMPT — g0-root holds the law it applies · clearance cannot clear itself</text>
+<path class="grn" marker-end="url(#ag)" d="M1022 358 L1022 282"/>
+<text class="tiny" x="1032" y="308" fill="#79B473">inspects · blocks</text>
+
+<text class="tiny" x="700" y="546">The sweep is triggered by the record, not by a person. Its verdict is written to</text>
+<text class="tiny" x="700" y="560">canon/runs.csv, and a blocked skill stays blocked until a named human signs it again.</text>
+<text class="tiny" x="700" y="586" fill="#4FC3C7">MERIDIAN INSTRUMENTS 子虛儀器 — an invented company. 子虛 means fictitious.</text>
+</svg>
+</div>
+  <p class="capt mini" style="margin-top:8px">DIAGRAM 1 — the mechanism this repository runs.</p>
+  <div class="hg" style="margin-top:20px"><svg viewBox="0 0 1480 1010" role="img" aria-label="Skills Canon — proposed AWS VPC reference deployment. Not instantiated in this repository.">
+<defs>
+<style>
+.d-h1{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:15px;font-weight:600;fill:#DCE3EE;letter-spacing:.02em}
+.d-lbl{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:9px;letter-spacing:.17em;fill:#5A6A83}
+.d-svc{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:10.5px;font-weight:600;fill:#EDF2F9}
+.d-sub{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:8.5px;fill:#8494AC}
+.d-tiny{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:8px;fill:#5A6A83}
+.d-note{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:8.5px;fill:#8494AC}
+.d-warn{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:9.5px;fill:#DDA83C;letter-spacing:.1em}
+.d-box{fill:#151D2C;stroke:#2E3D57;stroke-width:1.2}
+.d-zone{fill:none;stroke:#26334A;stroke-width:1;stroke-dasharray:6 4}
+.d-vpc{fill:none;stroke:#4FC3C7;stroke-width:1.6}
+.d-acct{fill:none;stroke:#9B8CE0;stroke-width:1.4;stroke-dasharray:8 5}
+.d-dat{fill:#101E2A;stroke:#4FC3C7;stroke-width:1.4}
+.d-sec{fill:#10241A;stroke:#79B473;stroke-width:1.4}
+.d-noegress{fill:#1B1410;stroke:#D0674F;stroke-width:1.6}
+.d-w{stroke:#4FC3C7;fill:none;stroke-width:1.4}
+.d-wg{stroke:#79B473;fill:none;stroke-width:1.4}
+.d-wa{stroke:#DDA83C;fill:none;stroke-width:1.4;stroke-dasharray:4 4}
+.d-wv{stroke:#9B8CE0;fill:none;stroke-width:1.4;stroke-dasharray:5 4}
+.d-elab{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:8px;fill:#5A6A83}
+</style>
+<marker id="a1" markerWidth="8" markerHeight="8" refX="7" refY="2.8" orient="auto"><path d="M0 0 L7 2.8 L0 5.6 z" fill="#4FC3C7"/></marker>
+<marker id="a2" markerWidth="8" markerHeight="8" refX="7" refY="2.8" orient="auto"><path d="M0 0 L7 2.8 L0 5.6 z" fill="#79B473"/></marker>
+<marker id="a3" markerWidth="8" markerHeight="8" refX="7" refY="2.8" orient="auto"><path d="M0 0 L7 2.8 L0 5.6 z" fill="#DDA83C"/></marker>
+</defs>
+<rect x="0" y="0" width="1480" height="1010" fill="#0E1420"/>
+
+<text class="d-warn" x="26" y="26">PROPOSED DEPLOYMENT — NOT INSTANTIATED IN THIS REPOSITORY</text>
+<text class="d-h1"  x="26" y="52">Reference deployment · AWS VPC</text>
+<text class="d-note" x="26" y="70">How the same record and the same six laws would run inside an enterprise. The demo proves the governance; this proves it can be operated.</text>
+
+<!-- ─────────────── OUTSIDE THE BOUNDARY ─────────────── -->
+<text class="d-lbl" x="26" y="106">OUTSIDE THE BOUNDARY</text>
+<line x1="26" y1="114" x2="300" y2="114" stroke="#26334A"/>
+
+<rect class="d-box" x="26" y="126" width="274" height="92" rx="3"/>
+<text class="d-svc"  x="40" y="148">Desktop agents</text>
+<text class="d-sub"  x="40" y="164">Claude Cowork · Copilot · in-house</text>
+<text class="d-tiny" x="40" y="182">Authors write skill folders on their own</text>
+<text class="d-tiny" x="40" y="194">machines. No agent has canon credentials.</text>
+<text class="d-tiny" x="40" y="210" fill="#79B473">push a folder → CI → S3 (versioned)</text>
+
+<rect class="d-box" x="26" y="232" width="274" height="86" rx="3"/>
+<text class="d-svc"  x="40" y="254">Skill runtimes</text>
+<text class="d-sub"  x="40" y="270">ECS tasks · Lambda · laptops · agents</text>
+<text class="d-tiny" x="40" y="288">Wherever a skill actually executes.</text>
+<text class="d-tiny" x="40" y="302" fill="#DDA83C">every invocation calls POST /api/use first</text>
+
+<rect class="d-box" x="26" y="332" width="274" height="76" rx="3"/>
+<text class="d-svc"  x="40" y="354">Corporate IdP</text>
+<text class="d-sub"  x="40" y="370">Entra ID · Okta — SAML / OIDC</text>
+<text class="d-tiny" x="40" y="388">The OWNER column is a federated identity,</text>
+<text class="d-tiny" x="40" y="400">not a string somebody typed.</text>
+
+<text class="d-lbl" x="26" y="440">EDGE</text>
+<line x1="26" y1="448" x2="300" y2="448" stroke="#26334A"/>
+<rect class="d-box" x="26" y="460" width="274" height="96" rx="3"/>
+<text class="d-svc"  x="40" y="482">Route 53 → AWS WAF → API Gateway</text>
+<text class="d-sub"  x="40" y="498">private REST API · mTLS · usage plans</text>
+<text class="d-tiny" x="40" y="516">Reached over PrivateLink from inside the</text>
+<text class="d-tiny" x="40" y="528">network, or Direct Connect from a plant.</text>
+<text class="d-tiny" x="40" y="544" fill="#4FC3C7">rate-limited per calling skill, not per user</text>
+
+<path class="d-w" marker-end="url(#a1)" d="M300 272 L336 272 L336 300 L372 300"/>
+<path class="d-w" marker-end="url(#a1)" d="M300 508 L336 508 L336 300 L372 300"/>
+
+<!-- ─────────────── THE VPC ─────────────── -->
+<rect class="d-vpc" x="356" y="96" width="1098" height="700" rx="4"/>
+<text class="d-lbl" x="372" y="118" fill="#4FC3C7">VPC · 10.40.0.0/16 · NO INTERNET GATEWAY · TWO AVAILABILITY ZONES</text>
+
+<!-- AZ headers -->
+<text class="d-lbl" x="380" y="146">AVAILABILITY ZONE A</text>
+<text class="d-lbl" x="924" y="146">AVAILABILITY ZONE B</text>
+<rect class="d-zone" x="372" y="156" width="528" height="452" rx="3"/>
+<rect class="d-zone" x="916" y="156" width="528" height="452" rx="3"/>
+
+<!-- app subnet -->
+<text class="d-tiny" x="386" y="176">private-app · 10.40.1.0/24</text>
+<text class="d-tiny" x="930" y="176">private-app · 10.40.2.0/24</text>
+<rect class="d-box" x="386" y="184" width="500" height="96" rx="3"/>
+<text class="d-svc"  x="400" y="206">ECS Fargate — the thin app</text>
+<text class="d-sub"  x="400" y="222">app.py, containerised · autoscaled · stateless</text>
+<text class="d-tiny" x="400" y="240">Serves /api/state, /api/use, /api/promote,</text>
+<text class="d-tiny" x="400" y="252">/api/clear. Holds nothing. Delete it and the</text>
+<text class="d-tiny" x="400" y="264" fill="#79B473">record is untouched — that is the design.</text>
+<rect class="d-box" x="930" y="184" width="500" height="96" rx="3"/>
+<text class="d-svc"  x="944" y="206">ECS Fargate — the thin app</text>
+<text class="d-sub"  x="944" y="222">identical task definition · same image digest</text>
+<text class="d-tiny" x="944" y="240">An NLB spreads traffic across both zones.</text>
+<text class="d-tiny" x="944" y="252">Losing a zone loses no record and no</text>
+<text class="d-tiny" x="944" y="264">signature — only capacity.</text>
+
+<!-- data subnet -->
+<text class="d-tiny" x="386" y="304">private-data · 10.40.11.0/24</text>
+<text class="d-tiny" x="930" y="304">private-data · 10.40.12.0/24</text>
+<rect class="d-dat" x="386" y="312" width="500" height="106" rx="3"/>
+<text class="d-svc"  x="400" y="334" fill="#4FC3C7">Aurora PostgreSQL — THE CANON (writer)</text>
+<text class="d-sub"  x="400" y="350">nodes · edges · rules · exemptions · clearance · proposals</text>
+<text class="d-tiny" x="400" y="368">Single writer. Row-level security per team.</text>
+<text class="d-tiny" x="400" y="380">PITR 35 days. Encrypted with a customer-managed key.</text>
+<text class="d-tiny" x="400" y="398" fill="#79B473">canon.py is the single access layer — CSV in the demo,</text>
+<text class="d-tiny" x="400" y="410" fill="#79B473">Aurora here. One file changes, no other.</text>
+<rect class="d-dat" x="930" y="312" width="500" height="106" rx="3"/>
+<text class="d-svc"  x="944" y="334" fill="#4FC3C7">Aurora replica + DynamoDB (hot path)</text>
+<text class="d-sub"  x="944" y="350">skill → version · status · clearance expiry</text>
+<text class="d-tiny" x="944" y="368">/api/use must answer in single-digit ms at every</text>
+<text class="d-tiny" x="944" y="380">invocation across the company, so the gate reads a</text>
+<text class="d-tiny" x="944" y="392">projection. Aurora stays the system of record;</text>
+<text class="d-tiny" x="944" y="404" fill="#DDA83C">DynamoDB is a cache that may never be signed against.</text>
+
+<!-- inspection subnet -->
+<text class="d-tiny" x="386" y="442">private-inspection · 10.40.21.0/24</text>
+<rect class="d-noegress" x="386" y="450" width="500" height="150" rx="3"/>
+<text class="d-svc"  x="400" y="472" fill="#D0674F">Lambda — the inspection</text>
+<text class="d-sub"  x="400" y="488">engine/inspect_skills.py · one loop, six checks</text>
+<text class="d-tiny" x="400" y="508">Reads each team's rules from the canon and writes a</text>
+<text class="d-tiny" x="400" y="520">verdict. It states no rule and names no skill.</text>
+<line x1="400" y1="532" x2="872" y2="532" stroke="#3A2A22"/>
+<text class="d-tiny" x="400" y="550" fill="#D0674F">NO NAT GATEWAY. NO INTERNET ROUTE. NO EGRESS.</text>
+<text class="d-tiny" x="400" y="564">The grader cannot reach a model or any third party —</text>
+<text class="d-tiny" x="400" y="576">not by policy, by routing. A verdict this record cannot</text>
+<text class="d-tiny" x="400" y="588" fill="#D0674F">reproduce offline is not a verdict it will accept.</text>
+
+<text class="d-tiny" x="930" y="442">scheduler + workflow (regional, no subnet)</text>
+<rect class="d-box" x="930" y="450" width="500" height="140" rx="3"/>
+<text class="d-svc"  x="944" y="472">EventBridge Scheduler → Step Functions</text>
+<text class="d-sub"  x="944" y="488">one schedule per team — 90d, 45d, whatever it set</text>
+<text class="d-tiny" x="944" y="508">The sweep is triggered by the record, not by a person.</text>
+<text class="d-tiny" x="944" y="520">Step Functions fans out per team, retries, and writes</text>
+<text class="d-tiny" x="944" y="532">one run row per sweep to canon/runs.</text>
+<line x1="944" y1="544" x2="1416" y2="544" stroke="#26334A"/>
+<text class="d-tiny" x="944" y="562" fill="#79B473">A lapsed signature blocks a skill because nobody</text>
+<text class="d-tiny" x="944" y="574" fill="#79B473">renewed it — not because somebody remembered to</text>
+<text class="d-tiny" x="944" y="586" fill="#79B473">switch it off. That asymmetry is the whole control.</text>
+
+<!-- endpoints strip -->
+<text class="d-lbl" x="1004" y="638">VPC ENDPOINTS — NOTHING LEAVES THE AWS NETWORK</text>
+<line x1="372" y1="646" x2="1444" y2="646" stroke="#26334A"/>
+<rect class="d-sec" x="372" y="658" width="340" height="122" rx="3"/>
+<text class="d-svc"  x="386" y="680" fill="#79B473">S3 — the skill folders</text>
+<text class="d-sub"  x="386" y="696">gateway endpoint · versioning ON</text>
+<text class="d-tiny" x="386" y="714">One prefix per skill. Every version of every</text>
+<text class="d-tiny" x="386" y="726">folder, immutable and addressable.</text>
+<text class="d-tiny" x="386" y="744" fill="#79B473">OBJECT LOCK (compliance mode) on the</text>
+<text class="d-tiny" x="386" y="756" fill="#79B473">clearance register: a signature cannot be</text>
+<text class="d-tiny" x="386" y="768" fill="#79B473">edited after the fact, by anyone, including root.</text>
+
+<rect class="d-box" x="726" y="658" width="340" height="122" rx="3"/>
+<text class="d-svc"  x="740" y="680">Kinesis Firehose → S3 → Athena</text>
+<text class="d-sub"  x="740" y="696">the telemetry the benchmark grades on</text>
+<text class="d-tiny" x="740" y="714">Every call and every REFUSED call, with its</text>
+<text class="d-tiny" x="740" y="726">version and its caller, partitioned by day.</text>
+<text class="d-tiny" x="740" y="744">Glue catalogues it; Athena answers</text>
+<text class="d-tiny" x="740" y="756">"what should we retire?" over years of it.</text>
+<text class="d-tiny" x="740" y="768" fill="#DDA83C">Cheap to keep. Never the system of record.</text>
+
+<rect class="d-box" x="1080" y="658" width="336" height="122" rx="3"/>
+<text class="d-svc"  x="1094" y="680">Interface endpoints</text>
+<text class="d-sub"  x="1094" y="696">KMS · Secrets Manager · CloudWatch · ECR</text>
+<text class="d-tiny" x="1094" y="714">Every dependency the app has is reached</text>
+<text class="d-tiny" x="1094" y="726">privately. There is no route to the internet</text>
+<text class="d-tiny" x="1094" y="738">from any subnet in this VPC.</text>
+<text class="d-tiny" x="1094" y="756" fill="#4FC3C7">Egress is a decision somebody has to make</text>
+<text class="d-tiny" x="1094" y="768" fill="#4FC3C7">and sign for — not a default.</text>
+
+<!-- wires -->
+<path class="d-w"  marker-end="url(#a1)" d="M636 280 L636 312"/>
+<text class="d-elab" x="644" y="300">reads / writes the canon</text>
+<path class="d-w"  marker-end="url(#a1)" d="M1180 280 L1180 312"/>
+<text class="d-elab" x="1188" y="300">gate reads the projection</text>
+<path class="d-wa" marker-end="url(#a3)" d="M886 232 L916 232"/>
+<text class="d-elab" x="878" y="222" text-anchor="end">NLB · both AZs</text>
+<path class="d-wg" marker-end="url(#a2)" d="M1180 590 L1180 620 L636 620 L636 604"/>
+<rect x="770" y="605" width="276" height="13" fill="#0E1420"/>
+<text class="d-elab" x="908" y="614" text-anchor="middle">fires the sweep, per team, on that team&#8217;s own cadence</text>
+<path class="d-wg" marker-end="url(#a2)" d="M542 600 L542 658"/>
+<text class="d-elab" x="550" y="636">signs the register</text>
+<path class="d-wa" marker-end="url(#a3)" d="M896 280 L896 640 L896 658"/>
+<text class="d-elab" x="888" y="636" text-anchor="end">streams every call</text>
+
+<!-- ─────────────── ACCOUNT-WIDE ─────────────── -->
+<rect class="d-acct" x="26" y="826" width="1428" height="156" rx="4"/>
+<text class="d-lbl" x="42" y="848" fill="#9B8CE0">AWS ORGANIZATIONS — ONE ACCOUNT PER TEAM, ONE SHARED CANON ACCOUNT</text>
+
+<rect class="d-box" x="42" y="862" width="340" height="104" rx="3"/>
+<text class="d-svc"  x="56" y="884">A team is an account boundary</text>
+<text class="d-tiny" x="56" y="902">A team's apex maps to its own AWS account.</text>
+<text class="d-tiny" x="56" y="914">Its skills execute there; its blast radius ends</text>
+<text class="d-tiny" x="56" y="926">there. Cross-team dependencies cross accounts</text>
+<text class="d-tiny" x="56" y="938">through a resource policy — visible, revocable.</text>
+<text class="d-tiny" x="56" y="956" fill="#9B8CE0">SCPs stop a team loosening its own apex rules.</text>
+
+<rect class="d-box" x="398" y="862" width="340" height="104" rx="3"/>
+<text class="d-svc"  x="412" y="884">IAM Identity Center</text>
+<text class="d-tiny" x="412" y="902">The owner column resolves to a real, current</text>
+<text class="d-tiny" x="412" y="914">person. When they leave, every skill they answer</text>
+<text class="d-tiny" x="412" y="926">for becomes STEWARDLESS on the next sweep and</text>
+<text class="d-tiny" x="412" y="938">stops running.</text>
+<text class="d-tiny" x="412" y="956" fill="#79B473">Offboarding becomes a governance event.</text>
+
+<rect class="d-box" x="754" y="862" width="340" height="104" rx="3"/>
+<text class="d-svc"  x="768" y="884">CloudTrail · Config · GuardDuty</text>
+<text class="d-tiny" x="768" y="902">Who called what, from where, with which role —</text>
+<text class="d-tiny" x="768" y="914">independent of the record's own logs, so the two</text>
+<text class="d-tiny" x="768" y="926">can be reconciled against each other.</text>
+<text class="d-tiny" x="768" y="944">Config rules alarm when a rule row is changed</text>
+<text class="d-tiny" x="768" y="956">outside the maker-checker path.</text>
+
+<rect class="d-box" x="1110" y="862" width="344" height="104" rx="3"/>
+<text class="d-svc"  x="1124" y="884">What this does NOT need</text>
+<text class="d-tiny" x="1124" y="902">No vector database. No model endpoint. No GPU.</text>
+<text class="d-tiny" x="1124" y="914">No third-party SaaS in the trust path.</text>
+<text class="d-tiny" x="1124" y="932" fill="#DDA83C">The governance is deterministic, so the platform</text>
+<text class="d-tiny" x="1124" y="944" fill="#DDA83C">under it is boring — and boring is what survives</text>
+<text class="d-tiny" x="1124" y="956" fill="#DDA83C">an audit, a vendor change and a decade.</text>
+
+<text class="d-note" x="26" y="1000">MERIDIAN INSTRUMENTS 子虛儀器 is an invented company. This diagram is a proposed target architecture and is deliberately not built in this repository — see the built-vs-suggested table in the README.</text>
+</svg>
+</div>
+  <p class="capt mini" style="margin-top:8px">DIAGRAM 2, a target architecture. Nothing in it is instantiated here, and the README says so in a table.</p>
+</section>
+
+<p class="disc" id="foot"></p>
 </div>
 <script>
-const SEED={"config":{"apex":"g0-root","cadence":{"policing":"weekly","clearance_expires_days":"90"},"canon":{"name":"Meridian Instruments 子虛儀器"}},
-"nodes":[
-{"id":"g0-root","g":"G0","n":"","role":"master — the apex; holds the law and mints every graph","owner":"A. Chen","owner_role":"business","status":"active","clearance":"","cleared_by":"","cleared_on":"","calls":0,"dependents":0,"type":"skill","exempt":1},
-{"id":"g1n0-refund-master","g":"G1","n":"N0","role":"master — governs the Refund Desk graph","owner":"M. Santos","owner_role":"business","status":"active","clearance":"PASS","cleared_by":"D. Halim","cleared_on":"2026-08-30","calls":0,"dependents":0,"type":"skill"},
-{"id":"g1n1-policy-steward","g":"G1","n":"N1","role":"steward (CRUD) — the only writer of record/refund-policy.csv","owner":"M. Santos","owner_role":"business","status":"active","clearance":"PASS","cleared_by":"D. Halim","cleared_on":"2026-08-30","calls":0,"dependents":1,"type":"skill"},
-{"id":"g1n2-quote-reader","g":"G1","n":"N2","role":"reader (read-only) — answers from the record or refuses","owner":"J. Varga","owner_role":"business","status":"active","clearance":"PASS","cleared_by":"D. Halim","cleared_on":"2026-08-30","calls":0,"dependents":0,"type":"skill"},
-{"id":"g2n0-clearance","g":"G2","n":"N0","role":"master — inspects every governed skill and writes the register","owner":"D. Halim","owner_role":"it","status":"active","clearance":"","cleared_by":"","cleared_on":"","calls":0,"dependents":3,"type":"skill","exempt":1}],
-"edges":[["g1n1-policy-steward","g1n0-refund-master","broader"],["g1n2-quote-reader","g1n0-refund-master","broader"],
-["g1n2-quote-reader","g1n1-policy-steward","requires"],["g1n0-refund-master","g2n0-clearance","requires"],
-["g1n1-policy-steward","g2n0-clearance","requires"],["g1n2-quote-reader","g2n0-clearance","requires"]],
-"runs":[],"proposals":[],"feedback":[],"usage_total":0};
+/* ═══════════════════════════════════════════════════════════════════════════
+   THE RECORD — two teams, each with its own apex, its own rules and its own
+   inspector. In the served build these rows are CSV files on disk; here they
+   are the same rows in memory, so the browser demo obeys the same record.
+   ═══════════════════════════════════════════════════════════════════════════ */
+const SEED = {
+config:{cadence:{policing:"weekly",clearance_expires_days:"90"},
+        canon:{name:"Meridian Instruments 子虛儀器"}},
+teams:[
+ {code:"rd",name:"Refund Desk",apex:"rd-g0-root",lead:"A. Chen",created:"2026-06-14",inspector:"rd-g2n0-clearance"},
+ {code:"so",name:"Supplier Ops",apex:"so-g0-root",lead:"K. Adeyemi",created:"2026-08-02",inspector:"so-g2n0-code-review"}],
+nodes:[
+ {id:"rd-g0-root",team:"rd",g:"G0",n:"",role:"apex — administers this team and holds its rules",
+  owner:"A. Chen",version:"2026-09.1",status:"active",clearance:"",cleared_by:"",cleared_on:"",calls:4,type:"skill"},
+ {id:"rd-g1n0-refund-master",team:"rd",g:"G1",n:"N0",role:"master — governs the Refund Desk graph",
+  owner:"M. Santos",version:"2026-09.1",status:"active",clearance:"PASS",cleared_by:"D. Halim",cleared_on:"2026-08-30",calls:11,maxTokens:6000,type:"skill"},
+ {id:"rd-g1n1-policy-steward",team:"rd",g:"G1",n:"N1",role:"steward (CRUD) — the ONLY writer of the refund policy record",
+  owner:"M. Santos",version:"2026-08.4",status:"active",clearance:"PASS",cleared_by:"D. Halim",cleared_on:"2026-08-30",calls:22,maxTokens:2000,type:"skill"},
+ {id:"rd-g1n2-quote-reader",team:"rd",g:"G1",n:"N2",role:"reader — answers from the record, or refuses and names the gap",
+  owner:"J. Varga",version:"2026-08.2",status:"active",clearance:"PASS",cleared_by:"D. Halim",cleared_on:"2026-08-30",calls:46,maxTokens:4000,type:"skill"},
+ {id:"rd-g1n3-legacy-fx-lookup",team:"rd",g:"G1",n:"N3",role:"reader — legacy FX lookup, superseded",
+  owner:"J. Varga",version:"2026-04.1",status:"active",clearance:"PASS",cleared_by:"D. Halim",cleared_on:"2026-04-02",calls:0,maxTokens:32000,type:"skill"},
+ {id:"rd-g2n0-clearance",team:"rd",g:"G2",n:"N0",role:"master — inspects this team's skills and signs the register",
+  owner:"D. Halim",version:"2026-09.1",status:"active",clearance:"",cleared_by:"",cleared_on:"",calls:8,type:"skill"},
+ {id:"so-g0-root",team:"so",g:"G0",n:"",role:"apex — administers this team and holds its rules",
+  owner:"K. Adeyemi",version:"2026-09.1",status:"active",clearance:"",cleared_by:"",cleared_on:"",calls:3,type:"skill"},
+ {id:"so-g1n0-supplier-master",team:"so",g:"G1",n:"N0",maxTokens:6000,role:"master — governs the Supplier Ops graph",
+  owner:"P. Ilves",version:"2026-09.1",status:"active",clearance:"PASS",cleared_by:"R. Okonkwo",cleared_on:"2026-08-27",calls:9,securityReview:"2026-08-27",type:"skill"},
+ {id:"so-g1n1-vendor-steward",team:"so",g:"G1",n:"N1",maxTokens:3000,role:"steward (CRUD) — the ONLY writer of the vendor record",
+  owner:"P. Ilves",version:"2026-09.1",status:"active",clearance:"PASS",cleared_by:"R. Okonkwo",cleared_on:"2026-08-27",calls:17,securityReview:"2026-08-27",type:"skill"},
+ {id:"so-g1n2-tariff-reader",team:"so",g:"G1",n:"N2",role:"reader — answers a tariff question from the vendor record",
+  owner:"L. Haddad",version:"2026-09.2",status:"proposed",clearance:"",cleared_by:"",cleared_on:"",calls:0,type:"skill"},
+ {id:"so-g2n0-code-review",team:"so",g:"G2",n:"N0",role:"master — inspects this team's skills before they run",
+  owner:"R. Okonkwo",version:"2026-09.1",status:"active",clearance:"",cleared_by:"",cleared_on:"",calls:6,type:"skill"}],
+/* [source, target, relation, label-on-the-arrow] */
+edges:[
+ ["rd-g1n0-refund-master","rd-g0-root","born","minted by"],
+ ["rd-g2n0-clearance","rd-g0-root","born","minted by"],
+ ["rd-g1n1-policy-steward","rd-g1n0-refund-master","member","member of"],
+ ["rd-g1n2-quote-reader","rd-g1n0-refund-master","member","member of"],
+ ["rd-g1n3-legacy-fx-lookup","rd-g1n0-refund-master","member","member of"],
+ ["rd-g1n2-quote-reader","rd-g1n1-policy-steward","requires","reads"],
+ ["rd-g1n0-refund-master","rd-g2n0-clearance","inspected","inspected by"],
+ ["rd-g1n1-policy-steward","rd-g2n0-clearance","inspected","inspected by"],
+ ["rd-g1n2-quote-reader","rd-g2n0-clearance","inspected","inspected by"],
+ ["rd-g1n3-legacy-fx-lookup","rd-g2n0-clearance","inspected","inspected by"],
+ ["so-g1n0-supplier-master","so-g0-root","born","minted by"],
+ ["so-g2n0-code-review","so-g0-root","born","minted by"],
+ ["so-g1n1-vendor-steward","so-g1n0-supplier-master","member","member of"],
+ ["so-g1n2-tariff-reader","so-g1n0-supplier-master","member","member of"],
+ ["so-g1n0-supplier-master","so-g2n0-code-review","inspected","inspected by"],
+ ["so-g1n1-vendor-steward","so-g2n0-code-review","inspected","inspected by"],
+ ["so-g1n2-tariff-reader","so-g2n0-code-review","inspected","inspected by"],
+ ["rd-g1n2-quote-reader","so-g1n1-vendor-steward","xteam","reads across teams"]],
+rules:[
+ {rule_id:"R-CARD-01",scope:"rd-g0-root",check:"card_has",param:"version",severity:"block",authored_by:"A. Chen",approved_by:"D. Halim",version:"2026-09.1",note:"every card states the version it is"},
+ {rule_id:"R-CARD-02",scope:"rd-g0-root",check:"card_has",param:"skill-owner",severity:"block",authored_by:"A. Chen",approved_by:"D. Halim",version:"2026-09.1",note:"a skill with no named human cannot be answered for"},
+ {rule_id:"R-OWNER-01",scope:"rd-g0-root",check:"node_owner",param:"",severity:"block",authored_by:"A. Chen",approved_by:"D. Halim",version:"2026-09.1",note:"the record carries the same named human as the card"},
+ {rule_id:"R-CLEAR-01",scope:"rd-g0-root",check:"clearance_pass",param:"",severity:"block",authored_by:"D. Halim",approved_by:"A. Chen",version:"2026-09.1",note:"nothing runs without a written PASS"},
+ {rule_id:"R-CLEAR-02",scope:"rd-g0-root",check:"clearance_age",param:"90",severity:"block",authored_by:"D. Halim",approved_by:"A. Chen",version:"2026-09.1",note:"a PASS older than the cadence limit is not a PASS"},
+ {rule_id:"R-CTX-01",scope:"rd-g1n0-refund-master",check:"card_max",param:"max-tokens:8000",severity:"block",authored_by:"M. Santos",approved_by:"A. Chen",version:"2026-09.1",note:"a skill answering from the record has no business carrying a large context"},
+ {rule_id:"S-OWNER-01",scope:"so-g0-root",check:"node_owner",param:"",severity:"block",authored_by:"K. Adeyemi",approved_by:"R. Okonkwo",version:"2026-09.1",note:"this team requires a named human on every skill"},
+ {rule_id:"S-CLEAR-01",scope:"so-g0-root",check:"clearance_pass",param:"",severity:"block",authored_by:"R. Okonkwo",approved_by:"K. Adeyemi",version:"2026-09.1",note:"nothing runs without a written PASS"},
+ {rule_id:"S-CLEAR-02",scope:"so-g0-root",check:"clearance_age",param:"45",severity:"block",authored_by:"R. Okonkwo",approved_by:"K. Adeyemi",version:"2026-09.1",note:"this team re-signs twice as often as the Refund Desk — its skills touch vendor money"},
+ {rule_id:"R-CTX-02",scope:"rd-g0-root",check:"card_has",param:"max-tokens",severity:"block",authored_by:"D. Halim",approved_by:"A. Chen",version:"2026-09.1",note:"a skill that does not declare a context ceiling cannot be held to one"},
+ {rule_id:"S-CTX-02",scope:"so-g0-root",check:"card_has",param:"max-tokens",severity:"block",authored_by:"R. Okonkwo",approved_by:"K. Adeyemi",version:"2026-09.1",note:"a skill that does not declare a context ceiling cannot be held to one"},
+ {rule_id:"R-TEST-01",scope:"rd-g0-root",check:"test_exists",param:"",severity:"block",authored_by:"D. Halim",approved_by:"A. Chen",version:"2026-09.1",note:"a skill nobody has tested against the pinned base is a claim, not a capability"},
+ {rule_id:"R-TEST-02",scope:"rd-g0-root",check:"test_pass_min",param:"0.90",severity:"block",authored_by:"D. Halim",approved_by:"A. Chen",version:"2026-09.1",note:"the floor this estate accepts; a team may raise it, never lower it"},
+ {rule_id:"R-TEST-03",scope:"rd-g0-root",check:"test_current_version",param:"",severity:"block",authored_by:"D. Halim",approved_by:"A. Chen",version:"2026-09.1",note:"change the skill, re-run the suite — an old result describes an old skill"},
+ {rule_id:"R-IAM-01",scope:"rd-g0-root",check:"grant_write",param:"",severity:"block",authored_by:"A. Chen",approved_by:"D. Halim",version:"2026-09.1",note:"a skill that writes a record holds a scoped, granted, expiring authority to do so"},
+ {rule_id:"S-TEST-02",scope:"so-g0-root",check:"test_pass_min",param:"0.95",severity:"block",authored_by:"R. Okonkwo",approved_by:"K. Adeyemi",version:"2026-09.1",note:"this team raised the floor to 95% — its skills touch vendor money"},
+ {rule_id:"S-TEST-01",scope:"so-g0-root",check:"test_exists",param:"",severity:"block",authored_by:"R. Okonkwo",approved_by:"K. Adeyemi",version:"2026-09.1",note:"no skill runs here untested against the pinned base"},
+{rule_id:"S-SEC-01",scope:"so-g0-root",check:"card_has",param:"security-review",severity:"block",authored_by:"R. Okonkwo",approved_by:"K. Adeyemi",version:"2026-09.1",note:"a rule the Refund Desk does not have, and does not need"}],
+tests:{"rd-g1n0-refund-master": {"suite": "routing", "n": 30, "rate": 0.97, "fail": 1, "prev": 0.97, "delta": 0, "on": "2026-08-30", "by": "M. Santos", "v": "2026-09.1"}, "rd-g1n1-policy-steward": {"suite": "policy-write", "n": 25, "rate": 0.96, "fail": 1, "prev": 0.92, "delta": 4, "on": "2026-08-30", "by": "M. Santos", "v": "2026-08.4"}, "rd-g1n2-quote-reader": {"suite": "quote-and-refuse", "n": 40, "rate": 0.98, "fail": 1, "prev": 0.98, "delta": 0, "on": "2026-08-30", "by": "J. Varga", "v": "2026-08.2"}, "rd-g1n3-legacy-fx-lookup": {"suite": "fx-lookup", "n": 20, "rate": 0.71, "fail": 6, "prev": 0.9, "delta": -19, "on": "2026-04-02", "by": "J. Varga", "v": "2026-03.6"}, "so-g1n0-supplier-master": {"suite": "vendor-route", "n": 30, "rate": 0.95, "fail": 2, "prev": 0.93, "delta": 2, "on": "2026-08-27", "by": "P. Ilves", "v": "2026-09.1"}, "so-g1n1-vendor-steward": {"suite": "vendor-write", "n": 20, "rate": 0.97, "fail": 1, "prev": 0.97, "delta": 0, "on": "2026-08-27", "by": "P. Ilves", "v": "2026-09.1"}},
+grants:[{"id": "GR-001", "principal": "A. Chen", "role": "apex-owner", "scope": "rd-g0-root", "may": "create, promote, grant", "by": "BOARD", "on": "2026-06-14", "exp": "2027-06-14"}, {"id": "GR-002", "principal": "D. Halim", "role": "inspector-owner", "scope": "rd-g0-root", "may": "clear, test", "by": "A. Chen", "on": "2026-06-14", "exp": "2026-12-14"}, {"id": "GR-003", "principal": "M. Santos", "role": "graph-owner", "scope": "rd-g1n0-refund-master", "may": "rule, promote", "by": "A. Chen", "on": "2026-06-20", "exp": "2027-06-20"}, {"id": "GR-004", "principal": "M. Santos", "role": "steward", "scope": "rd-g1n1-policy-steward", "may": "write", "by": "A. Chen", "on": "2026-06-20", "exp": "2027-06-20"}, {"id": "GR-006", "principal": "K. Adeyemi", "role": "apex-owner", "scope": "so-g0-root", "may": "create, promote, grant", "by": "BOARD", "on": "2026-08-02", "exp": "2027-08-02"}, {"id": "GR-007", "principal": "rd-g1n2-quote-reader", "role": "cross-team-consumer", "scope": "so-g1n1-vendor-steward", "may": "read", "by": "K. Adeyemi", "on": "2026-08-27", "exp": "2026-11-27"}],
+exemptions:[
+ {skill:"rd-g0-root",reason:"an apex holds the rules it would be judged by",granted_by:"A. Chen",granted_on:"2026-09-01",review_on:"2027-03-01"},
+ {skill:"rd-g2n0-clearance",reason:"cannot inspect itself — re-attested by this team's apex owner",granted_by:"A. Chen",granted_on:"2026-09-01",review_on:"2026-12-01"},
+ {skill:"so-g0-root",reason:"an apex holds the rules it would be judged by",granted_by:"K. Adeyemi",granted_on:"2026-09-01",review_on:"2027-03-01"},
+ {skill:"so-g2n0-code-review",reason:"cannot inspect itself — re-attested by this team's apex owner",granted_by:"K. Adeyemi",granted_on:"2026-09-01",review_on:"2026-12-01"}],
+runs:[],proposals:[],
+feedback:[
+ {ts:"2026-08-28T09:14:00Z",skill:"rd-g1n2-quote-reader",rating:"up",comment:"refused a question the record could not answer instead of guessing — correct",by:"R. Okonkwo"},
+ {ts:"2026-09-01T14:02:00Z",skill:"rd-g1n3-legacy-fx-lookup",rating:"down",comment:"returned a rate that no longer exists in the record",by:"P. Ilves"}],
+usage_total:126};
 
-let S=JSON.parse(JSON.stringify(SEED)), LIVE=false, TAB="skills";
-const $=i=>document.getElementById(i), esc=t=>String(t??"").replace(/[<>&]/g,c=>({"<":"&lt;",">":"&gt;","&":"&amp;"}[c]));
-const EXEMPT={"g0-root":"the apex holds the law it applies","g2n0-clearance":"cannot clear itself — no self-approval"};
+let S = JSON.parse(JSON.stringify(SEED)), LIVE = false, TAB = "teams", THREAD = [], BUSY = false;
+const $  = i => document.getElementById(i);
+const esc = t => String(t ?? "").replace(/[<>&]/g, c => ({"<":"&lt;",">":"&gt;","&":"&amp;"}[c]));
+const nowISO = () => new Date().toISOString().replace(/\.\d+Z$/, "Z");
+const skills = () => (S.nodes || []).filter(n => n.type === "skill");
+const edges  = () => (S.edges || []).map(e => Array.isArray(e) ? e : [e.source_id, e.target_id, e.relation, e.label]);
+const teamOf = id => (S.teams || []).find(t => t.code === (skills().find(n => n.id === id) || {}).team);
+const exemptionFor = id => (S.exemptions || []).find(e => e.skill === id);
 
-async function api(p,body){ if(!LIVE) return null;
-  try{const r=await fetch(p,body?{method:"POST",body:JSON.stringify(body)}:{});return await r.json();}catch(e){return null;} }
-async function load(){ try{const r=await fetch("/api/state"); if(!r.ok) throw 0;
-    S=await r.json(); LIVE=true; $("mode").textContent="LIVE · SERVED FROM THE RECORD"; $("mode").className="badge live";
-  }catch(e){ LIVE=false; $("mode").textContent="LIVE IN YOUR BROWSER · NOTHING INSTALLED"; $("mode").className="badge"; }
-  const f=$("foot");
-  f.innerHTML = (LIVE
-    ? "Served by <code>app.py</code> — every action below writes to <code>canon/*.csv</code> and <code>skills/</code> on disk. "
-    : "Running entirely in this browser — the same five laws, on in-memory state. Clone the repo and run <code>python3 app.py</code> to have every action write to real folders and CSVs. ")
-    + "Illustrative — invented company, invented people. 子虛 means <i>fictitious</i>.";
-  render(); }
-
-const TABS=[["skills","skills"],["graph","graph"],["cadence","cadence · policing"],["benchmark","benchmark"],["feedback","feedback"]];
-$("tabs").innerHTML=TABS.map(([k,l])=>`<button class="tab" role="tab" data-k="${k}">${l}</button>`).join("");
-$("tabs").onclick=e=>{const b=e.target.closest(".tab"); if(!b)return; TAB=b.dataset.k; render();};
-
-function skillRows(){ return (S.nodes||[]).filter(n=>n.type==="skill"); }
+function logUse(skill, action, outcome, caller){
+  S.usage_total = (S.usage_total || 0) + 1;
+  const n = skills().find(x => x.id === skill); if (n) n.calls = (n.calls || 0) + 1;
+}
+function limitFor(n){
+  const t = (S.teams || []).find(t => t.code === n.team);
+  const r = (S.rules || []).find(r => r.scope === (t || {}).apex && r.check === "clearance_age");
+  return +((r && r.param) || S.config?.cadence?.clearance_expires_days || 90);
+}
 function clrState(n){
-  if(EXEMPT[n.id]) return ["exempt","dim"];
-  if(!n.clearance) return ["not cleared","bad"];
-  const age=Math.round((Date.now()-Date.parse(n.cleared_on))/864e5);
-  const lim=+(S.config?.cadence?.clearance_expires_days||90);
-  return age>lim?[`expired · ${age}d`,"bad"]:[`cleared · ${n.cleared_by}`,"ok"];
+  if (exemptionFor(n.id)) return ["exempt", "dim"];
+  if (!n.clearance)       return ["not cleared", "bad"];
+  const age = Math.round((Date.now() - Date.parse(n.cleared_on)) / 864e5), lim = limitFor(n);
+  return age > lim ? [`expired · ${age}d`, "bad"] : [`cleared · ${n.cleared_by}`, "ok"];
 }
-function render(){
-  [...$("tabs").children].forEach(b=>b.setAttribute("aria-selected",b.dataset.k===TAB));
-  $("view").innerHTML = ({skills:vSkills,graph:vGraph,cadence:vCadence,benchmark:vBench,feedback:vFeed})[TAB]();
-  wire();
+
+/* ── inheritance: a skill, then everything above it, ending at its team's apex ── */
+function ancestry(sid){
+  const out = [sid], seen = new Set([sid]); let front = [sid];
+  while (front.length){
+    const nxt = [];
+    edges().forEach(a => {
+      if ((a[2] === "member" || a[2] === "born") && front.includes(a[0]) && !seen.has(a[1])){
+        seen.add(a[1]); out.push(a[1]); nxt.push(a[1]);
+      }});
+    front = nxt;
+  }
+  const t = (S.teams || []).find(t => t.code === (skills().find(n => n.id === sid) || {}).team);
+  if (t && !seen.has(t.apex)) out.push(t.apex);
+  return out;
 }
-function vSkills(){
-  const rows=skillRows().map(n=>{const[c,cls]=clrState(n);
-    const bad=cls==="bad", prop=n.status==="proposed";
-    return `<tr class="${bad?'bad':prop?'warn':''}">
-      <td><b>${esc(n.id)}</b><div class="mini">${esc(n.role||"")}</div></td>
-      <td class="own ${n.owner?'':'none'}">◆ ${esc(n.owner||"no owner")}</td>
-      <td><span class="meter" style="width:${Math.min(n.calls*6,90)}px"></span>${n.calls}</td>
-      <td>${n.dependents}</td>
-      <td class="st ${cls}">${c}</td>
-      <td class="st ${prop?'warn':'ok'}">${esc(n.status)}</td>
-      <td>${prop?`<button class="go" data-act="promote" data-s="${n.id}">promote</button>`
-        :bad?`<button class="go" data-act="clear" data-s="${n.id}">sign PASS</button>`:'<span class="st dim">—</span>'}</td></tr>`;}).join("");
-  return `<div class="pane"><div class="bar">
-    <b class="mini">${esc(S.config?.canon?.name||"")}</b>
-    <span style="flex:1"></span>
-    <input id="bn" placeholder="new skill name" size="16">
-    <input id="bo" placeholder="owner" size="12">
-    <select id="bt"><option>reader</option><option>steward</option><option>master</option></select>
-    <button class="go" data-act="birth">birth from apex</button>
-    <button class="go ghost" data-act="reset">reset</button></div>
-    <table><thead><tr><th>skill (a folder)</th><th>owner</th><th>calls</th><th>dependents</th><th>clearance</th><th>status</th><th>action</th></tr></thead><tbody>${rows}</tbody></table>
-    <p class="note">Only the apex <b>${esc(S.config?.apex||"g0-root")}</b> may birth a skill, and every birth lands <b>proposed</b> — a different named human must promote it. The apex and the clearance skill are exempt from inspection: one holds the law it applies, the other cannot clear itself.</p></div>`;
+/* ── the checks. Twelve of them. None names a skill and none states a rule. ── */
+const CHECKS = {
+  node_owner:  (n) => n.owner && n.owner.trim() ? null : "STEWARDLESS — no named human",
+  clearance_pass: (n) => n.clearance ? null : "NO CLEARANCE — never inspected",
+  clearance_age: (n, p) => { if (!n.clearance) return null;
+    const cap = +(p || limitFor(n)), age = Math.round((Date.now() - Date.parse(n.cleared_on)) / 864e5);
+    return age <= cap ? null : `CLEARANCE EXPIRED — ${age}d old, limit ${cap}`; },
+  card_has: (n, p) => {
+    const f = {version:n.version, "skill-owner":n.owner, "security-review":n.securityReview,
+               status:n.status, "max-tokens":n.maxTokens};
+    return f[p] ? null : `CARD MISSING ${p}`; },
+  card_max: (n, p) => { const [k, cap] = p.split(":");
+    const v = k === "max-tokens" ? n.maxTokens : undefined;
+    if (v === undefined) return null;
+    return v <= +cap ? null : `${k} ${v} EXCEEDS THE LIMIT ${cap} SET BY THIS GRAPH`; },
+  card_is: () => null,
+  /* the parts an open format does not give you */
+  test_exists: (n) => (S.tests || {})[n.id] ? null : "NEVER TESTED — no run against the pinned base",
+  test_pass_min: (n, p) => {
+    const t = (S.tests || {})[n.id]; if (!t) return null;
+    const need = +(p || 0.9);
+    if (t.rate >= need) return null;
+    const moved = t.delta !== undefined ? `, ${t.delta > 0 ? "+" : ""}${t.delta} pts against the same base` : "";
+    return `PASS RATE ${Math.round(t.rate*100)}% BELOW THE ${Math.round(need*100)}% FLOOR (${t.fail} of ${t.n} failed${moved}) — the base did not move, so the skill did`; },
+  test_current_version: (n) => {
+    const t = (S.tests || {})[n.id]; if (!t) return null;
+    return t.v === n.version ? null
+      : `TESTED AT v${t.v}, THE RECORD HOLDS v${n.version} — the suite was never re-run after the change`; },
+  test_base_pinned: () => null,
+  grant_write: (n) => {
+    if (!/^steward/.test(n.role || "")) return null;
+    const g = (S.grants || []).filter(x => x.scope === n.id && /write/.test(x.may));
+    if (!g.length) return `NO WRITE GRANT — ${n.id} writes a record with nobody's authority`;
+    const last = g[g.length-1];
+    if (last.principal !== n.owner)
+      return `GRANT NAMES ${last.principal}, THE RECORD NAMES ${n.owner} — authority and accountability are different people`;
+    const days = Math.round((Date.now() - Date.parse(last.exp)) / 864e5);
+    return days <= 0 ? null : `WRITE GRANT ${last.id} EXPIRED ${days}d AGO`; }
+};
+function inspectOne(n){
+  const ex = exemptionFor(n.id);
+  if (ex) return {verdict:"EXEMPT", findings:[], applied:[],
+    why:`${ex.reason} — granted by ${ex.granted_by} on ${ex.granted_on}, review due ${ex.review_on}`};
+  const scope = new Set(ancestry(n.id));
+  const inherited = (S.rules || []).filter(r => scope.has(r.scope));
+  const findings = [];
+  inherited.forEach(r => {
+    const fn = CHECKS[r.check]; if (!fn) return;
+    const bad = fn(n, r.param);
+    if (bad) findings.push(`${bad}  [${r.rule_id} · ${r.severity} · ◆ ${r.authored_by}]`);
+  });
+  return {verdict: findings.length ? "BLOCKED" : "PASS", findings,
+          applied: inherited.map(r => r.rule_id), why:""};
 }
-function vGraph(){
-  const ns=skillRows(), W=980, colX={G0:40,G1:360,G2:700};
-  const pos={}; let gi={G0:0,G1:0,G2:0};
-  ns.forEach(n=>{const g=n.g||"G1"; pos[n.id]={x:colX[g]??360,y:30+gi[g]*74}; gi[g]++;});
-  const ed=(S.edges||[]).map(e=>{const a=Array.isArray(e)?e:[e.source_id,e.target_id,e.relation];
-    const p=pos[a[0]],q=pos[a[1]]; if(!p||!q)return"";
-    const x1=p.x+250,y1=p.y+22,x2=q.x,y2=q.y+22,m=(x1+x2)/2;
-    return `<path class="ed ${a[2]==='requires'?'req':''}" d="M${x1} ${y1} C${m} ${y1} ${m} ${y2} ${x2} ${y2}"/>`;}).join("");
-  const nd=ns.map(n=>{const p=pos[n.id],[c,cls]=clrState(n);
-    return `<g class="nd ${n.status==='proposed'?'prop':cls==='bad'?'bad':''}">
-      <rect x="${p.x}" y="${p.y}" width="250" height="44" rx="3"/>
-      <text class="c" x="${p.x+10}" y="${p.y+14}">${esc((n.g||"")+(n.n?" · "+n.n:""))}</text>
-      <text class="a" x="${p.x+10}" y="${p.y+28}">${esc(n.id)}</text>
-      <text class="b" x="${p.x+10}" y="${p.y+39}">◆ ${esc(n.owner||"no owner")}</text></g>`;}).join("");
-  const h=Math.max(...Object.values(pos).map(p=>p.y))+70;
-  return `<div class="pane"><svg viewBox="0 0 ${W} ${h}">${ed}${nd}</svg>
-  <p class="note">Solid line = <b>broader</b>, the hierarchy. Dashed = <b>requires</b>, the dependency that code enforces — every dashed line into <b>g2n0-clearance</b> reads <i>“its scripts run only after a written PASS from”</i>.</p></div>`;
+function sweep(trigger){
+  let pass = 0, blocked = 0; const notes = [];
+  skills().forEach(n => {
+    const r = inspectOne(n); n._applied = r.applied.length;
+    if (r.verdict === "BLOCKED"){ blocked++; notes.push(`${n.id}: ${r.findings[0]}`); } else pass++;
+    logUse(n.id, "police", r.verdict, teamOf(n.id)?.inspector || "inspector");
+  });
+  S.runs = (S.runs || []).concat([{run_id:`R-${String((S.runs||[]).length+1).padStart(4,"0")}`,
+    ts:nowISO(), trigger, skills_checked:skills().length, passed:pass, blocked,
+    note: notes.join("; ") || "all clear"}]);
 }
+
+/* ═══ THE LIVE RECORD, DRAWN — one swimlane per team, every arrow named ═══ */
+function heroGraph(){
+  const NW = 292, NH = 78, RY = 18, CG = 150, PAD = 74, HDR = 30, BANDGAP = 34;
+  const teams = S.teams || [];
+  const lanes = [], pos = {};
+  let y = 16;
+  teams.forEach(t => {
+    const mine = skills().filter(n => n.team === t.code);
+    const gs = [...new Set(mine.map(n => n.g))].sort();
+    const cols = {}; gs.forEach((g, i) => cols[g] = PAD + i * (NW + CG));
+    const cnt = {}; mine.forEach(n => cnt[n.g] = (cnt[n.g] || 0) + 1);
+    const rows = Math.max(...Object.values(cnt));
+    const laneTop = y, bodyTop = y + HDR + 12;
+    const seen = {};
+    mine.forEach(n => {
+      seen[n.g] = seen[n.g] || 0;
+      const off = ((rows - cnt[n.g]) * (NH + RY)) / 2;
+      pos[n.id] = {x: cols[n.g], y: bodyTop + off + seen[n.g] * (NH + RY), g: n.g,
+                   col: gs.indexOf(n.g), team: t.code};
+      seen[n.g]++;
+    });
+    const laneH = HDR + 12 + rows * (NH + RY) + 6;
+    lanes.push({t, gs, cols, top: laneTop, h: laneH, bodyTop});
+    y = laneTop + laneH + BANDGAP;
+  });
+  const maxCols = Math.max(...lanes.map(l => l.gs.length));
+  const W = PAD + maxCols * (NW + CG) - CG + PAD + 56;
+  const H = y + 6;
+
+  const laneSvg = lanes.map(l => `
+    <g class="tm"><rect x="8" y="${l.top}" width="${W - 16}" height="${l.h}" rx="3"/>
+      <text class="lab" x="24" y="${l.top + 21}">TEAM · ${esc(l.t.name.toUpperCase())}</text>
+      <text class="meta" x="${24 + l.t.name.length * 8.6 + 62}" y="${l.top + 21}">apex ${esc(l.t.apex)} · administered by ◆ ${esc(l.t.lead)} · created ${esc(l.t.created)} · inspector ${esc(l.t.inspector)}</text>
+      ${l.gs.map(g => `<text class="gcol" x="${l.cols[g]}" y="${l.bodyTop - 6}">${esc(g)}${
+        g === "G0" ? " · APEX" : g === "G2" ? " · INSPECTION" : " · DOMAIN"}</text>`).join("")}
+    </g>`).join("");
+
+  const labels = [];
+  const groups = {};                       /* one label per relation per lane, not five */
+  edges().forEach(a => { const q = pos[a[1]]; if (!q) return;
+    const k = (pos[a[0]] ? pos[a[0]].team : "") + "|" + a[2] + "|" + a[1];
+    (groups[k] = groups[k] || []).push(a[0]); });
+  const labelled = new Set();
+
+  const wires = edges().map(a => {
+    const p = pos[a[0]], q = pos[a[1]]; if (!p || !q) return "";
+    const rel = a[2], lab = a[3] || rel;
+    const cls = rel === "inspected" ? "insp" : rel === "requires" ? "req"
+              : rel === "xteam" ? "xteam" : rel === "born" ? "born" : "mem";
+    const key = p.team + "|" + rel + "|" + a[1];
+    const showLabel = !labelled.has(key);
+    let d, mx, my, anchor = "middle";
+
+    if (rel === "xteam"){                    /* between lanes — a channel on the right */
+      const sx = p.x + NW, sy = p.y + NH / 2, tx = q.x + NW, ty = q.y + NH / 2;
+      const gx = W - 34;
+      d = `M${sx} ${sy} L${gx} ${sy} L${gx} ${ty} L${tx} ${ty}`;
+      mx = gx - 12; my = sy - 12; anchor = "end";
+    } else if (p.col < q.col){               /* rightward — the inspection corridor */
+      const x1 = p.x + NW, y1 = p.y + NH / 2, x2 = q.x, y2 = q.y + NH / 2, m = (x1 + x2) / 2;
+      d = `M${x1} ${y1} C${m} ${y1} ${m} ${y2} ${x2} ${y2}`;
+      mx = x1 + (x2 - x1) * 0.32; my = y1 + (y2 - y1) * 0.16;
+    } else if (p.col > q.col){               /* leftward — minted by the apex */
+      const x1 = p.x, y1 = p.y + NH / 2, x2 = q.x + NW, y2 = q.y + NH / 2, m = (x1 + x2) / 2;
+      d = `M${x1} ${y1} C${m} ${y1} ${m} ${y2} ${x2} ${y2}`;
+      mx = x2 + (x1 - x2) * 0.34; my = y2 + (y1 - y2) * 0.20;
+    } else {                                 /* same column — route down the LEFT margin */
+      const x1 = p.x, y1 = p.y + NH / 2, x2 = q.x, y2 = q.y + NH / 2, b = Math.min(x1, x2) - 58;
+      d = `M${x1} ${y1} C${b} ${y1} ${b} ${y2} ${x2} ${y2}`;
+      mx = b + 10; my = Math.min(y1, y2) + 16; anchor = "start";
+    }
+    if (showLabel){
+      labelled.add(key);
+      const n = groups[key] ? groups[key].length : 1;
+      const txt = n > 1 ? `${lab} ×${n}` : lab;
+      const w = txt.length * 4.9 + 10;
+      const lx = anchor === "middle" ? mx - w / 2 : anchor === "end" ? mx - w : mx - 4;
+      labels.push(`<g><rect class="elabbg" x="${lx}" y="${my - 7}" width="${w}" height="13" rx="2"/>
+        <text class="elab ${cls}" x="${mx}" y="${my + 3}" text-anchor="${anchor}">${esc(txt)}</text></g>`);
+    }
+    return `<path class="he ${cls}" d="${d}"/>`;
+  }).join("");
+
+  const nodes = skills().map(n => {
+    const p = pos[n.id]; if (!p) return "";
+    const ex = exemptionFor(n.id), [ctxt, ccls] = clrState(n);
+    const cls = ex ? "apex" : n.status === "proposed" ? "prop" : ccls === "bad" ? "bad" : "ok";
+    const lim = limitFor(n);
+    const age = n.cleared_on ? Math.round((Date.now() - Date.parse(n.cleared_on)) / 864e5) : null;
+    const sig = ex ? "EXEMPT — signed row, review dated"
+      : age === null ? "NO CLEARANCE — never inspected · BLOCKED"
+      : age > lim ? `CLEARANCE EXPIRED ${age}d — limit ${lim} · BLOCKED`
+      : `PASS ${n.cleared_on} · ◆ ${n.cleared_by} · ${age}d of ${lim}`;
+    const insp = edges().filter(a => a[2] === "inspected" && a[1] === n.id).length;
+    const mem  = edges().filter(a => (a[2] === "member" || a[2] === "born") && a[1] === n.id).length;
+    const rel = insp ? `inspects ${insp}` : mem ? `${mem} beneath it` : "";
+    const role = (n.role || "").split("—")[0].trim();
+    return `<g class="hn ${cls}">
+      <rect class="plate" x="${p.x}" y="${p.y}" width="${NW}" height="${NH}" rx="3"/>
+      <text class="addr" x="${p.x + 12}" y="${p.y + 17}">${esc(n.g + (n.n ? " · " + n.n : ""))} · ${esc(role)}</text>
+      <text class="rel"  x="${p.x + NW - 12}" y="${p.y + 17}" text-anchor="end">${esc(rel)}</text>
+      <text class="name" x="${p.x + 12}" y="${p.y + 34}">${esc(n.id)}</text>
+      <text class="who ${n.owner ? "" : "none"}" x="${p.x + 12}" y="${p.y + 49}">◆ ${esc(n.owner || "no named human")}</text>
+      <text class="meta" x="${p.x + 12}" y="${p.y + 64}">v${esc(n.version)} · ${esc(sig)}</text>
+    </g>`;}).join("");
+
+  return `<div class="hg"><svg viewBox="0 0 ${W} ${H}">${laneSvg}${wires}${nodes}${labels.join("")}</svg>
+  <div class="hglegend">
+    <span class="hgk"><i class="mem"></i> <b>member of</b> · <i></i> <b>minted by</b> — the hierarchy</span>
+    <span class="hgk"><i class="req"></i> <b>reads</b> — a dependency the code enforces</span>
+    <span class="hgk"><i class="insp"></i> <b>inspected by</b> — declared, not assigned</span>
+    <span class="hgk"><i class="xt"></i> <b>across teams</b></span>
+    <span class="hgk"><s></s> signed &amp; active</span>
+    <span class="hgk"><s class="p"></s> proposed</span>
+    <span class="hgk"><s class="b"></s> blocked</span>
+    <span class="hgk"><s class="x"></s> exempt — by a signed row</span>
+  </div></div>`;
+}
+
+/* ═══════════════════════ CONSOLE ═══════════════════════ */
+const TABS = [["teams","① the teams"],["rules","② the rules · who wrote them"],
+              ["cadence","③ inspection"],["bench","④ ask the benchmark"],["feedback","feedback"]];
+$("tabs").innerHTML = TABS.map(([k,l]) => `<button class="tab" role="tab" data-k="${k}">${l}</button>`).join("");
+$("tabs").onclick = e => { const b = e.target.closest(".tab"); if (!b) return; TAB = b.dataset.k; render(); };
+
+function chip(code){ const t = (S.teams||[]).find(t => t.code === code);
+  return `<span class="teamchip ${code}">${esc(t ? t.name : code)}</span>`; }
+
+function vTeams(){
+  const blocks = (S.teams || []).map(t => {
+    const mine = skills().filter(n => n.team === t.code);
+    const rules = (S.rules || []).filter(r => r.scope === t.apex);
+    const rows = mine.map(n => { const [c, cls] = clrState(n); const r = inspectOne(n);
+      return `<tr class="${r.verdict === "BLOCKED" ? "bad" : n.status === "proposed" ? "warn" : ""}">
+        <td><b>${esc(n.id)}</b><div class="mini">${esc(n.role)}</div></td>
+        <td class="own ${n.owner ? "" : "none"}">◆ ${esc(n.owner || "none")}</td>
+        <td class="mini">v${esc(n.version)}</td>
+        <td class="mini">${(()=>{const t=(S.tests||{})[n.id];
+          if(exemptionFor(n.id)) return '<span class="st dim">—</span>';
+          if(!t) return '<span class="st bad">never tested</span>';
+          const ok=t.rate>=0.90;
+          return `<span class="st ${ok?"ok":"bad"}">${Math.round(t.rate*100)}%</span>
+            <div class="mini">${esc(t.suite)} n=${t.n} · ${t.delta>0?"+":""}${t.delta} pts vs last run</div>`;})()}</td>
+        <td class="st ${cls}">${esc(c)}</td>
+        <td class="st ${n.status === "proposed" ? "warn" : "ok"}">${esc(n.status)}</td>
+        <td class="st ${r.verdict === "PASS" ? "ok" : r.verdict === "EXEMPT" ? "dim" : "bad"}">${r.verdict}
+          <div class="mini">${r.applied.length} rules applied</div></td></tr>`;}).join("");
+    return `<div class="pane"><div class="bar">
+      ${chip(t.code)} <b class="mini">apex ${esc(t.apex)}</b>
+      <span class="mini">· administered by <b class="own">◆ ${esc(t.lead)}</b> · created ${esc(t.created)}
+      · inspector <b>${esc(t.inspector)}</b> · <b>${rules.length}</b> rules of its own</span></div>
+      <table><thead><tr><th>skill</th><th>owner</th><th>version</th><th>pass rate · pinned base</th><th>clearance</th><th>status</th><th>this sweep</th></tr></thead>
+      <tbody>${rows}</tbody></table></div>`;}).join("");
+  return blocks + `<p class="note"><b style="color:var(--prop)">An open standard is not enough.</b>
+  A <code>SKILL.md</code> says what a skill <i>looks like</i>. It says nothing about whether the skill
+  may run <i>here</i>. Four things are missing, and each is enterprise business, not format business:
+  <b>the metadata that matters to this company</b> (one graph demands <code>max-tokens</code>, another
+  <code>security-review</code> — neither is in any published format); <b>a graph of dependencies and
+  inspection rights</b>; <b>a hierarchy of identity and access</b> for teams that cross-pollinate;
+  and <b>a stable base to test against</b>.<br><br>
+  <b style="color:var(--wire)">Why the base is pinned.</b> Every suite runs against one open-weights
+  model at one quantisation, named by weight hash in <code>canon.yaml</code>. It is not the smartest
+  model available — it is <b>the same one as last month</b>. Hold the base still and a moving pass
+  rate means <b>the skill moved</b>. Chase each frontier release and you can never say which one
+  broke.<br><br>
+  <code>rd-g1n3-legacy-fx-lookup</code> now fails <b>71%</b> against a 90% floor, <b>−19 points</b>
+  against a base that did not move — and it was last tested at v2026-03.6 while the record holds
+  v2026-04.1. Nobody switched it off. Four rules, four named authors, one verdict.<br><br>
+  <b>Two teams, two apexes, two inspectors.</b> The Refund Desk re-signs
+  every 90 days; Supplier Ops chose 45, because its skills touch vendor money — <b>K. Adeyemi's team set
+  that, not a central authority.</b> Supplier Ops also requires a <code>security-review</code> field the
+  Refund Desk does not have and does not need.<br><br>
+  Neither inspector is special. <code>rd-g2n0-clearance</code> and <code>so-g2n0-code-review</code> are
+  ordinary skills, each minted by its own apex, each with an owner and a version. What makes them
+  inspectors is that other skills <b>declared</b> an <i>inspected by</i> edge to them.</p>`;
+}
+
+function vRules(){
+  const R = S.rules || [], X = S.exemptions || [];
+  const rows = R.map(r => { const t = (S.teams||[]).find(t => t.apex === r.scope);
+    return `<tr><td><b>${esc(r.rule_id)}</b><div class="mini">${esc(r.note)}</div></td>
+    <td>${t ? chip(t.code) + `<div class="mini">apex — every skill in this team inherits it</div>`
+             : `<span class="st warn">${esc(r.scope)}</span><div class="mini">this graph only — stricter than its apex</div>`}</td>
+    <td class="mini"><code>${esc(r.check)}${r.param ? " " + esc(r.param) : ""}</code></td>
+    <td class="st ${r.severity === "block" ? "bad" : "warn"}">${esc(r.severity)}</td>
+    <td class="own">◆ ${esc(r.authored_by)}</td><td class="mini">◆ ${esc(r.approved_by)}</td>
+    <td class="mini">v${esc(r.version)}</td></tr>`;}).join("");
+  const exr = X.map(e => `<tr><td><b>${esc(e.skill)}</b></td>
+    <td class="mini" colspan="2">${esc(e.reason)}</td>
+    <td class="own">◆ ${esc(e.granted_by)}</td><td class="mini">${esc(e.granted_on)}</td>
+    <td class="mini">review ${esc(e.review_on)}</td></tr>`).join("");
+  return `<div class="pane">
+    <div class="bar"><b class="mini">${R.length} rules in force</b>
+      <span class="mini">· read from <code>canon/rules.csv</code> at every sweep</span></div>
+    <table><thead><tr><th>rule</th><th>scope — and what inherits it</th><th>check</th><th>severity</th>
+      <th>authored by</th><th>approved by</th><th>version</th></tr></thead><tbody>${rows}</tbody></table>
+    <p class="note"><b style="color:var(--prop)">Nothing above is written into the program.</b>
+    The inspection is a loop and twelve generic checks — <code>node_owner</code>, <code>clearance_pass</code>,
+    <code>clearance_age</code>, <code>card_has</code>, <code>card_max</code>, <code>card_is</code>,
+    <code>test_exists</code>, <code>test_pass_min</code>, <code>test_current_version</code>,
+    <code>test_base_pinned</code>, <code>grant_write</code>. It names no skill and states no rule. Every rule it applies is a row here: authored by one named human, approved
+    by a different one, versioned, and <b>scoped</b> — so it inherits from that team's apex down, and a
+    graph master may be stricter than its apex but never looser.<br><br>
+    Read <code>R-CTX-01</code>: <b>M. Santos</b>, who owns the refund graph, set its context ceiling
+    herself — her judgement being that a skill answering from a record has no business carrying a large
+    context. <b>IT did not impose it. The author did.</b></p>
+    <div class="bar" style="margin-top:20px"><b class="mini">exemptions</b>
+      <span class="mini">· <code>canon/exemptions.csv</code> — four rows, four signatures, four review dates</span></div>
+    <table><tbody>${exr}</tbody></table>
+    <p class="note">An exemption nobody granted is not an exemption. An exemption with no review date is a
+    permanent hole. Every apex is exempt from its own rules and every inspector is exempt from itself —
+    but each of those is <b>a row someone signed</b>, in a file you can read, with a date on which it must
+    be argued again.</p></div>`;
+}
+
 function vCadence(){
-  const c=S.config?.cadence||{}, runs=(S.runs||[]).slice().reverse();
+  const c = S.config?.cadence || {}, runs = (S.runs || []).slice().reverse();
+  const blocked = skills().filter(n => inspectOne(n).verdict === "BLOCKED").length;
   return `<div class="pane"><div class="bar">
-    <span class="mini">policing cadence <b style="color:var(--wire)">${esc(c.policing||"weekly")}</b> · clearance expires after <b style="color:var(--wire)">${esc(c.clearance_expires_days||90)}</b> days · set in <b>canon.yaml</b></span>
-    <span style="flex:1"></span><button class="go" data-act="police">run the sweep now</button></div>
+    <span class="mini">each team sets its own cadence — Refund Desk <b style="color:var(--wire)">90d</b>,
+      Supplier Ops <b style="color:var(--violet)">45d</b></span>
+    <span style="flex:1"></span><button class="go" data-act="police">run every team's sweep</button>
+    <button class="go ghost" data-act="reset">reset</button></div>
     <div class="grid" style="margin-bottom:12px">
-      <div class="card"><div class="k">skills governed</div><div class="v">${skillRows().length}</div></div>
-      <div class="card"><div class="k">sweeps recorded</div><div class="v">${(S.runs||[]).length}</div></div>
-      <div class="card"><div class="k">calls logged</div><div class="v">${S.usage_total||0}</div></div>
-      <div class="card"><div class="k">open proposals</div><div class="v">${(S.proposals||[]).filter(p=>p.status==="proposed").length}</div></div></div>
-    <div class="log">${runs.length?runs.map(r=>`<div><span class="st dim">${esc(r.ts)}</span>
-      <b style="color:var(--wire)">${esc(r.run_id)}</b> ${esc(r.trigger)} — checked ${esc(r.skills_checked)},
-      <span class="st ok">pass ${esc(r.passed)}</span>, <span class="st ${+r.blocked?'bad':'dim'}">blocked ${esc(r.blocked)}</span>
+      <div class="card"><div class="k">teams</div><div class="v">${(S.teams||[]).length}</div></div>
+      <div class="card"><div class="k">skills governed</div><div class="v">${skills().length}</div></div>
+      <div class="card"><div class="k">rules in force</div><div class="v">${(S.rules||[]).length}</div></div>
+      <div class="card"><div class="k">would not run</div><div class="v" style="color:${blocked?"var(--orphan)":"var(--named)"}">${blocked}</div></div></div>
+    <div class="log">${runs.length ? runs.map(r => `<div><span class="st dim">${esc(r.ts)}</span>
+      <b style="color:var(--wire)">${esc(r.run_id)}</b> ${esc(r.trigger)} — checked ${r.skills_checked},
+      <span class="st ok">pass ${r.passed}</span>, <span class="st ${r.blocked?"bad":"dim"}">blocked ${r.blocked}</span>
       <div class="mini" style="padding-left:12px">${esc(r.note)}</div></div>`).join("")
-      :'<span class="st dim">no sweep recorded yet — run one.</span>'}</div>
-    <p class="note">The sweep is triggered by the record, not by a person: <b>g2n0-clearance</b> inspects every governed skill against the cadence in <code>canon.yaml</code> and writes the result to <code>canon/runs.csv</code>. A skill whose PASS has expired stops being runnable until a named human signs it again.</p></div>`;
+      : '<span class="st dim">no sweep recorded yet — run one.</span>'}</div>
+    <p class="note"><b style="color:var(--prop)">${(S.rules||[]).length} rules in force, none of them
+    written in the inspector.</b> Every finding names the rule and the human who authored it — see
+    <b>② the rules</b>.<br><br>
+    The sweep is triggered by the record, not by a person. Each team's inspector reads that team's rules
+    and writes its verdict to <code>canon/runs.csv</code>. A skill whose PASS has lapsed stops being
+    runnable until a named human signs it again — <b>nobody has to remember to switch it off.</b></p></div>`;
+}
+
+/* the benchmark — computed from the record, no model */
+const ASKS = [["what should we retire?"],["which skills are load-bearing?"],
+              ["whose clearance is going stale?"],["who is accountable for what?"],["benchmark every skill"]];
+function scoreOf(n){
+  const ex = !!exemptionFor(n.id), lim = limitFor(n);
+  const age = n.cleared_on ? Math.round((Date.now() - Date.parse(n.cleared_on)) / 864e5) : null;
+  const dep = edges().filter(a => (a[2] === "requires" || a[2] === "xteam") && a[1] === n.id).length
+            + edges().filter(a => a[2] === "inspected" && a[1] === n.id).length;
+  const fb = (S.feedback || []).filter(f => f.skill === n.id);
+  const up = fb.filter(f => f.rating === "up").length, dn = fb.filter(f => f.rating === "down").length;
+  const s = Math.round((Math.min((n.calls||0)/10, 4) + dep*2 + ((ex || (age !== null && age <= lim)) ? 2 : -3) + (up - 2*dn)) * 10) / 10;
+  const rec = ex ? "exempt — holds the rules it would be judged by"
+    : age === null ? "needs clearance" : age > lim ? "re-clear"
+    : (dep >= 2 && s >= 6) ? "promote — load-bearing"
+    : (n.calls || 0) === 0 ? "retire — nothing calls it" : "hold";
+  return {ex, age, dep, s, rec, calls: n.calls || 0, lim, n};
+}
+function tbl(head, rows){ return `<table style="margin-top:8px"><thead><tr>${
+  head.map(h => `<th>${esc(h)}</th>`).join("")}</tr></thead><tbody>${rows}</tbody></table>`; }
+function filedLine(k, list){
+  list.forEach(x => S.proposals = (S.proposals || []).concat([{id:`P-${String((S.proposals||[]).length+1).padStart(3,"0")}`,
+    kind:"benchmark", target:x, detail:k, raised_by:"benchmark", status:"proposed", approved_by:"", ts:nowISO()}]));
+  return `<div class="filed">▸ <b>${list.length}</b> ${list.length===1?"line":"lines"} written to
+    <code>canon/proposals.csv</code> at <b style="color:var(--prop)">proposed</b>. Nothing was promoted,
+    cleared or retired — <b>the grader proposes; a named human disposes.</b></div>`;
+}
+function analyse(q){
+  const t = q.toLowerCase(), A = skills().map(scoreOf);
+  const src = `<div class="mini" style="margin-top:10px">computed from <code>usage.csv</code> ·
+    <code>edges.csv</code> · <code>clearance.csv</code> · <code>feedback.csv</code> —
+    ${A.length} skills across ${(S.teams||[]).length} teams, ${S.usage_total||0} calls on record</div>`;
+  if (/retire|unused|dead|remove|nobody/.test(t)){
+    const dead = A.filter(x => !x.ex && x.calls === 0 && x.dep === 0 && x.n.status === "active");
+    if (!dead.length) return `<b>Nothing qualifies for retirement.</b> Every active skill has been called,
+      or something depends on it.` + src;
+    return `<b>${dead.length} skill${dead.length>1?"s":""} should be retired.</b> Nothing in either team
+      reaches for ${dead.length>1?"them":"it"}, and nothing depends on ${dead.length>1?"them":"it"}. A skill
+      nobody calls still carries an owner, a clearance obligation and a review cost.`
+      + tbl(["skill","team","owner","calls","depends","score"], dead.map(x => `<tr class="bad">
+        <td><b>${esc(x.n.id)}</b></td><td>${chip(x.n.team)}</td><td class="own">◆ ${esc(x.n.owner)}</td>
+        <td>${x.calls}</td><td>${x.dep}</td><td style="color:var(--orphan);font-weight:600">${x.s}</td></tr>`).join(""))
+      + filedLine("retire — nothing calls it", dead.map(x => x.n.id)) + src;
+  }
+  if (/load|critical|important|depend|backbone/.test(t)){
+    const lb = A.filter(x => x.dep > 0).sort((a,b) => b.dep - a.dep);
+    const top = lb[0];
+    return `<b>${lb.length} skills are load-bearing.</b> Load-bearing is not a matter of opinion — it is the
+      in-degree of a declared edge, and this system enforces those edges. <b>${esc(top.n.id)}</b> carries
+      ${top.dep}, so its failure is not local; it is the team's. Its owner <b>${esc(top.n.owner)}</b> should
+      be told that in those words.`
+      + tbl(["skill","team","owner","depends on it","calls","clearance","score"], lb.map(x => `<tr${x.dep>=2?' class="good"':''}>
+        <td><b>${esc(x.n.id)}</b></td><td>${chip(x.n.team)}</td><td class="own">◆ ${esc(x.n.owner)}</td>
+        <td style="color:var(--wire);font-weight:600">${x.dep}</td><td>${x.calls}</td>
+        <td class="st ${x.ex?"dim":x.age===null?"bad":"ok"}">${x.ex?"exempt":x.age===null?"none":x.age+"d of "+x.lim}</td>
+        <td style="font-weight:600">${x.s}</td></tr>`).join("")) + src;
+  }
+  if (/stale|expir|old|clearance|sign|overdue/.test(t)){
+    const risk = A.filter(x => !x.ex).sort((a,b) => (b.age===null?1e9:b.age/b.lim) - (a.age===null?1e9:a.age/a.lim));
+    const bad = risk.filter(x => x.age === null || x.age > x.lim);
+    return `<b>${bad.length} skill${bad.length===1?"":"s"} will not run.</b> Each team sets its own limit —
+      the Refund Desk 90 days, Supplier Ops 45 — so <b>the same age is fine in one team and a failure in the
+      other.</b> That is the point of the rules being per-team rows.`
+      + tbl(["skill","team","owner","signed by","age","that team's limit","verdict"], risk.map(x => `<tr class="${
+        x.age===null||x.age>x.lim?"bad":x.age>x.lim*.6?"warn":""}">
+        <td><b>${esc(x.n.id)}</b></td><td>${chip(x.n.team)}</td><td class="own">◆ ${esc(x.n.owner)}</td>
+        <td class="mini">${esc(x.n.cleared_by||"—")}</td><td>${x.age===null?"never":x.age+"d"}</td>
+        <td class="mini">${x.lim}d</td>
+        <td class="st ${x.age===null||x.age>x.lim?"bad":"ok"}">${x.age===null?"BLOCKED — never inspected"
+          :x.age>x.lim?"BLOCKED — expired":"valid"}</td></tr>`).join("")) + src;
+  }
+  if (/who|account|owner|steward|responsib/.test(t)){
+    const by = {}; A.forEach(x => { const o = x.n.owner || "— NO NAMED HUMAN —"; (by[o] = by[o] || []).push(x); });
+    return `<b>${Object.keys(by).length} people carry ${A.length} skills across ${(S.teams||[]).length} teams.</b>
+      Accountability here is a column in <code>nodes.csv</code>, not a slide — which is why the code can
+      refuse when it is empty.`
+      + tbl(["named human","team","skills","calls","depended on"], Object.entries(by).map(([o, xs]) => `<tr>
+        <td class="own">◆ ${esc(o)}</td><td>${chip(xs[0].n.team)}</td>
+        <td class="mini">${xs.map(x => esc(x.n.id)).join("<br>")}</td>
+        <td>${xs.reduce((a,x)=>a+x.calls,0)}</td><td>${xs.reduce((a,x)=>a+x.dep,0)}</td></tr>`).join("")) + src;
+  }
+  const rk = A.slice().sort((a,b) => b.s - a.s);
+  const act = rk.filter(x => !x.ex && x.rec !== "hold");
+  return `<b>${A.length} skills graded on evidence this system produced.</b> Not on anyone's opinion, and not
+    on a model's — reach, reliance, freshness of signature, and what named people reported.
+    <b>${act.length}</b> need a decision.`
+    + tbl(["skill","team","owner","calls","depends","clearance","score","recommendation"], rk.map(x => `<tr class="${
+      x.rec.startsWith("promote")?"good":x.rec==="hold"||x.ex?"":"warn"}">
+      <td><b>${esc(x.n.id)}</b></td><td>${chip(x.n.team)}</td><td class="own">◆ ${esc(x.n.owner)}</td>
+      <td><span class="meter" style="width:${Math.min(x.calls*1.2,60)}px"></span>${x.calls}</td>
+      <td>${x.dep}</td><td class="st ${x.ex?"dim":x.age===null?"bad":"ok"}">${x.ex?"exempt":x.age===null?"none":x.age+"d"}</td>
+      <td style="color:var(--wire);font-weight:600">${x.s}</td>
+      <td class="st ${x.rec.startsWith("promote")?"ok":x.rec==="hold"||x.ex?"dim":"warn"}">${esc(x.rec)}</td></tr>`).join(""))
+    + filedLine("benchmark verdict", act.map(x => x.n.id)) + src;
 }
 function vBench(){
-  const rows=skillRows().map(n=>{
-    const ex=!!EXEMPT[n.id], age=n.cleared_on?Math.round((Date.now()-Date.parse(n.cleared_on))/864e5):null;
-    const reach=Math.min(n.calls/10,4), rel=n.dependents*2, fresh=(ex||(age!==null&&age<=90))?2:-3;
-    const fb=(S.feedback||[]).filter(f=>f.skill===n.id);
-    const fbs=fb.filter(f=>f.rating==="up").length-2*fb.filter(f=>f.rating==="down").length;
-    const s=Math.round((reach+rel+fresh+fbs)*10)/10;
-    const rec=ex?"exempt — governs the rule it would be judged by":age===null?"needs clearance":age>90?"re-clear":(n.dependents>=2&&s>=6)?"promote — load-bearing":n.calls===0?"retire — nothing calls it":"hold";
-    return `<tr><td><b>${esc(n.id)}</b></td><td class="own">◆ ${esc(n.owner)}</td>
-      <td>${n.calls}</td><td>${n.dependents}</td><td>${age===null?"—":age+"d"}</td>
-      <td style="color:var(--wire);font-weight:600">${s}</td><td class="st ${rec.startsWith("promote")?"ok":rec.startsWith("retire")||rec.startsWith("needs")||rec==="re-clear"?"warn":"dim"}">${esc(rec)}</td></tr>`;}).join("");
-  return `<div class="pane">
-    <table><thead><tr><th>skill</th><th>owner</th><th>calls</th><th>dependents</th><th>clearance age</th><th>score</th><th>recommendation</th></tr></thead><tbody>${rows}</tbody></table>
-    <p class="note"><b>Graded on evidence this system produced</b> — call volume, how many skills depend on it, how fresh its clearance is, and what people said. Not on anyone's opinion.<br><br>
-    <b style="color:var(--prop)">And the law that makes it safe:</b> the benchmark <b>proposes — it never writes</b>. Every line above lands in <code>canon/proposals.csv</code> at status <b>proposed</b> and waits for a named human. An automated grader that could promote itself would be exactly the thing this record exists to prevent.<br><br>
-    An optional <code>--llm</code> mode sends the same evidence bundle to a model for a written judgement. It is bound by the identical rule.</p></div>`;
+  const turns = THREAD.map(t => `<div class="turn ${t.who==="you"?"u":"a"}">
+    <div class="who">${esc(t.who)}</div><div class="body">${t.body}</div></div>`).join("");
+  return `<div class="cui"><div>
+    <div class="thread" id="thread">${turns || `<div class="turn a"><div class="who">the benchmark</div>
+      <div class="body">Ask me about the skills in either team.<br><br>I grade on <b>evidence this system
+      produced</b> — how often each skill was called, what declared a dependency on it, how fresh its
+      signature is against <b>its own team's limit</b>, and what named people reported.<br><br>
+      <b>I propose. I never write to the canon.</b></div></div>`}</div>
+    <div class="ask"><input id="q" placeholder="e.g. whose clearance is going stale?" ${BUSY?"disabled":""}>
+      <button class="go" data-act="ask" ${BUSY?"disabled":""}>${BUSY?"reading…":"ask"}</button></div>
+    <div style="margin-top:8px">${ASKS.map(([q]) => `<span class="chip" data-act="ex" data-v="${esc(q)}">${esc(q)}</span>`).join("")}</div>
+    </div><div class="side">
+    <div class="card"><h4>where the answer comes from</h4>
+      <p>Every number is a cell in a CSV in this repository. Nothing is estimated and nothing is generated.</p>
+      <p><b>No model is called.</b> A grader with network access is a grader this record cannot audit, and
+      the whole argument is that the trust line ends at something a person can read.</p></div>
+    <div class="card"><h4>the law it obeys</h4>
+      <p><b>The grader proposes. It never writes.</b> Everything it concludes lands in
+      <code>canon/proposals.csv</code> at <code>proposed</code> and waits for a named human.</p></div>
+    </div></div>`;
 }
 function vFeed(){
-  const fb=(S.feedback||[]).slice().reverse();
+  const fb = (S.feedback || []).slice().reverse();
   return `<div class="pane"><div class="bar">
-    <select id="fs">${skillRows().map(n=>`<option>${esc(n.id)}</option>`).join("")}</select>
+    <select id="fs">${skills().map(n => `<option>${esc(n.id)}</option>`).join("")}</select>
     <select id="fr"><option value="up">worked</option><option value="down">did not work</option></select>
     <input id="fc" placeholder="what happened" size="34"><input id="fb" placeholder="your name" size="12">
     <button class="go" data-act="feedback">file it</button></div>
-    <div class="log">${fb.length?fb.map(f=>`<div><span class="st dim">${esc(f.ts)}</span>
+    <div class="log">${fb.length ? fb.map(f => `<div><span class="st dim">${esc(f.ts)}</span>
       <b>${esc(f.skill)}</b> <span class="st ${f.rating==="up"?"ok":"bad"}">${f.rating==="up"?"worked":"did not work"}</span>
-      — ${esc(f.comment)} <span class="mini">◆ ${esc(f.by)}</span></div>`).join(""):'<span class="st dim">no feedback filed yet.</span>'}</div>
-    <p class="note">Feedback is evidence, not chatter: it feeds the benchmark, and a skill people report as broken loses score until its owner acts.</p></div>`;
-}
-/* ---------------------------------------------------------------
-   The same five laws, in the browser.
-   With a server, every action writes to canon/*.csv and skills/*.
-   Without one, it runs here on in-memory state — identical rules,
-   so the public demo behaves exactly like the record does.
-----------------------------------------------------------------*/
-const nowISO=()=>new Date().toISOString().replace(/\.\d+Z$/,"Z");
-function logUse(skill,action,outcome,caller){ S.usage_total=(S.usage_total||0)+1;
-  const n=S.nodes.find(x=>x.id===skill); if(n) n.calls=(n.calls||0)+1;
-  S._log=(S._log||[]); S._log.push({ts:nowISO(),skill,action,outcome,caller}); }
-
-function localPolice(trigger){
-  const lim=+(S.config?.cadence?.clearance_expires_days||90); let pass=0,blocked=0,notes=[];
-  skillRows().forEach(n=>{
-    let verdict="PASS", why="";
-    if(EXEMPT[n.id]){ verdict="EXEMPT"; }
-    else if(!n.owner){ verdict="BLOCKED"; why="STEWARDLESS — no named human"; }
-    else if(!n.clearance){ verdict="BLOCKED"; why="NO CLEARANCE — never inspected"; }
-    else { const age=Math.round((Date.now()-Date.parse(n.cleared_on))/864e5);
-      if(age>lim){ verdict="BLOCKED"; why=`CLEARANCE EXPIRED — ${age}d, limit ${lim}`; } }
-    if(verdict==="BLOCKED"){ blocked++; notes.push(`${n.id}: ${why}`);} else pass++;
-    logUse(n.id,"police",verdict,"g2n0-clearance");
-  });
-  S.runs=(S.runs||[]).concat([{run_id:`R-${String((S.runs||[]).length+1).padStart(4,"0")}`,
-    ts:nowISO(),trigger,skills_checked:skillRows().length,passed:pass,failed:0,blocked,
-    note:notes.join("; ")||"all clear"}]);
-}
-function localBirth(name,owner,kind){
-  const apex=S.config?.apex||"g0-root";
-  const ns=S.nodes.filter(n=>n.g==="G1"&&/^N\d+$/.test(n.n||"")).map(n=>+n.n.slice(1));
-  const nn="N"+(ns.length?Math.max(...ns)+1:0);
-  const sid=`g1${nn.toLowerCase()}-${name.replace(/[^a-z0-9-]/gi,"-").toLowerCase()}`;
-  if(S.nodes.some(n=>n.id===sid)) return {ok:false,error:sid+" already exists"};
-  S.nodes.push({id:sid,g:"G1",n:nn,role:kind+" — born by the apex",owner,owner_role:"business",
-    status:"proposed",clearance:"",cleared_by:"",cleared_on:"",calls:0,dependents:0,type:"skill"});
-  S.edges.push([sid,"g1n0-refund-master","broader"],[sid,"g2n0-clearance","requires"]);
-  const cl=S.nodes.find(n=>n.id==="g2n0-clearance"); if(cl) cl.dependents++;
-  S.proposals=(S.proposals||[]).concat([{id:`P-${String((S.proposals||[]).length+1).padStart(3,"0")}`,
-    kind:"birth",target:sid,detail:`${kind} owned by ${owner}`,raised_by:apex,
-    status:"proposed",approved_by:"",ts:nowISO()}]);
-  logUse(sid,"birth","PROPOSED",apex);
-  return {ok:true,skill:sid};
-}
-function localPromote(sid,approver){
-  const p=(S.proposals||[]).filter(x=>x.target===sid&&x.status==="proposed").pop();
-  if(p && p.raised_by===approver)
-    return {ok:false,error:`maker-checker: ${approver} raised it and may not approve it`};
-  const n=S.nodes.find(x=>x.id===sid); if(n) n.status="active";
-  if(p){ p.status="active"; p.approved_by=approver; }
-  logUse(sid,"promote","ACTIVE",approver); return {ok:true};
-}
-function localClear(sid,inspector){
-  const n=S.nodes.find(x=>x.id===sid); if(!n) return;
-  n.clearance="PASS"; n.cleared_by=inspector; n.cleared_on=new Date().toISOString().slice(0,10);
-  logUse(sid,"clear","PASS",inspector);
-}
-function localFeedback(skill,rating,comment,by){
-  S.feedback=(S.feedback||[]).concat([{ts:nowISO(),skill,rating,comment,by}]);
-  logUse(skill,"feedback",rating,by);
+      — ${esc(f.comment)} <span class="mini">◆ ${esc(f.by)}</span></div>`).join("")
+      : '<span class="st dim">no feedback filed yet.</span>'}</div>
+    <p class="note">Feedback is evidence, not chatter: it feeds the benchmark, and a skill people report as
+    broken loses score until its owner acts.</p></div>`;
 }
 
-function wire(){
-  $("view").onclick=async e=>{
-    const b=e.target.closest("[data-act]"); if(!b)return;
-    const act=b.dataset.act, sid=b.dataset.s;
-
-    if(act==="reset"){ S=JSON.parse(JSON.stringify(SEED)); render(); return; }
-
-    if(LIVE){
-      if(act==="police")  await api("/api/police",{trigger:"console"});
-      if(act==="clear")   await api("/api/clear",{skill:sid,inspector:"D. Halim"});
-      if(act==="promote"){const r=await api("/api/promote",{skill:sid,approver:"A. Chen"});
-        if(r&&!r.ok) alert(r.error);}
-      if(act==="birth"){ const n=$("bn").value.trim(),o=$("bo").value.trim();
-        if(!n||!o){alert("a skill needs a name and a named human");return;}
-        const r=await api("/api/birth",{name:n,owner:o,type:$("bt").value,graph:"G1"});
-        if(r&&!r.ok) alert(r.error); }
-      if(act==="feedback") await api("/api/feedback",{skill:$("fs").value,rating:$("fr").value,
-        comment:$("fc").value,by:$("fb").value||"anon"});
-      await load(); return;
-    }
-
-    /* no server — same laws, in the browser */
-    if(act==="police")  localPolice("console");
-    if(act==="clear")   localClear(sid,"D. Halim");
-    if(act==="promote"){const r=localPromote(sid,"A. Chen"); if(!r.ok) alert(r.error);}
-    if(act==="birth"){ const n=$("bn").value.trim(),o=$("bo").value.trim();
-      if(!n||!o){alert("a skill needs a name and a named human");return;}
-      const r=localBirth(n,o,$("bt").value); if(!r.ok) alert(r.error); }
-    if(act==="feedback"){ if(!$("fc").value.trim()){alert("say what happened");return;}
-      localFeedback($("fs").value,$("fr").value,$("fc").value,$("fb").value||"anon"); }
-    render();
-  };
+function render(){
+  [...$("tabs").children].forEach(b => b.setAttribute("aria-selected", b.dataset.k === TAB));
+  const hg = $("herograph"); if (hg) hg.innerHTML = heroGraph();
+  $("view").innerHTML = ({teams:vTeams, rules:vRules, cadence:vCadence, bench:vBench, feedback:vFeed})[TAB]();
+  $("view").onclick = onAct;
+}
+function onAct(e){
+  const b = e.target.closest("[data-act]"); if (!b) return;
+  const act = b.dataset.act;
+  if (act === "reset"){ S = JSON.parse(JSON.stringify(SEED)); THREAD = []; render(); return; }
+  if (act === "police"){ sweep("console"); render(); return; }
+  if (act === "ex"){ $("q").value = b.dataset.v; return; }
+  if (act === "ask"){
+    const q = $("q").value.trim(); if (!q){ alert("ask something about the skills"); return; }
+    THREAD.push({who:"you", body:esc(q)}); BUSY = true; render();
+    const body = analyse(q); BUSY = false;
+    THREAD.push({who:"the benchmark", body}); render();
+    const t = $("thread"); if (t) t.scrollTop = t.scrollHeight; return;
+  }
+  if (act === "feedback"){
+    if (!$("fc").value.trim()){ alert("say what happened"); return; }
+    S.feedback = (S.feedback || []).concat([{ts:nowISO(), skill:$("fs").value, rating:$("fr").value,
+      comment:$("fc").value, by:$("fb").value || "anon"}]);
+    render(); return;
+  }
+}
+async function load(){
+  try{
+    const r = await fetch("/api/state"); if (!r.ok) throw 0;
+    const j = await r.json();
+    S = Object.assign(S, j); LIVE = true;
+    $("mode").textContent = "LIVE · SERVED FROM THE RECORD"; $("mode").className = "badge live";
+  }catch(e){
+    LIVE = false;
+    $("mode").textContent = "LIVE IN YOUR BROWSER · NOTHING INSTALLED"; $("mode").className = "badge";
+  }
+  $("stackbar").innerHTML = LIVE
+    ? "<b>Served build.</b> Python 3 standard library, <code>http.server</code>. Every button below writes to real CSV files in <code>canon/</code> and real folders in <code>skills/</code> on this machine."
+    : "<b>Browser build.</b> GitHub Pages runs no server-side code, so this page ports the same six laws to JavaScript over in-memory state — nothing is saved, and a reload resets it. It is a port, not a mockup: the sweep really reads each team's rules and really blocks. The <b>served build</b> is the system — <code>git clone</code>, <code>python3 app.py</code>, and every action here writes to real CSVs and real skill folders on disk.";
+  $("foot").innerHTML = "MERIDIAN INSTRUMENTS 子虛儀器 is an invented company — 子虛 means <i>fictitious</i>. Every person, team, rule and figure is constructed to demonstrate the mechanism. No real organisation's data appears anywhere.";
+  render();
 }
 load();
 </script></body></html>

@@ -31,8 +31,62 @@ def state():
         n["cleared_on"] = clr.get(n["id"], {}).get("date", "")
         n["has_folder"] = (C.folder(n["id"])/"SKILL.md").exists()
     return {"config": C.cfg(), "nodes": nodes, "edges": C.rows("edges.csv"),
+            "rules": C.rows("rules.csv"), "exemptions": C.rows("exemptions.csv"),
+            "tests": C.rows("tests.csv"), "grants": C.rows("grants.csv"),
             "runs": C.rows("runs.csv")[-12:], "proposals": C.rows("proposals.csv")[-20:],
             "feedback": C.rows("feedback.csv")[-20:], "usage_total": len(usage)}
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE REGISTRATION GATE — what makes this a system of record and not a catalogue.
+#
+# A catalogue lists what a company owns. It cannot tell you what is RUNNING, at
+# which version, called by whom. So every skill produced by this apex is issued
+# in a format that carries one obligation: on every single invocation, register.
+#
+#   POST /api/use  {"skill","version","caller","action"}
+#
+# The record answers, and it is allowed to say no. A skill that is unknown, not
+# yet promoted, unsigned, expired, or running a version the canon does not hold
+# is REFUSED — and the refusal is itself written to canon/usage.csv, because an
+# attempt to run something ungoverned is exactly the event a record must keep.
+# ═════════════════════════════════════════════════════════════════════════════
+def register_use(b):
+    import datetime
+    sid  = (b.get("skill")   or "").strip()
+    ver  = (b.get("version") or "").strip()
+    who  = (b.get("caller")  or "unknown").strip()
+    act  = (b.get("action")  or "invoke").strip()
+
+    def refuse(why):
+        C.log(sid or "(unnamed)", act, f"REFUSED — {why}", who, ver)
+        return {"ok": False, "registered": False, "skill": sid, "reason": why}
+
+    node = next((n for n in C.rows("nodes.csv") if n["id"] == sid), None)
+    if not node:            return refuse("UNREGISTERED — no such skill in the canon")
+    if node.get("type") != "skill":
+                            return refuse("NOT A SKILL — that address is not a governed folder")
+    if not node.get("owner"):
+                            return refuse("STEWARDLESS — no named human answers for it")
+    if node.get("status") != "active":
+                            return refuse(f"NOT ACTIVE — the canon holds it at '{node.get('status')}'")
+    if ver and ver != node.get("version"):
+                            return refuse(f"VERSION MISMATCH — you ran {ver}, "
+                                          f"the canon holds {node.get('version')}")
+
+    exempt = {e["skill"] for e in C.rows("exemptions.csv")}   # from the record, not a constant
+    if sid not in exempt:
+        rec = next((c for c in reversed(C.rows("clearance.csv"))
+                    if c["skill"] == sid and c["verdict"] == "PASS"), None)
+        if not rec:         return refuse("NO CLEARANCE — never inspected")
+        lim = int(C.cfg().get("cadence", {}).get("clearance_expires_days", 90))
+        age = (datetime.date.today() - datetime.date.fromisoformat(rec["date"])).days
+        if age > lim:       return refuse(f"CLEARANCE EXPIRED — signed {rec['date']}, "
+                                          f"{age}d against a {lim}d limit")
+
+    C.log(sid, act, "OK", who, ver or node.get("version", ""))
+    return {"ok": True, "registered": True, "skill": sid,
+            "version": node.get("version"), "owner": node.get("owner"),
+            "note": "registered against the canon"}
 
 class H(SimpleHTTPRequestHandler):
     def __init__(self, *a, **k): super().__init__(*a, directory=str(ROOT/"docs"), **k)
@@ -49,6 +103,8 @@ class H(SimpleHTTPRequestHandler):
         p = urllib.parse.urlparse(self.path).path
         n = int(self.headers.get("Content-Length", 0))
         body = json.loads(self.rfile.read(n) or "{}")
+        if p == "/api/use":
+            return self._send(register_use(body))
         if p == "/api/police":
             return self._send(inspect_skills.run(body.get("trigger", "ui")))
         if p == "/api/birth":

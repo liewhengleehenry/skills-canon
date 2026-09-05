@@ -1,1 +1,4 @@
 run_id,ts,trigger,skills_checked,passed,failed,blocked,note
+R-0001,2026-09-05T15:58:23Z,cli,6,5,0,1,"g1n3-legacy-fx-lookup: CLEARANCE EXPIRED — 156d old, limit 90  [R-CLEAR-02 · block · ◆ D. Halim]"
+R-0002,2026-09-05T16:24:00Z,cli,6,4,0,2,"g1n0-refund-master: NO WRITE GRANT — g1n0-refund-master writes a record with nobody's authority  [R-IAM-01 · block · ◆ A. Chen]; g1n3-legacy-fx-lookup: CLEARANCE EXPIRED — 156d old, limit 90  [R-CLEAR-02 · block · ◆ D. Halim]"
+R-0003,2026-09-05T16:24:11Z,cli,6,5,0,1,"g1n3-legacy-fx-lookup: CLEARANCE EXPIRED — 156d old, limit 90  [R-CLEAR-02 · block · ◆ D. Halim]"
