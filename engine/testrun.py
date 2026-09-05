@@ -58,8 +58,12 @@ def ask_base(case, base, endpoint, timeout=30):
     body = json.dumps({"model": base, "temperature": 0, "max_tokens": 256,
                        "messages": [{"role": "system", "content": case.get("system", "")},
                                     {"role": "user", "content": case["input"]}]}).encode()
+    head = {"Content-Type": "application/json"}
+    key = os.environ.get("OPENAI_API_KEY", "")
+    if key:                                   # a hosted OpenAI-compatible endpoint needs auth;
+        head["Authorization"] = f"Bearer {key}"   # a local llama.cpp/vLLM/Ollama server ignores it
     req = urllib.request.Request(endpoint.rstrip("/") + "/chat/completions", data=body,
-                                 headers={"Content-Type": "application/json"})
+                                 headers=head)
     with urllib.request.urlopen(req, timeout=timeout) as r:
         return json.loads(r.read())["choices"][0]["message"]["content"].strip()
 

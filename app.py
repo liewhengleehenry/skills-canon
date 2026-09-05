@@ -10,7 +10,7 @@ disposable view over them. Delete it and the canon is untouched.
 import json, pathlib, sys, urllib.parse
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 sys.path.insert(0, str(pathlib.Path(__file__).parent/"engine"))
-import canon as C, inspect_skills, benchmark, birth as birth_mod
+import canon as C, inspect_skills, benchmark, birth as birth_mod, basecheck
 
 ROOT = pathlib.Path(__file__).parent
 
@@ -98,6 +98,13 @@ class H(SimpleHTTPRequestHandler):
         p = urllib.parse.urlparse(self.path).path
         if p == "/api/state": return self._send(state())
         if p == "/api/benchmark": return self._send(benchmark.run(False))
+        if p == "/api/basecheck":
+            # Defend the pinned base against the frontier candidate. --live and a key
+            # make it a real OpenAI call; without one it returns a labelled stub.
+            # Either way it returns a PROPOSAL and canon.yaml is never touched.
+            import os
+            return self._send(basecheck.run(live=bool(os.environ.get("OPENAI_API_KEY")),
+                                            write=False))
         return super().do_GET()
     def do_POST(self):
         p = urllib.parse.urlparse(self.path).path

@@ -18,6 +18,13 @@ testing:
   endpoint_env: TEST_BASE_URL   # any OpenAI-compatible server: llama.cpp, vLLM, Ollama
   min_pass_rate: 0.90
   rerun_on_version_change: true
+  # THE CHALLENGER. A frontier model is never the base — it changes underneath you.
+  # It is the CANDIDATE the incumbent is defended against, run by engine/basecheck.py.
+  # Adoption requires it to beat the incumbent on EVERY suite on record, and even then
+  # the result is a PROPOSAL: a named human moves the pin, not a script.
+  candidate_model: gpt-4o-mini
+  candidate_endpoint: https://api.openai.com/v1
+  candidate_key_env: OPENAI_API_KEY
 cadence:
   policing: weekly            # weekly | daily | 3d | 14d — the clearance sweep
   clearance_expires_days: 90  # a PASS older than this stops being a PASS

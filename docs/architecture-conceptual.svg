@@ -56,7 +56,7 @@
 <text class="big" x="40" y="522">Any agent writes it.</text>
 <text class="big" x="40" y="546">The team&#8217;s rules decide.</text>
 <text class="big" x="40" y="570" fill="#79B473">A named human signs.</text>
-<text class="tiny" x="40" y="598">838 lines of Python · standard library only · no database</text>
+<text class="tiny" x="40" y="598">1013 lines of Python · standard library only · no database</text>
 <text class="tiny" x="40" y="612">no build step · no pip install · git is the audit trail</text>
 
 <!-- 2 · THE GATE -->

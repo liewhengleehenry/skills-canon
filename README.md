@@ -58,6 +58,37 @@ strictly improves the suites already on record** — every suite, not the averag
 better at nine skills and worse at one has not improved this estate; it has traded a known failure
 for an unknown one.
 
+### The challenger — where OpenAI sits, and why it is not the base
+
+That rule needs something to judge, so the frontier model gets the one role it can honestly hold
+here: **the candidate**. `engine/basecheck.py` runs every suite on record against OpenAI at
+`api.openai.com` and defends the incumbent suite by suite.
+
+```console
+$ OPENAI_API_KEY=sk-... python3 engine/basecheck.py --live
+BASE CHANGE PROPOSAL BC-0002   (openai-live)
+  candidate  gpt-4o-mini   vs incumbent  qwen2.5-14b-instruct
+
+  skill                      incumbent  candidate   delta
+  g1n0-refund-master              97%        99%     +2
+  g1n1-policy-steward             96%        94%     -2  WORSE
+  g1n2-quote-reader               98%        98%     +0
+  g1n3-legacy-fx-lookup           71%        88%    +17
+
+  VERDICT  REJECT — regresses on 1 of 4 suites (g1n1-policy-steward)
+```
+
+That verdict overrules the obvious instinct. The candidate wins on average and wins big on the worst
+skill in the estate, and it is still rejected, because it went backwards on one suite. Averages hide
+exactly the regression a test base exists to catch. Adoption requires at least parity on every suite
+and improvement on one.
+
+And a clean sweep still would not move the pin. `basecheck.py` writes a row to
+`canon/base_candidates.csv` marked `proposal`; `canon.yaml` is never touched. **The same law that
+governs every skill governs the record's own configuration** — the grader proposes, a named human
+disposes. Without a key it runs a stand-in, prints `offline-stub`, and says in as many words that no
+model was called.
+
 ### All four, on one skill
 
 ```console
@@ -98,6 +129,7 @@ Python 3 standard library only. **No `pip install`, no database, no build step.*
 ```bash
 python3 engine/inspect_skills.py               # the cadence sweep — every rule in the record
 python3 engine/testrun.py g1n2-quote-reader    # the suite, against the pinned open-weights base
+python3 engine/basecheck.py --live             # defend the pin against OpenAI — needs OPENAI_API_KEY
 python3 engine/register.py <skill> <version>   # the registration gate, from outside
 python3 engine/benchmark.py                    # graded on evidence; proposes, never writes
 ```
@@ -140,15 +172,16 @@ the exemption and when it expires, not because of a line of code.
 
 ## Nothing runs unregistered
 
-Every issued skill registers with the record before it does any work: thirty-five lines of standard
+Every issued skill registers with the record before it does any work: forty-three lines of standard
 library in `engine/register.py`, or the same four fields over HTTP from any runtime in any language.
 The record is allowed to say no.
 
 ```console
+$ python3 engine/register.py g1n2-quote-reader 2026-08.2
 REGISTERED  g1n2-quote-reader        v2026-08.2
-REFUSED     g1n2-quote-reader        v2026-07.9   VERSION MISMATCH — the canon holds 2026-08.2
-REFUSED     g1n3-legacy-fx-lookup    v2026-04.1   CLEARANCE EXPIRED — 156d against a 90d limit
-REFUSED     g9n9-shadow-tool         v1.0         UNREGISTERED — no such skill in the canon
+REFUSED     g1n2-quote-reader        v2026-07.9   VERSION MISMATCH — you ran 2026-07.9, the canon holds 2026-08.2
+REFUSED     g1n3-legacy-fx-lookup    v2026-04.1   CLEARANCE EXPIRED — signed 2026-04-02, 156d against a 90d limit
+REFUSED     g9n9-shadow-tool         v1.0   UNREGISTERED — no such skill in the canon
 ```
 
 All four lines, refusals included, are written to `canon/usage.csv` with their version and caller.
@@ -186,7 +219,7 @@ a model by routing rather than by policy; one AWS account per team.
 
 | | |
 |---|---|
-| **Built and runnable** | The record and its schema · the folder format and its card · apex-only creation · maker-checker promotion · the cadence sweep · clearance expiry · enterprise-specific metadata rules, scoped and inherited · the dependency and inspection-rights graph · a grant register for identity and access, scoped and expiring · a test harness against a pinned open-weights base · the registration gate · a benchmark computed from the system's own telemetry |
+| **Built and runnable** | The record and its schema · the folder format and its card · apex-only creation · maker-checker promotion · the cadence sweep · clearance expiry · enterprise-specific metadata rules, scoped and inherited · the dependency and inspection-rights graph · a grant register for identity and access, scoped and expiring · a test harness against a pinned open-weights base · a challenge harness that defends the pin against OpenAI and can only propose · the registration gate · a benchmark computed from the system's own telemetry |
 | **Suggested, not instantiated** | The identity provider behind the owner column · transport and auth on `/api/use` · the storage engine under `canon.py` · retention on `usage.csv` · the pipeline that publishes a folder to the agent runtimes · everything in Diagram 2 · the end state shown in the film, where machine customers transact into other systems of record, which the film argues for and this repository does not implement |
 
 Standing up a VPC in three days would have proved less about the governance than the rules did.
@@ -203,13 +236,14 @@ canon/
   exemptions.csv      who is exempt, who granted it, when that must be reviewed
   grants.csv          identity and access · principal · role · scope · may · granted by · expires
   tests.csv           every suite run against the pinned base · pass rate · delta · weight hash
+  base_candidates.csv every challenge to the pin · candidate · verdict · why · always a proposal
   clearance.csv       the written PASS register
   runs.csv            every sweep and its verdict
   usage.csv           every call and every refused call, with version and caller
   feedback.csv        what named people reported
   proposals.csv       the maker-checker queue. Nothing enters the canon except through here.
 skills/               one folder per skill, each with tests/suite.jsonl
-engine/               birth · inspect · testrun · register · benchmark · canon access
+engine/               birth · inspect · testrun · basecheck · register · benchmark · canon access
 app.py                the thin app. Delete it and the record is untouched
 docs/                 the console, and both architecture diagrams
 ```
@@ -223,7 +257,7 @@ Plain text on purpose: an owner who cannot open the record cannot be said to hav
 |---|---|
 | **prior method** | The governance pattern (apex-only creation, `proposed → active` promotion, one writer per record, inspection as a declared edge) was designed by the author before this event and carried in as a method. No code was carried in. |
 | **code** | Every line here was written during BUILDMODE 2026 (4–6 September, Taipei Expo Dome). Nothing was copied from a prior project. |
-| **models** | Generative AI writes the skills this system governs; that is the premise of the whole thing. The governance itself calls no model. `engine/testrun.py` calls an OpenAI-compatible endpoint only when `TEST_BASE_URL` points at a local open-weights server you run yourself. Without it a labelled stub runs and the row records `runner=offline-stub`. |
+| **models** | Generative AI writes the skills this system governs; that is the premise of the whole thing. The governance decisions themselves call no model — every block in the sweep comes from a signed row. Two places call one: `engine/basecheck.py` calls **OpenAI** (`api.openai.com`, `gpt-4o-mini`, `OPENAI_API_KEY`) to run the suites against the challenger, and `engine/benchmark.py --llm --live` calls the same API to put the grader's evidence into plain prose. Both PROPOSE and neither can write the canon. `engine/testrun.py` calls whatever OpenAI-compatible endpoint `TEST_BASE_URL` names — a local llama.cpp/vLLM/Ollama server for the pinned base, or OpenAI itself if you point it there. With no key, each falls back to a stand-in and labels the row `offline-stub`. |
 | **data** | All invented for this demonstration. |
 | **third party** | Python 3 standard library only. The `SKILL.md` card format follows the open [Agent Skills](https://agentskills.io) standard. Web fonts (Archivo, IBM Plex Mono) via Google Fonts, SIL OFL. No other dependency, framework or asset. |
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""THE INSPECTION — and the point is that none of it is written here.
+"""THE INSPECTION — none of which is written in this file.
 
 An inspector is not a special kind of thing. `g2n0-clearance` is an ordinary skill:
 a folder, a version, a named human who answers for it, minted by the apex and
@@ -200,7 +200,15 @@ def run(trigger="manual"):
     rules = C.rows("rules.csv")
     exemptions = {e["skill"]: e for e in C.rows("exemptions.csv")}
     tests = {}
-    for t in C.rows("tests.csv"): tests[t["skill"]] = t   # last run wins
+    for t in C.rows("tests.csv"):
+        # Last run wins — EXCEPT that a result nobody can attribute to a real base never
+        # displaces one that is attributable. A stub row is evidence that the harness ran,
+        # not evidence of a pass rate, and letting it overwrite a signed open-weights run
+        # would put an unattributed number in front of a named human's measurement.
+        prev = tests.get(t["skill"])
+        if prev and prev.get("runner") != "offline-stub" and t.get("runner") == "offline-stub":
+            continue
+        tests[t["skill"]] = t
 
     results = [r for r in (inspect_one(n, clearance, rules, exemptions, edges, expires, tests)
                            for n in nodes) if r]

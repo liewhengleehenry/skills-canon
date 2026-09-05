@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""THE CLIENT SIDE OF THE OBLIGATION — 35 lines, standard library.
+"""THE CLIENT SIDE OF THE OBLIGATION — 43 lines, standard library.
 
 Every skill this apex issues carries this call. It runs on every invocation,
 BEFORE the skill does its work, and the skill does nothing if the record says no.
@@ -32,4 +32,12 @@ def require(skill, version, caller="unknown"):
     return a
 
 if __name__ == "__main__":
-    print(json.dumps(register(*sys.argv[1:3], caller="cli"), indent=2))
+    args = [a for a in sys.argv[1:] if a != "--json"]
+    skill, ver = (args + [""])[0], (args + ["", ""])[1]
+    ans = register(skill, ver, caller="cli")
+    if "--json" in sys.argv:
+        print(json.dumps(ans, indent=2))
+    elif ans.get("ok"):
+        print(f"REGISTERED  {skill:<24} v{ver}")
+    else:
+        print(f"REFUSED     {skill:<24} v{ver}   {ans.get('reason', '')}")

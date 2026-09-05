@@ -1,0 +1,2 @@
+proposal_id,candidate_model,incumbent_model,suites,better,worse,verdict,why,run_on,run_by,runner,status
+BC-0001,gpt-4o-mini,qwen2.5-14b-instruct,4,1,1,REJECT,regresses on 1 of 4 suites (g1n1-policy-steward) — a known failure traded for an unknown one,2026-09-05,cli,offline-stub,proposal

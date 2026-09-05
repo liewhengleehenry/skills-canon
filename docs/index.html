@@ -195,6 +195,14 @@ tr.bad td{background:#2A1712}tr.warn td{background:#2A2110}tr.good td{background
       <div class="w">canon.yaml &middot; canon/tests.csv &middot; qwen2.5-14b &middot; Q4_K_M</div></div>
 
   </div>
+
+  <p class="lede" style="margin-top:18px">A frontier model still has a role here, and it is
+  <b>challenger</b> rather than base. <code>engine/basecheck.py</code> runs every suite on record
+  against <b>OpenAI</b> and defends the incumbent suite by suite. A candidate is adopted only if it is
+  at least as good on <i>every</i> suite and better on one &mdash; a model that wins on average but
+  regresses on a single suite has traded a failure you had measured for one you have not. Even a clean
+  sweep only writes a <b>proposal</b>: <code>canon.yaml</code> is never touched, and a named human
+  moves the pin.</p>
   <p class="lede" style="margin-top:18px">Every check below is one of these four, and none of them is
   written into the inspector. <b>17 signed rules</b> are in force; the inspector is a loop and twelve
   generic checks that names no skill and states no rule.</p>
@@ -333,7 +341,7 @@ tr.bad td{background:#2A1712}tr.warn td{background:#2A2110}tr.good td{background
 <text class="big" x="40" y="522">Any agent writes it.</text>
 <text class="big" x="40" y="546">The team&#8217;s rules decide.</text>
 <text class="big" x="40" y="570" fill="#79B473">A named human signs.</text>
-<text class="tiny" x="40" y="598">838 lines of Python · standard library only · no database</text>
+<text class="tiny" x="40" y="598">1013 lines of Python · standard library only · no database</text>
 <text class="tiny" x="40" y="612">no build step · no pip install · git is the audit trail</text>
 
 <!-- 2 · THE GATE -->
@@ -1129,7 +1137,7 @@ function analyse(q){
     const bad = risk.filter(x => x.age === null || x.age > x.lim);
     return `<b>${bad.length} skill${bad.length===1?"":"s"} will not run.</b> Each team sets its own limit —
       the Refund Desk 90 days, Supplier Ops 45 — so <b>the same age is fine in one team and a failure in the
-      other.</b> That is the point of the rules being per-team rows.`
+      other.</b> That is what per-team rule rows are for.`
       + tbl(["skill","team","owner","signed by","age","that team's limit","verdict"], risk.map(x => `<tr class="${
         x.age===null||x.age>x.lim?"bad":x.age>x.lim*.6?"warn":""}">
         <td><b>${esc(x.n.id)}</b></td><td>${chip(x.n.team)}</td><td class="own">◆ ${esc(x.n.owner)}</td>
