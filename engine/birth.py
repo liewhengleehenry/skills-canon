@@ -53,8 +53,12 @@ def birth(name, graph, kind, owner, caller, problem=""):
     master = next((x["id"] for x in nodes if x.get("g")==graph and x.get("n")=="N0"), None)
     if master: edges.append({"source_id":sid,"target_id":master,"relation":"broader",
         "meaning":f"member of {graph} — born {n}"})
-    edges.append({"source_id":sid,"target_id":"g2n0-clearance","relation":"requires",
-        "meaning":"its scripts run only after a written PASS from"})
+    # WHICH skill inspects is a setting, not a constant — the same one the sweep reads.
+    # Point canon.yaml at a different skill and newly born skills declare an edge to that.
+    inspector = C.cfg().get("inspector", "")
+    if inspector:
+        edges.append({"source_id":sid,"target_id":inspector,"relation":"requires",
+            "meaning":"its scripts run only after a written PASS from"})
     C.write("edges.csv", edges, list(edges[0].keys()))
     C.append("proposals.csv", {"id":f"P-{len(C.rows('proposals.csv'))+1:03d}","kind":"birth",
         "target":sid,"detail":f"{kind} owned by {owner}","raised_by":caller,

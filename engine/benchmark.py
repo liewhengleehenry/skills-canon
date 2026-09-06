@@ -21,6 +21,9 @@ def evidence():
     refus = collections.Counter(u["skill"] for u in usage if u["outcome"] in ("REFUSED","BLOCKED"))
     deps  = collections.Counter(e["target_id"] for e in edges if e["relation"]=="requires")
     last  = {c["skill"]: c["date"] for c in clr}
+    # Who is exempt is a row in canon/exemptions.csv naming who granted it and when it
+    # expires — never a constant in this file. Delete the row and the exemption is gone.
+    exempt = {e["skill"] for e in C.rows("exemptions.csv")}
     out = []
     for n in C.rows("nodes.csv"):
         if n["type"] != "skill": continue
@@ -29,7 +32,7 @@ def evidence():
         if sid in last:
             age = (datetime.date.today() - datetime.date.fromisoformat(last[sid])).days
         out.append({"skill":sid,"owner":n["owner"],"status":n["status"],
-            "exempt": sid in ("g0-root","g2n0-clearance"),
+            "exempt": sid in exempt,
             "calls":calls[sid],"refusals":refus[sid],"dependents":deps[sid],
             "clearance_age_days":age,
             "feedback":[f for f in fb if f["skill"]==sid]})
